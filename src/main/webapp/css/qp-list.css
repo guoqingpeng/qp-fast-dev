@@ -1,0 +1,53 @@
+/* CSS Document */
+.listArea{
+   width:100%;
+   height:100%;
+}
+
+.qp-search{
+   width:100%;
+   height:auto;
+}
+
+.searchArea{
+  width:100%;
+  height:5%;
+}
+
+.searchArea:hover + .searchForm{
+  display:block;
+}
+
+.search-left{
+   float:left;
+   width:98%;
+   height:100%;
+}
+
+.search-right{
+   float:left;
+   width:2%;
+   height:100%;
+}
+
+.searchForm{
+  width:100%;
+  background:#00FF33;
+  display:none;
+}
+
+
+.qp-down:hover,qp-search-icon:hover{
+    cursor:pointer;
+}
+.qp-data{
+   width:100%;
+   height:85%;
+   background:#444444;
+}
+
+.qp-page-state{
+   width:100%;
+   height:5%;
+   background:#001100;
+}
