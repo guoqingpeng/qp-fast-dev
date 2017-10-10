@@ -25,7 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   <body>
   <div class="listArea">
-	  <!-- 检索区域 -->
+  
+	  <!--part1 检索区域 -->
 	  <div class="qp-search" id ="qp-search">
 	       <div class="searchArea">
 	       		<div class="search-left contaniner-horizontal-left">
@@ -39,12 +40,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       <div class="searchForm"></div>
 	  </div>
 	  
-	  <!-- 数据区域 -->
+	  <!--part2 数据区域 -->
 	  <div class="qp-data" id ="qp-data">
 	  </div>
-	  <!-- 状态区以及分页区 -->
+	  
+	  <!--part3 状态区以及分页区 -->
 	  <div class="qp-page-state" id ="qp-page-state">
 	  </div>
-	 </div>
+	  
+  </div>
   </body>
 </html>

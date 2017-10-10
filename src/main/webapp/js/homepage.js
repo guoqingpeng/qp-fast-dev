@@ -1,5 +1,4 @@
 // JavaScript Document
-
 //每一个菜单的id都是唯一的
 //使用一个字符串来维护所有已经打开的标签的url,每个包含参数url都是唯一的
 var openedurls = "";
@@ -30,6 +29,11 @@ $(document).ready(function(){
    //页签右翻页
   $(document).on('click','.rightcontrol',function(){
 	   moveRight();			 
+  });
+  
+  //菜单区宽窄变化
+  $(document).on('click','.molo',function(){
+	    menuSizeChange();
   });
   
 });
@@ -304,4 +308,28 @@ function shuffleMarks(id){
 		$(".markit:lt("+startIndex+")").addClass("ihide").removeClass("ishow").hide(0);
 	}
 	showMark();
+}
+
+/**
+功能说明------
+菜单区域宽度变化
+*/
+function menuSizeChange(){
+	if(!$('#logo').hasClass("menuZoomout")){		
+		 $(".qpright").css({
+			width: "95%",
+		  }); 
+		 $(".qpleft").css({
+			width: "5%",
+		  }, 300);		 
+		 $('#logo').addClass("menuZoomout");
+    }else{
+		 $(".qpright").css({
+			width: "85%",
+		  }); 
+		 $(".qpleft").css({
+			width: "15%",
+		  }, 300);		 
+		 $('#logo').removeClass("menuZoomout");
+	}
 }

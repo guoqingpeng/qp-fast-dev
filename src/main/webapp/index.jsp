@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <title>qp-dev-center1</title>
+    <title>qp-dev-center</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
       <div class="uppart" id="uppart" >
 	        <!--logo区-->
-	        <div class="logo contaniner-horizontal" id="logo">GUO-QP</div>
+	        <div class="logo contaniner-horizontal" id="logo"><span class="molo glyphicon glyphicon-indent-right"></span>GUO-QP</div>
 	  		<!--页签区-->
 			<div class="markarea" id="markarea">
 				<div class="leftcontrol glyphicon glyphicon-triangle-left"></div>
@@ -53,13 +53,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a class = "menuItem" href="#" id="1" url="menulist.do" onClick="jumptourl(this)">菜单设置</a>
 				</li>
 				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="2" url="menulist.do" onClick="jumptourl(this)">2</a>
+					<a class = "menuItem" href="#" id="2" url="g1.do" onClick="jumptourl(this)">2</a>
 				</li>
 				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="3" url="menulist.do" onClick="jumptourl(this)">3</a>
+					<a class = "menuItem" href="#" id="3" url="g3.do" onClick="jumptourl(this)">3</a>
 				</li>
 				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="4" url="menulist.do" onClick="jumptourl(this)">4</a>
+					<a class = "menuItem" href="#" id="4" url="g2.do" onClick="jumptourl(this)">4</a>
 				</li>
 				<li class="subMenu simpleMenu">
 					<a class = "menuItem" href="#" id="5" url="menulist.do" onClick="jumptourl(this)">5</a>

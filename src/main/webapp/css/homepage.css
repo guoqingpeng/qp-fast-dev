@@ -2,7 +2,6 @@
 #qpcontainer {
 	width:100%;
 	height:100%;
-	background-color:#CCFFCC;
 }
 
 #uppart{
@@ -19,7 +18,9 @@
 	margin:0 auto;
 	font-size:32px;
 	line-height:100%;
-	color:red;
+}
+
+#uppart #logo span{
 }
 
 #uppart #markarea {
@@ -121,32 +122,32 @@
 	height:100%;
 	float:left;
 	overflow:auto;
-	direction:rtl;/*¿ØÖÆ¹ö¶¯Ìõ³öÏÖÔÚ×ó²à*/
+	direction:rtl;/*æ§åˆ¶æ»šåŠ¨æ¡å‡ºç°åœ¨å·¦ä¾§*/
 }
 
 /*
-::-webkit-scrollbar ¹ö¶¯ÌõÕûÌå²¿·Ö
-::-webkit-scrollbar-thumb  ¹ö¶¯ÌõÀïÃæµÄĞ¡·½¿é£¬ÄÜÏòÉÏÏòÏÂÒÆ¶¯£¨»òÍù×óÍùÓÒÒÆ¶¯£¬È¡¾öÓÚÊÇ´¹Ö±¹ö¶¯Ìõ»¹ÊÇË®Æ½¹ö¶¯Ìõ£©
-::-webkit-scrollbar-track  ¹ö¶¯ÌõµÄ¹ìµÀ£¨ÀïÃæ×°ÓĞThumb£©
-::-webkit-scrollbar-button ¹ö¶¯ÌõµÄ¹ìµÀµÄÁ½¶Ë°´Å¥£¬ÔÊĞíÍ¨¹ıµã»÷Î¢µ÷Ğ¡·½¿éµÄÎ»ÖÃ¡£
-::-webkit-scrollbar-track-piece ÄÚ²ã¹ìµÀ£¬¹ö¶¯ÌõÖĞ¼ä²¿·Ö£¨³ıÈ¥£©
-::-webkit-scrollbar-corner ±ß½Ç£¬¼´Á½¸ö¹ö¶¯ÌõµÄ½»»ã´¦
-::-webkit-resizer Á½¸ö¹ö¶¯ÌõµÄ½»»ã´¦ÉÏÓÃÓÚÍ¨¹ıÍÏ¶¯µ÷ÕûÔªËØ´óĞ¡µÄĞ¡¿Ø¼ş
+::-webkit-scrollbar æ»šåŠ¨æ¡æ•´ä½“éƒ¨åˆ†
+::-webkit-scrollbar-thumb  æ»šåŠ¨æ¡é‡Œé¢çš„å°æ–¹å—ï¼Œèƒ½å‘ä¸Šå‘ä¸‹ç§»åŠ¨ï¼ˆæˆ–å¾€å·¦å¾€å³ç§»åŠ¨ï¼Œå–å†³äºæ˜¯å‚ç›´æ»šåŠ¨æ¡è¿˜æ˜¯æ°´å¹³æ»šåŠ¨æ¡ï¼‰
+::-webkit-scrollbar-track  æ»šåŠ¨æ¡çš„è½¨é“ï¼ˆé‡Œé¢è£…æœ‰Thumbï¼‰
+::-webkit-scrollbar-button æ»šåŠ¨æ¡çš„è½¨é“çš„ä¸¤ç«¯æŒ‰é’®ï¼Œå…è®¸é€šè¿‡ç‚¹å‡»å¾®è°ƒå°æ–¹å—çš„ä½ç½®ã€‚
+::-webkit-scrollbar-track-piece å†…å±‚è½¨é“ï¼Œæ»šåŠ¨æ¡ä¸­é—´éƒ¨åˆ†ï¼ˆé™¤å»ï¼‰
+::-webkit-scrollbar-corner è¾¹è§’ï¼Œå³ä¸¤ä¸ªæ»šåŠ¨æ¡çš„äº¤æ±‡å¤„
+::-webkit-resizer ä¸¤ä¸ªæ»šåŠ¨æ¡çš„äº¤æ±‡å¤„ä¸Šç”¨äºé€šè¿‡æ‹–åŠ¨è°ƒæ•´å…ƒç´ å¤§å°çš„å°æ§ä»¶
 */
 
-/* ¹ö¶¯ÌõµÄ»¬¹ì±³¾°ÑÕÉ« */
+/* æ»šåŠ¨æ¡çš„æ»‘è½¨èƒŒæ™¯é¢œè‰² */
 #qpleft::-webkit-scrollbar-track{
 	background-color:#F5F5F5;
 	-webkit-box-shadow:inset 0 0 6px rgba(0, 0, 0, 0.22);
 }
 
-/* »¬¿éÑÕÉ« */
+/* æ»‘å—é¢œè‰² */
 #qpleft::-webkit-scrollbar-thumb{
 	background-color:#8b8b8b;
 	border-radius:10px;
 }
 
-/*¶¨Òå¹ö¶¯Ìõ¿í¼°±³¾°*/
+/*å®šä¹‰æ»šåŠ¨æ¡å®½åŠèƒŒæ™¯*/
 #qpleft::-webkit-scrollbar{
 	width:5px;
 	background-color:rgba(0, 0, 0, 0.32);
@@ -167,7 +168,6 @@
 	font-size:14px;
 	background:#000000;
 }
-
 
 .mainMenu .subMenu:hover{
     background:#FFFFFF;
@@ -202,14 +202,13 @@
 	width:100%;
 	height:100%;
 	float:clear;
-
 }
 
 #qpright #qp-right-main #dataframe{
 	width:100%;
 	height:100%;
-	background:#FFFFCC;
 	border:none;
+	background:#BBBBBB;
 }
 
 #dialog{
