@@ -14,19 +14,34 @@
 	width:15%;
 	height:100%;
 	float:left;
+	cursor:pointer;
 	background:#DDDDDD;
-	margin:0 auto;
-	font-size:32px;
-	line-height:100%;
+	text-align:left;
 }
 
-#uppart #logo span{
+.molo1{
+	font-size:36px;
+	width:auto;
+	float:left;
+}
+
+.molo2{
+	font-size:36px;
+	display:none;
+	width:auto;
+	float:left;
+}
+
+.homepage{
+	font-size:36px;
+	width:auto;
+	float:left;
 }
 
 #uppart #markarea {
 	width:75%;
 	height:100%;
-	background:#888888;
+	background:#DDDDDD;
 	position:relative;
 	z-index:3;
 	float:left;
@@ -60,7 +75,7 @@
 	width:10%;
 	height:100%;
 	float:right;
-	background-color:#00CC99;
+	background-color:#DDDDDD;;
 } 
 
 .markit{

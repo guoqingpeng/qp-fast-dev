@@ -32,8 +32,8 @@ $(document).ready(function(){
   });
   
   //菜单区宽窄变化
-  $(document).on('click','.molo',function(){
-	    menuSizeChange();
+  $(document).on('click','.molo1,.molo2',function(){
+	   menuSizeChange();  
   });
   
 });
@@ -60,7 +60,7 @@ function  jumptourl(ele){
 	if(isMenuOpen(id) == -1){
 		//判断是否够长度
 		if(checkAvriableMarkWidth() != 1){
-			$(".ishow").first().removeClass("ishow").addClass("ihide").hide(0);	
+			$(".ishow").first().removeClass("ishow").addClass("ihide").hide();	
 		}
 		creatMark(id,url,markName);
 		showMark();
@@ -131,14 +131,14 @@ function showMark(){
 	 var leftflafg = $(".ishow").first().prev();
 	 var rightflafg = $(".ishow").last().next();
 	 if(leftflafg.length == 1){
-		 $(".rightcontrol").show(0);
+		 $(".rightcontrol").show();
 	 }else{
-		 $(".rightcontrol").hide(2000);
+		 $(".rightcontrol").hide();
 	 }
 	 if(rightflafg.length == 1){
-		 $(".leftcontrol").show(0);
+		 $(".leftcontrol").show();
 	 }else{
-		 $(".leftcontrol").hide(2000);
+		 $(".leftcontrol").hide();
 	 }
 	 $(".leftcontrol").css("top",centerposition);
 	 $(".rightcontrol").css("top",centerposition);
@@ -159,9 +159,9 @@ function hideMark(){
 */
 function moveLeft(){
 	 //找到第一个ishow元素，并将其隐藏
-	 $(".ishow").first().removeClass("ishow").addClass("ihide").hide(0);
+	 $(".ishow").first().removeClass("ishow").addClass("ihide").hide();
 	 //找到最后一个ishow元素之后的第一个隐藏元素
-	 $(".ishow").last().next().removeClass("ihide").addClass("ishow").show(0);
+	 $(".ishow").last().next().removeClass("ihide").addClass("ishow").show();
 	 showMark();
 }
 
@@ -171,7 +171,7 @@ function moveLeft(){
 */
 function moveRight(){
 	 //找到最后一个ishow元素，并将其隐藏
-	 $(".ishow").last().removeClass("ishow").addClass("ihide").hide(0);
+	 $(".ishow").last().removeClass("ishow").addClass("ihide").hide();
 	 //找到最后一个ishow元素之后的第一个隐藏元素
 	 $(".ishow").first().prev().removeClass("ihide").addClass("ishow").show(50);
 	 showMark();
@@ -254,9 +254,9 @@ function destoryMark(ele){
    var leftflafg = $(".ishow").first().prev();
    var rightflafg = $(".ishow").last().next(); 
    if(leftflafg.length == 1){
-	 leftflafg.removeClass("ihide").addClass("ishow").show(0);
+	 leftflafg.removeClass("ihide").addClass("ishow").show();
    }else if(rightflafg.length == 1){
-	  rightflafg.removeClass("ihide").addClass("ishow").show(0);
+	  rightflafg.removeClass("ihide").addClass("ishow").show();
    }
    showMark();
 }
@@ -301,11 +301,11 @@ function shuffleMarks(id){
 			 startIndex = choosendMarkIndex -(marknum - 1);
 			 endIndex = choosendMarkIndex;
 		}
-		$(".markit:gt("+startIndex+"):lt("+endIndex+")").addClass("ishow").removeClass("ihide").show(0);
-		$(".markit:eq("+startIndex+")").addClass("ishow").removeClass("ihide").show(0);
-		$(".markit:eq("+endIndex+")").addClass("ishow").removeClass("ihide").show(0);
-		$(".markit:gt("+endIndex+")").addClass("ihide").removeClass("ishow").hide(0);
-		$(".markit:lt("+startIndex+")").addClass("ihide").removeClass("ishow").hide(0);
+		$(".markit:gt("+startIndex+"):lt("+endIndex+")").addClass("ishow").removeClass("ihide").show();
+		$(".markit:eq("+startIndex+")").addClass("ishow").removeClass("ihide").show();
+		$(".markit:eq("+endIndex+")").addClass("ishow").removeClass("ihide").show();
+		$(".markit:gt("+endIndex+")").addClass("ihide").removeClass("ishow").hide();
+		$(".markit:lt("+startIndex+")").addClass("ihide").removeClass("ishow").hide();
 	}
 	showMark();
 }
@@ -323,6 +323,8 @@ function menuSizeChange(){
 			width: "5%",
 		  }, 300);		 
 		 $('#logo').addClass("menuZoomout");
+		 $('.molo1').hide();
+		 $('.molo2').show();
     }else{
 		 $(".qpright").css({
 			width: "85%",
@@ -331,5 +333,7 @@ function menuSizeChange(){
 			width: "15%",
 		  }, 300);		 
 		 $('#logo').removeClass("menuZoomout");
+		 $('.molo2').hide();
+		 $('.molo1').show();		
 	}
 }
