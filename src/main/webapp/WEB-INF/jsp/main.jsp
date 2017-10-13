@@ -20,8 +20,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="${ASSERT_URL}/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 	<!--javascript-->
 	<script src="${JAVASCRIPT_URL}/jquery-3.2.1.js"></script>
-	<script src="${JAVASCRIPT_URL}/homepage.js"></script>
 	<script src="${ASSERT_URL}/bootstrap/js/bootstrap.js"></script>
+	<script src="${JAVASCRIPT_URL}/homepage.js"></script>
   </head>
   <body>
   <div id="qpcontainer">
@@ -52,53 +52,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  2.点击每个菜单时判断是已经点过了，点过了
 		  3.是就跳转，不是就ajax请求，获取子菜单，然后展开,一次循环
 		  -->
-			 <ul class="mainMenu">
-			    <!--
-				三种形式的的菜单项
-				1.单一，不带url，点击没有任何反应
-				2.单一，带url可调转，点击跳转页面
-				3.符合，点击可展开，可嵌套
-				 -->
-				<li class="subMenu">
-					<a class = "menuItem" href="#" id="1">1不跳转</a>
-				</li>
-				
-				<li class="subMenu">
-					<a class = "menuItem" href="#" id="2" url="g1.do" onClick="jumptourl(this)">2跳转</a>
-				</li>
-				
-				<!--
-				3.符合，点击可展开，可嵌套
-			    -->
-				<li class="subMenu hasSubMenu">
-					<a class = "menuItem" href="#" id="3">3嵌套</a>
-					<span>+</span>
-					<ul class="subMainMenu">
-					
-						<li class="subMenu">
-							<a class = "menuItem" href="#" id="4" url="menulist.do" onClick="jumptourl(this)">2跳转</a>
-						</li>
-						
-						<li class="subMenu">
-							<a class = "menuItem" href="#" id="5">1不跳转</a>
-						</li>
-						
-						<li class="subMenu hasSubMenu">
-							<a class = "menuItem" href="#" id="3">3嵌套</a>
-							<span>+</span>
-							<ul class="subMainMenu">
-								<li class="subMenu">
-									<a class = "menuItem" href="#" id="4" url="menulist.do" onClick="jumptourl(this)">2跳转</a>
-								</li>
-								<li class="subMenu">
-									<a class = "menuItem" href="#" id="5">1不跳转</a>
-								</li>
-							</ul>		
-						</li>
-										
-				    </ul>
-				</li>
-			 </ul>
 		  </div>
 		  <!--系统的菜单区结束-->
 		  
@@ -113,6 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </div>
   </div>
   <div id="dialog"></div>
-  <div id="msg">${menu }</div>
+  <div id="msg"></div>
+  <div id="menuData">${menu}</div>
   </body>
 </html>

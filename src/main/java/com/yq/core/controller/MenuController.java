@@ -42,10 +42,10 @@ public class MenuController {
 			List<TreeObj> topMenusList = menuDao.getTopMenus();
 			//非顶级菜单
 			List<TreeObj> notTopMenusList = menuDao.getNotTopSubMenus();
-			topMenusList = TreeDataUtil.makeTreeDate(topMenusList, notTopMenusList);
-			System.out.println(JSONArray.toJSON(topMenusList));
-			modelAndView.addObject(topMenusList);
-			modelAndView.setViewName("menu/menus");
+			topMenusList = TreeDataUtil.makeTreeData(topMenusList, notTopMenusList);
+			System.out.println(JSONArray.toJSONString(topMenusList));
+			modelAndView.addObject("menu",JSONArray.toJSONString(topMenusList));
+			modelAndView.setViewName("main");
 		} catch (Exception e) {
 			e.printStackTrace();
 			modelAndView.setViewName("404");

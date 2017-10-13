@@ -11,12 +11,20 @@ package com.yq.core.common;
 import java.util.List;
 
 public class TreeObj {
+	private String name;
 	private int id;
 	private int pid;
-	private String url;
-	private Boolean hasSubTreeobj;
-	private int subMenuNum;
+	private String url = "";
+	private int urlType = 1;
+	private Boolean hasSubTreeobj = false;
+	private int subMenuNum = 0;
 	private List<TreeObj> subTreeobjList;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getId() {
 		return id;
 	}
@@ -28,6 +36,18 @@ public class TreeObj {
 	}
 	public void setPid(int pid) {
 		this.pid = pid;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public int getUrlType() {
+		return urlType;
+	}
+	public void setUrlType(int urlType) {
+		this.urlType = urlType;
 	}
 	public Boolean getHasSubTreeobj() {
 		return hasSubTreeobj;
@@ -47,10 +67,5 @@ public class TreeObj {
 	public void setSubTreeobjList(List<TreeObj> subTreeobjList) {
 		this.subTreeobjList = subTreeobjList;
 	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}	
+
 }

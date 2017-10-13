@@ -36,7 +36,83 @@ $(document).ready(function(){
 	   menuSizeChange();  
   });
   
+  initMenu();
+  
 });
+
+/**
+功能说明------
+初始化化自定义的菜单
+*/
+function initMenu(){
+	var menuArea = $('#qpleft');
+	var mainMenu = $("<ul class='mainMenu'></ul>");
+	var menuContent = $('#menuData').html();
+	var menuJson = $.parseJSON(menuContent);
+	//递归生成所有菜单
+	for(var menu in menuJson){
+	    var menuIetm = menuJson[menu];
+	    mainMenu = makeSubMenu(mainMenu,menuIetm);
+	}
+	menuArea.append(mainMenu);
+}
+
+/**
+功能说明------
+针对一个菜单，递归生成所有的子菜单
+*/
+function makeSubMenu(mainMenu,menu){
+	   var li = $("<li class='subMenu'></li>");
+	   var menuType = menu.urlType;//1.代表栏目不能跳转,0代表普通菜单可以跳转
+	   var pid = menu.pid;
+	   var subMenuNum = menu.subMenuNum;
+	   //栏目菜单
+	   if(menuType == 1){
+	        if(subMenuNum == 0){	            
+	            //没有子元素时
+		        var a = $("<a class = 'menuItem' href='javascript:void(0)' id='" 
+								     + menu.id + "' pid='"+menu.pid
+								     + "' url='"+menu.url
+								     +"'>"
+								     +"www"+"</a>");
+				li.append(a);
+			    mainMenu.append(li);   
+	        }else{
+	            //有子元素时，递归调用
+	            li.addClass("hasSubMenu");
+		        var a = $("<a class = 'menuItem' href='javascript:void(0)' id='" 
+								     + menu.id + "' pid='"+menu.pid
+								     + "' url='"+menu.url
+								     +"'>"
+								     +menu.name+"</a>");
+				var span = $("<span></span>");
+				if(pid == 0){
+				   span.append("Z");
+				}else{
+				   span.append("+");
+				}
+				var subMainMenu = $("<ul class='subMainMenu'></ul>");
+				li.append(a).append(span);
+				var subMenus = menu.subTreeobjList;
+				for(var menu in subMenus){
+				    var menuIetm = subMenus[menu];
+				    subMainMenu = makeSubMenu(subMainMenu,menuIetm);
+				}
+				li.append(subMainMenu);
+				mainMenu.append(li);			
+	        }
+	    }else{
+	          //处于顶级栏目但是只是一个普通的跳转 
+		      var a = $("<a class = 'menuItem' href='javascript:void(0)' id='" 
+								     + menu.id + "' pid='"+menu.pid
+								     + "' url='"+menu.url
+								     +"' onClick='jumptourl(this)'>"
+								     +menu.name+"</a>");
+			  li.append(a);
+			  mainMenu.append(li);
+	   }
+	   return mainMenu;
+}
 
 /**
 功能说明------
@@ -56,6 +132,7 @@ function  jumptourl(ele){
     var markName = $(ele).html();
     var url = $(ele).attr("url");
 	var id = $(ele).attr("id");
+	var pid = $(ele).attr("pid");
 	//页签如果没有打开过
 	if(isMenuOpen(id) == -1){
 		//判断是否够长度
@@ -338,13 +415,6 @@ function menuSizeChange(){
 	}
 }
 
-/**
-功能说明------
-初始化菜单项
-*/
-function initMenuItems(){
-	
-}
 
 
 

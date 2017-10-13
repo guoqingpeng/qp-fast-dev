@@ -81,11 +81,10 @@ public class TreeDataUtil {
 	 *更新日期：10:18:56 AM
 	 *作者: GUO-QP
 	 */
-	public static List<TreeObj> makeTreeDate(List<TreeObj> topTreeObjsList,List<TreeObj> notTopTreeObjsList){
+	public static List<TreeObj> makeTreeData(List<TreeObj> topTreeObjsList,List<TreeObj> notTopTreeObjsList){
 		for (TreeObj treeObj : topTreeObjsList) {
 			subTreeObjs(treeObj,notTopTreeObjsList);
 		}
 		return topTreeObjsList;
 	}
-
 }

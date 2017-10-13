@@ -167,6 +167,7 @@
 	width:5px;
 	background-color:rgba(0, 0, 0, 0.32);
 }
+/**滚动条结束-----------------------------*/
 
 .mainMenu{
     width:100%;
@@ -176,25 +177,23 @@
 
 .mainMenu .subMenu{
 	width:100%;
-	height:32px;
+	height:auto;
 	list-style-type:none;
 	text-align:center;
 	vertical-align:middle;
-	font-size:14px;
-	background:#000000;
 }
 
 .mainMenu .subMenu a{
-    width:auto;
-	height:100%;
+    width:90%;
+	height:30px;
 	color:#FFFFFF;
 	display:block;
 	float:left;
 }
 
 .mainMenu .subMenu span{
-    width:auto;
-	height:100%;
+    width:10%;
+	height:30px;
 	color:#FFFFFF;
 	display:block;
 	float:right;
@@ -202,49 +201,41 @@
 
 .mainMenu .subMenu:hover{
 	text-decoration:none;
-	background:#FFFFFF;
-	color:red;
 	cursor:pointer;
+	color:red;
 }
 
 .hasSubMenu:hover > .subMainMenu{
-	clear:both;
     display:block;
 }
 
 .subMainMenu{
-	clear:both;
-	display:none;
+    display:none;
+	height:auto;
+    clear:both;
+	width:100%;
+	height:auto;
 }
 
 .subMainMenu .subMenu{
 	width:100%;
-	height:32px;
+	height:auto;
 	list-style-type:none;
 	text-align:center;
 	vertical-align:middle;
-	font-size:14px;
-	background:#000000;
-}
-
-.subMainMenu .subMenu:hover{
-	text-decoration:none;
-	background:#FFFFFF;
-	color:#001100;
-	cursor:pointer;
 }
 
 .subMainMenu .subMenu a{
-    width:auto;
-	height:100%;
+    width:90%;
+	height:30px;
 	color:#FFFFFF;
 	display:block;
 	float:left;
 }
 
 .subMainMenu .subMenu span{
-    width:auto;
-	height:100%;
+    width:10%;
+	height:30px;
 	color:#FFFFFF;
 	display:block;
 	float:right;
@@ -272,6 +263,7 @@
 	height:100%;
 	border:none;
 	background:#BBBBBB;
+	overflow-y:auto;
 }
 
 #dialog{
@@ -294,4 +286,8 @@
    left:30%;
    background:#BBBBBB;
    z-index:auto;
+}
+
+#menuData{
+   display:none;
 }

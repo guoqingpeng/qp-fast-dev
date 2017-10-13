@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</li>
 				
 				<li class="subMenu">
-					<a class = "menuItem" href="#" id="2" url="g1.do" onClick="jumptourl(this)">2跳转</a>
+					<a class = "menuItem" href="#" id="2" url="menulist.do" onClick="jumptourl(this)">2跳转</a>
 				</li>
 				
 				<!--
