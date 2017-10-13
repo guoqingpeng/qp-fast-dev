@@ -8,14 +8,17 @@
 */
 package com.yq.core.dao;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.annotation.MapperScan;
+
+import com.yq.core.common.TreeObj;
 
 
 @MapperScan
 public interface MenuDao {
 	
-	public HashMap getMenu(int id);
-
+	public List<TreeObj> getTopMenus();
+	public List<TreeObj> getSubMenus(int id);
+	public List<TreeObj> getNotTopSubMenus();
 }

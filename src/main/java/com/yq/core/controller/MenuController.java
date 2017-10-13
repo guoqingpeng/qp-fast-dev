@@ -8,13 +8,16 @@
 */
 package com.yq.core.controller;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONArray;
+import com.yq.core.common.TreeDataUtil;
+import com.yq.core.common.TreeObj;
 import com.yq.core.dao.MenuDao;
 
 @Controller
@@ -35,14 +38,19 @@ public class MenuController {
 	public ModelAndView  menulist(){
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-			HashMap menuHashMap = menuDao.getMenu(1);
-			System.out.println(menuHashMap.get("user_login"));
-			modelAndView.addObject("menu", menuHashMap);
+			//获取顶级菜单，父级菜单为0,递归获取子菜单
+			List<TreeObj> topMenusList = menuDao.getTopMenus();
+			//非顶级菜单
+			List<TreeObj> notTopMenusList = menuDao.getNotTopSubMenus();
+			topMenusList = TreeDataUtil.makeTreeDate(topMenusList, notTopMenusList);
+			System.out.println(JSONArray.toJSON(topMenusList));
+			modelAndView.addObject(topMenusList);
 			modelAndView.setViewName("menu/menus");
 		} catch (Exception e) {
-			System.out.println("取数异常");
+			e.printStackTrace();
+			modelAndView.setViewName("404");
 		}
 		return modelAndView;
 	}
-
+	
 }

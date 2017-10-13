@@ -184,22 +184,70 @@
 	background:#000000;
 }
 
-.mainMenu .subMenu:hover{
-    background:#FFFFFF;
-}
-
 .mainMenu .subMenu a{
-    width:100%;
+    width:auto;
 	height:100%;
-    color:#FFFFFF;
+	color:#FFFFFF;
 	display:block;
+	float:left;
 }
 
-.mainMenu .subMenu:hover >a{
-    color:#FF0000;
-	font-style:oblique;
+.mainMenu .subMenu span{
+    width:auto;
+	height:100%;
+	color:#FFFFFF;
+	display:block;
+	float:right;
+}
+
+.mainMenu .subMenu:hover{
 	text-decoration:none;
 	background:#FFFFFF;
+	color:red;
+	cursor:pointer;
+}
+
+.hasSubMenu:hover > .subMainMenu{
+	clear:both;
+    display:block;
+}
+
+.subMainMenu{
+	clear:both;
+	display:none;
+}
+
+.subMainMenu .subMenu{
+	width:100%;
+	height:32px;
+	list-style-type:none;
+	text-align:center;
+	vertical-align:middle;
+	font-size:14px;
+	background:#000000;
+}
+
+.subMainMenu .subMenu:hover{
+	text-decoration:none;
+	background:#FFFFFF;
+	color:#001100;
+	cursor:pointer;
+}
+
+.subMainMenu .subMenu a{
+    width:auto;
+	height:100%;
+	color:#FFFFFF;
+	display:block;
+	float:left;
+}
+
+.subMainMenu .subMenu span{
+    width:auto;
+	height:100%;
+	color:#FFFFFF;
+	display:block;
+	float:right;
 }
 
 #qpright{

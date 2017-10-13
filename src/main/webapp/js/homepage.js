@@ -337,3 +337,17 @@ function menuSizeChange(){
 		 $('.molo1').show();		
 	}
 }
+
+/**
+功能说明------
+初始化菜单项
+*/
+function initMenuItems(){
+	
+}
+
+
+
+
+
+

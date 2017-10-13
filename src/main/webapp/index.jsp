@@ -53,65 +53,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  3.是就跳转，不是就ajax请求，获取子菜单，然后展开,一次循环
 		  -->
 			 <ul class="mainMenu">
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="1" url="menulist.do" onClick="jumptourl(this)">菜单设置</a>
+			    <!--
+				三种形式的的菜单项
+				1.单一，不带url，点击没有任何反应
+				2.单一，带url可调转，点击跳转页面
+				3.符合，点击可展开，可嵌套
+				 -->
+				<li class="subMenu">
+					<a class = "menuItem" href="#" id="1">1不跳转</a>
 				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="2" url="g1.do" onClick="jumptourl(this)">2</a>
+				
+				<li class="subMenu">
+					<a class = "menuItem" href="#" id="2" url="menulist.do" onClick="jumptourl(this)">2跳转</a>
 				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="3" url="g3.do" onClick="jumptourl(this)">3</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="4" url="g2.do" onClick="jumptourl(this)">4</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="5" url="menulist.do" onClick="jumptourl(this)">5</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="6" url="menulist.do" onClick="jumptourl(this)">6</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="7" url="menulist.do" onClick="jumptourl(this)">7</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="8" url="menulist.do" onClick="jumptourl(this)">8</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="9" url="menulist.do" onClick="jumptourl(this)">9</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="10" url="menulist.do" onClick="jumptourl(this)">10</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="11" url="menulist.do" onClick="jumptourl(this)">11</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="12" url="menulist.do" onClick="jumptourl(this)">12</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="13" url="menulist.do" onClick="jumptourl(this)">13</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="14" url="menulist.do" onClick="jumptourl(this)">14</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="15" url="menulist.do" onClick="jumptourl(this)">15</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="16" url="menulist.do" onClick="jumptourl(this)">16</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="17" url="menulist.do" onClick="jumptourl(this)">17</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="18" url="menulist.do" onClick="jumptourl(this)">18</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="19" url="menulist.do" onClick="jumptourl(this)">19</a>
-				</li>
-				<li class="subMenu simpleMenu">
-					<a class = "menuItem" href="#" id="20" url="menulist.do" onClick="jumptourl(this)">20</a>
+				
+				<!--
+				3.符合，点击可展开，可嵌套
+			    -->
+				<li class="subMenu hasSubMenu">
+					<a class = "menuItem" href="#" id="3">3嵌套</a>
+					<span>+</span>
+					<ul class="subMainMenu">
+					
+						<li class="subMenu">
+							<a class = "menuItem" href="#" id="4" url="menulist.do" onClick="jumptourl(this)">2跳转</a>
+						</li>
+						
+						<li class="subMenu">
+							<a class = "menuItem" href="#" id="5">1不跳转</a>
+						</li>
+						
+						<li class="subMenu hasSubMenu">
+							<a class = "menuItem" href="#" id="3">3嵌套</a>
+							<span>+</span>
+							<ul class="subMainMenu">
+								<li class="subMenu">
+									<a class = "menuItem" href="#" id="4" url="menulist.do" onClick="jumptourl(this)">2跳转</a>
+								</li>
+								<li class="subMenu">
+									<a class = "menuItem" href="#" id="5">1不跳转</a>
+								</li>
+							</ul>		
+						</li>
+										
+				    </ul>
 				</li>
 			 </ul>
 		  </div>

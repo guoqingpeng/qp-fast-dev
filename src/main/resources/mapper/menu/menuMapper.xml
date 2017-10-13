@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.yq.core.dao.MenuDao">
-	<select id="getMenu" parameterType="int" resultType="hashmap">
-		select * from wp_users where id = #{id}
+
+<!-- 获取系统顶级菜单 -->
+	<select id="getTopMenus"  resultType="com.yq.core.entity.Menu">
+		select id,pid,url from  menu  where pid = 0 order by id,pid 
 	</select>
+	
+	<select id="getSubMenus"  parameterType="int" resultType="com.yq.core.entity.Menu">
+		select id,pid,url from  menu where pid = #{id} order by id,pid 
+	</select>
+	
+	<select id="getNotTopSubMenus"  resultType="com.yq.core.entity.Menu">
+		select id,pid,url from  menu  where pid > 0 order by id,pid 
+	</select>	
 </mapper>
