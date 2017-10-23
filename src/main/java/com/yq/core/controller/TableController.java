@@ -30,7 +30,7 @@ public class TableController {
 	public ModelAndView toList(){
 		
 		ModelAndView modelAndView = new ModelAndView();
-		return null;		
+		return modelAndView;		
 	}
 	
 	/**

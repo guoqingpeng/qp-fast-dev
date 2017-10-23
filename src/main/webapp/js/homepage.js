@@ -68,7 +68,7 @@ function makeSubMenu(mainMenu,menu){
 	   var subMenuNum = menu.subMenuNum;
 	   //栏目菜单
 	   if(menuType == 1){
-	        if(subMenuNum == 0){	            
+	        if(subMenuNum == 0){	      
 	            //没有子元素时
 		        var a = $("<a class = 'menuItem' href='javascript:void(0)' id='" 
 								     + menu.id + "' pid='"+menu.pid
