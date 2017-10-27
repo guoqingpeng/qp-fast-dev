@@ -5,39 +5,18 @@ var openedurls = "";
 var jioncode = "guoqingpeng";
 var homepageurl = "g1.do";
 var marknum = 10;
+
 /**
 功能说明------
-所有事件的注册
+系统首页初始化
+菜单初始化
+系统首页事件绑定执行
 */
-$(document).ready(function(){
-						 
-  //注册关闭按钮页签按钮事件
-  $(document).on('click','.closemark',function(){
-	   destoryMark(this);							 
-  });
-  
-  //注册页签选中事件
-  $(document).on('click','.markname',function(){
-	   markChoosen(this);						 
-  });
-  
-   //页签左翻页
-  $(document).on('click','.leftcontrol',function(){
-	   moveLeft();					 
-  });
-  
-   //页签右翻页
-  $(document).on('click','.rightcontrol',function(){
-	   moveRight();			 
-  });
-  
-  //菜单区宽窄变化
-  $(document).on('click','.molo1,.molo2',function(){
-	   menuSizeChange();  
-  });
-  
+$(document).ready(function(){					   
+  //加载菜单
   initMenu();
-  
+  //初始化所有事件
+  initBindSystemEvents();
 });
 
 /**
@@ -49,11 +28,13 @@ function initMenu(){
 	var mainMenu = $("<ul class='mainMenu'></ul>");
 	var menuContent = $('#menuData').html();
 	var menuJson = $.parseJSON(menuContent);
+	
 	//递归生成所有菜单
 	for(var menu in menuJson){
 	    var menuIetm = menuJson[menu];
 	    mainMenu = makeSubMenu(mainMenu,menuIetm);
 	}
+	
 	menuArea.append(mainMenu);
 }
 
@@ -68,23 +49,22 @@ function makeSubMenu(mainMenu,menu){
 	   var subMenuNum = menu.subMenuNum;
 	   //栏目菜单
 	   if(menuType == 1){
-	        if(subMenuNum == 0){	      
+	        if(subMenuNum == 0){      
 	            //没有子元素时
-		        var a = $("<a class = 'menuItem' href='javascript:void(0)' id='" 
-								     + menu.id + "' pid='"+menu.pid
-								     + "' url='"+menu.url
-								     +"'>"
-								     +"www"+"</a>");
-				li.append(a);
-			    mainMenu.append(li);   
+				 li.addClass("menuItem")
+				   .attr("id",menu.id)
+				   .attr("pid",menu.pid)
+				   .attr("url",menu.url)
+				   .html("<a>"+menu.name+"</a>"); 
+			      mainMenu.append(li);   
 	        }else{
 	            //有子元素时，递归调用
 	            li.addClass("hasSubMenu");
-		        var a = $("<a class = 'menuItem' href='javascript:void(0)' id='" 
-								     + menu.id + "' pid='"+menu.pid
-								     + "' url='"+menu.url
-								     +"'>"
-								     +menu.name+"</a>");
+				li.addClass("menuItem")
+				   .attr("id",menu.id)
+				   .attr("pid",menu.pid)
+				   .attr("url",menu.url)
+				   .html("<a>"+menu.name+"</a>");
 				var span = $("<span></span>");
 				if(pid == 0){
 				   span.append("Z");
@@ -92,7 +72,7 @@ function makeSubMenu(mainMenu,menu){
 				   span.append("+");
 				}
 				var subMainMenu = $("<ul class='subMainMenu'></ul>");
-				li.append(a).append(span);
+				li.append(span);
 				var subMenus = menu.subTreeobjList;
 				for(var menu in subMenus){
 				    var menuIetm = subMenus[menu];
@@ -103,13 +83,12 @@ function makeSubMenu(mainMenu,menu){
 	        }
 	    }else{
 	          //处于顶级栏目但是只是一个普通的跳转 
-		      var a = $("<a class = 'menuItem' href='javascript:void(0)' id='" 
-								     + menu.id + "' pid='"+menu.pid
-								     + "' url='"+menu.url
-								     +"' onClick='jumptourl(this)'>"
-								     +menu.name+"</a>");
-			  li.append(a);
-			  mainMenu.append(li);
+			    li.addClass("menuItem")
+				  .attr("id",menu.id)
+				  .attr("pid",menu.pid)
+				  .attr("url",menu.url)
+				  .html("<a>"+menu.name+"</a>");
+			    mainMenu.append(li);
 	   }
 	   return mainMenu;
 }
@@ -133,6 +112,9 @@ function  jumptourl(ele){
     var url = $(ele).attr("url");
 	var id = $(ele).attr("id");
 	var pid = $(ele).attr("pid");
+	if(url == "" || url == null){
+	   return;
+	}
 	//页签如果没有打开过
 	if(isMenuOpen(id) == -1){
 		//判断是否够长度
@@ -288,7 +270,7 @@ function isMenuOpen(id){
 将刚刚打开的地址加入到全局维护所有以打开标签之中
 */
 function addUrltoOpenedurls(id){
-	if(openedurls.indexOf(id) == -1){
+	if(isMenuOpen(id) == -1){
 		openedurls = openedurls.concat(jioncode+id);
 	}
 }
@@ -298,7 +280,7 @@ function addUrltoOpenedurls(id){
 将刚关闭开的地址从全局维护的所有打开的地址之中去除
 */
 function removeUrlfromOpenedurls(id){
-	if(openedurls.indexOf(id) != -1){
+	if(isMenuOpen(id) != -1){
 		openedurls = openedurls.replace(jioncode+id,"");
 	}	
 }
@@ -325,9 +307,7 @@ function destoryMark(ele){
    openurlWhenCloseMark(ele);
    var id = $(ele).parent().attr("openid");
    $(ele).parent().remove();
-   console.log(id);
    removeUrlfromOpenedurls(id);
-   console.log(openedurls);
    var leftflafg = $(".ishow").first().prev();
    var rightflafg = $(".ishow").last().next(); 
    if(leftflafg.length == 1){
@@ -411,13 +391,62 @@ function menuSizeChange(){
 		  }, 300);		 
 		 $('#logo').removeClass("menuZoomout");
 		 $('.molo2').hide();
-		 $('.molo1').show();		
+		 $('.molo1').show();	
 	}
 }
 
-
-
-
-
-
-
+/**
+功能说明------
+所有事件的注册
+*/
+function initBindSystemEvents(){
+	
+  //注册关闭按钮页签按钮事件
+  $(document).on('click','.closemark',function(){
+	   destoryMark(this);							 
+  });
+  
+  //注册页签选中事件
+  $(document).on('click','.markname',function(){
+	   markChoosen(this);						 
+  });
+  
+   //页签左翻页
+  $(document).on('click','.leftcontrol',function(){
+	   moveLeft();					 
+  });
+  
+   //页签右翻页
+  $(document).on('click','.rightcontrol',function(){
+	   moveRight();			 
+  });
+  
+  //菜单区宽窄变化
+  $(document).on('click','.molo1,.molo2',function(){
+	   menuSizeChange();  
+  });	
+  
+  //绑定点击展开的功能
+  $(document).on('click','.hasSubMenu',function(event){
+	   var subMainMenu = $(this).find("ul").first();	   
+	   if(subMainMenu.hasClass("menuFold")){
+		   subMainMenu.hide();
+		   subMainMenu.removeClass("menuFold");
+	   }else{
+		   subMainMenu.addClass("menuFold");
+		   subMainMenu.show();
+		   //移动50px;
+		   subMainMenu.css("margin-left","20px");
+	   }
+	   //阻止父级再次调用 很重要的
+	  // event.stopPropagation();
+  });
+  
+     //url跳转这个事件一定要绑hasSubMenu定在之前
+  $(document).on('click','.menuItem',function(event){		
+		jumptourl($(this));	
+	    //阻止父级再次调用 很重要的
+	    event.stopPropagation();
+  }); 
+  
+}

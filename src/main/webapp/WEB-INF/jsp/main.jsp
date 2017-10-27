@@ -47,11 +47,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  
 		  <!--系统的菜单区 开始-->
 		  <div class="qpleft" id="qpleft">
-		  <!-- 延迟加载菜单
-		  1.首先加载顶级菜单，获取是不是有url,有上下级
-		  2.点击每个菜单时判断是已经点过了，点过了
-		  3.是就跳转，不是就ajax请求，获取子菜单，然后展开,一次循环
-		  -->
+		  
+		  <!-- 一次性获取所有菜单项-->
 		  </div>
 		  <!--系统的菜单区结束-->
 		  

@@ -181,14 +181,27 @@
 	list-style-type:none;
 	text-align:center;
 	vertical-align:middle;
+	background:#000000;
+	clear:both;
 }
 
 .mainMenu .subMenu a{
-    width:90%;
+    font-family:"Times New Roman", Times, serif;
+	font-size:14px;
+    width:50%;
 	height:30px;
 	color:#FFFFFF;
 	display:block;
 	float:left;
+	position:relative;
+    margin-left:20%;
+}
+
+.mainMenu .subMenu a:hover{
+    background:#EEEEEE;
+	text-decoration:none;
+	cursor:pointer;
+	color:red;
 }
 
 .mainMenu .subMenu span{
@@ -199,22 +212,15 @@
 	float:right;
 }
 
-.mainMenu .subMenu:hover{
-	text-decoration:none;
+.mainMenu .subMenu span:hover{
 	cursor:pointer;
-	color:red;
-}
-
-.hasSubMenu:hover > .subMainMenu{
-    display:block;
 }
 
 .subMainMenu{
+    clear:both;
     display:none;
 	height:auto;
-    clear:both;
-	width:100%;
-	height:auto;
+	position:relative;
 }
 
 .subMainMenu .subMenu{
@@ -223,14 +229,24 @@
 	list-style-type:none;
 	text-align:center;
 	vertical-align:middle;
+	clear:both;
 }
 
 .subMainMenu .subMenu a{
-    width:90%;
+    width:50%;
 	height:30px;
 	color:#FFFFFF;
 	display:block;
 	float:left;
+	position:relative;
+	margin-left:20%;
+}
+
+.subMainMenu .subMenu a:hover{
+    background:#EEEEEE;
+	text-decoration:none;
+	cursor:pointer;
+	color:red;
 }
 
 .subMainMenu .subMenu span{
@@ -239,6 +255,10 @@
 	color:#FFFFFF;
 	display:block;
 	float:right;
+}
+
+.subMainMenu .subMenu span:hover{
+	cursor:pointer;
 }
 
 #qpright{
