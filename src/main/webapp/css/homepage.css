@@ -134,7 +134,8 @@
 	height:100%;
 	float:left;
 	overflow:auto;
-	background:#000000;
+	background:#333333;
+	font-family:"微软雅黑";
 	direction:rtl;/*控制滚动条出现在左侧*/
 }
 
@@ -182,18 +183,19 @@
 }
 
 .mainMenu .subMenu a{
-    width:50%;
-	height:30px;
 	display:block;
 	float:left;
+	color:#FFFFFF;
 	position:relative;
-    margin-left:20%;
-	color:#FFFF66;
-	font-weight:bold 10px;
+	text-align:center;
+	vertical-align:middle;
+	margin-top:10px;
+	margin-left:30%;
+	height:25px;
 }
 
 .mainMenu .subMenu a:hover{
-    background:#EEEEEE;
+    background:#FFFFFF;
 	text-decoration:none;
 	cursor:pointer;
 	color:red;
@@ -201,10 +203,10 @@
 
 .mainMenu .subMenu span{
     width:10%;
-	height:30px;
 	color:#FFFFFF;
 	display:block;
 	float:right;
+	margin-top:10px;
 }
 
 .mainMenu .subMenu span:hover{
@@ -229,17 +231,18 @@
 }
 
 .subMainMenu .subMenu a{
-    width:50%;
-	height:30px;
-	color:#FFFFFF;
 	display:block;
 	float:left;
+	color:#FFFFFF;
 	position:relative;
-	margin-left:20%;
+	text-align:center;
+	vertical-align:middle;
+	margin-top:10px;
+	height:25px;
 }
 
 .subMainMenu .subMenu a:hover{
-    background:#EEEEEE;
+    background:#FFFFFF;;
 	text-decoration:none;
 	cursor:pointer;
 	color:red;
@@ -247,10 +250,10 @@
 
 .subMainMenu .subMenu span{
     width:10%;
-	height:30px;
 	color:#FFFFFF;
 	display:block;
 	float:right;
+	margin-top:10px;
 }
 
 .subMainMenu .subMenu span:hover{

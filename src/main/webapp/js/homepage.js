@@ -55,7 +55,8 @@ function makeSubMenu(mainMenu,menu){
 				   .attr("id",menu.id)
 				   .attr("pid",menu.pid)
 				   .attr("url",menu.url)
-				   .html(""+menu.name+""); 
+				   .attr("level",menu.level)
+				   .html("<a>"+menu.name+"</a>"); 
 			      mainMenu.append(li);   
 	        }else{
 	            //有子元素时，递归调用
@@ -64,6 +65,7 @@ function makeSubMenu(mainMenu,menu){
 				   .attr("id",menu.id)
 				   .attr("pid",menu.pid)
 				   .attr("url",menu.url)
+				   .attr("level",menu.level)
 				   .html("<a>"+menu.name+"</a>");
 				var span = $("<span></span>");
 				if(pid == 0){
@@ -87,6 +89,7 @@ function makeSubMenu(mainMenu,menu){
 				  .attr("id",menu.id)
 				  .attr("pid",menu.pid)
 				  .attr("url",menu.url)
+				  .attr("level",menu.level)
 				  .html("<a>"+menu.name+"</a>");
 			    mainMenu.append(li);
 	   }
@@ -435,11 +438,15 @@ function initBindSystemEvents(){
 	   }else{
 		   subMainMenu.addClass("menuFold");
 		   subMainMenu.show();
-		   //移动20px;
-		   subMainMenu.css("margin-left","10px");
+		   //递归移动形成层级渲染
+		   var level = $(this).attr("level");
+		   var offset = $(this).find("a").offset().left;
+		   var toLeft = offset + level * 4 +"px";
+		   console.log(offset);
+		   subMainMenu.children().find("a").css("margin-left",toLeft);
 	   }
 	   //阻止父级再次调用 很重要的
-	  // event.stopPropagation();
+	  event.stopPropagation();
   });
   
   //url跳转这个事件一定要绑hasSubMenu定在之前

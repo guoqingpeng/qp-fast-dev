@@ -4,14 +4,14 @@
 
 <!-- 获取系统顶级菜单 -->
 	<select id="getTopMenus"  resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url,urlType from  menu  where pid = 0 order by id,pid 
+		select name,id,pid,url,urlType,level from  menu  where pid = 0 order by id,pid 
 	</select>
 	
 	<select id="getSubMenus"  parameterType="int" resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url,urlType from  menu where pid = #{id} order by id,pid 
+		select name,id,pid,url,urlType,level from  menu where pid = #{id} order by id,pid 
 	</select>
 	
 	<select id="getNotTopSubMenus"  resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url ,urlType from  menu  where pid > 0 order by id,pid 
+		select name,id,pid,url ,urlType ,level from  menu  where pid > 0 order by id,pid 
 	</select>	
 </mapper>
