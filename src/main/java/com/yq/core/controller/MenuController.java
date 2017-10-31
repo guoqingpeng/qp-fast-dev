@@ -33,7 +33,6 @@ public class MenuController {
 	 *更新日期：9:17:42 AM
 	 *作者: GUO-QP
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value="menulist")
 	public ModelAndView  menulist(){
 		ModelAndView modelAndView = new ModelAndView();
@@ -43,7 +42,6 @@ public class MenuController {
 			//非顶级菜单
 			List<TreeObj> notTopMenusList = menuDao.getNotTopSubMenus();
 			topMenusList = TreeDataUtil.makeTreeData(topMenusList, notTopMenusList);
-			System.out.println(JSONArray.toJSONString(topMenusList));
 			modelAndView.addObject("menu",JSONArray.toJSONString(topMenusList));
 			modelAndView.setViewName("main");
 		} catch (Exception e) {

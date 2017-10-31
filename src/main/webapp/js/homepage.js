@@ -12,7 +12,7 @@ var marknum = 10;
 菜单初始化
 系统首页事件绑定执行
 */
-$(document).ready(function(){					   
+$(document).ready(function(){
   //加载菜单
   initMenu();
   //初始化所有事件
@@ -55,7 +55,7 @@ function makeSubMenu(mainMenu,menu){
 				   .attr("id",menu.id)
 				   .attr("pid",menu.pid)
 				   .attr("url",menu.url)
-				   .html("<a>"+menu.name+"</a>"); 
+				   .html(""+menu.name+""); 
 			      mainMenu.append(li);   
 	        }else{
 	            //有子元素时，递归调用
@@ -226,7 +226,7 @@ function moveLeft(){
 
 /**
 功能说明------
-右移一
+右移一格
 */
 function moveRight(){
 	 //找到最后一个ishow元素，并将其隐藏
@@ -435,18 +435,24 @@ function initBindSystemEvents(){
 	   }else{
 		   subMainMenu.addClass("menuFold");
 		   subMainMenu.show();
-		   //移动50px;
-		   subMainMenu.css("margin-left","20px");
+		   //移动20px;
+		   subMainMenu.css("margin-left","10px");
 	   }
 	   //阻止父级再次调用 很重要的
 	  // event.stopPropagation();
   });
   
-     //url跳转这个事件一定要绑hasSubMenu定在之前
+  //url跳转这个事件一定要绑hasSubMenu定在之前
   $(document).on('click','.menuItem',function(event){		
-		jumptourl($(this));	
-	    //阻止父级再次调用 很重要的
-	    event.stopPropagation();
+	   jumptourl($(this));	
+	   //阻止父级再次调用 很重要的
+	   event.stopPropagation();
   }); 
+  
+  //点击home图标
+  $(document).on('click','.home',function(){
+	   $(".markChoosen").removeClass("markChoosen").addClass("markNotChoosen");
+	   $("#dataframe").attr("src","g1.do");
+  });
   
 }

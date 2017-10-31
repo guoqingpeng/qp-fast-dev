@@ -25,8 +25,8 @@ public class GoodController {
 	 */
 	@RequestMapping(value="g1")
 	public String g1(){
-		System.out.println("哎呀，g1被电击了");
-		return "g1";
+		System.out.println("哎呀，g1被点击了");
+		return "menu/menus";
 		
 	}
 	
@@ -41,13 +41,13 @@ public class GoodController {
 	 */
 	@RequestMapping(value="g2")
 	public String g2(){
-		System.out.println("哎呀，g2被电击了");
+		System.out.println("哎呀，g2被点击了");
 		return "g2";
 		
 	}
 	@RequestMapping(value="g3")
 	public String g3(){
-		System.out.println("哎呀，g3被电击了");
+		System.out.println("哎呀，g3被点击了");
 		return "g3";
 		
 	}

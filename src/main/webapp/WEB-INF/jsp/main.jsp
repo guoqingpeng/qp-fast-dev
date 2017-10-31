@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <title>qp-dev-center1</title>
+    <title>qp-dev-center</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -28,10 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
       <div class="uppart" id="uppart" >
 	        <!--logo区-->
-	        <div class="logo" id="logo">
+	        <div class="logo contaniner-horizontal-left" id="logo">
 					<div class="molo1"><span class="glyphicon glyphicon-indent-right"></span></div>
 					<div class="molo2"><span class="glyphicon glyphicon-indent-left"></span></div>
-					<div class="homepage glyphicon glyphicon-home"></div>
+					<div class="home"><span class="glyphicon glyphicon-home"></span></div>
 			</div>
 	  		<!--页签区-->
 			<div class="markarea" id="markarea">

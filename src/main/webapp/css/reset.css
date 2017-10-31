@@ -28,7 +28,7 @@ h1,h2,h3,h4,h5,h6,small,big,input,textarea,button,select {
 }
 
 h1,h2,h3,h4,h5,h6 {
-	font-family: tahoma, arial, "Hiragino Sans GB", "΢���ź�", simsun,
+	font-family: tahoma, arial, "Hiragino Sans GB", simsun,
 		sans-serif
 }
 
@@ -117,13 +117,5 @@ sup,sub {
     display: -webkit-box;
     -webkit-box-orient:horizontal;
     -webkit-box-pack:left;
-    -webkit-box-align:center;
-}
-
-/*设置垂直居中-右*/
-.contaniner-horizontal-right{
-    display: -webkit-box;
-    -webkit-box-orient:horizontal;
-    -webkit-box-pack:right;
     -webkit-box-align:center;
 }

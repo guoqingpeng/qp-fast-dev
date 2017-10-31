@@ -24,6 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${JAVASCRIPT_URL}/qp-list.js"></script>
   </head>
   <body>
+  <div id="treeArea" class="treeArea"></div>
   <div class="listArea">
   
 	  <!--part1 检索区域 -->
