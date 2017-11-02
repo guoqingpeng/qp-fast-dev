@@ -36,6 +36,8 @@ function initMenu(){
 	}
 	
 	menuArea.append(mainMenu);
+	//菜单加载完毕之后,菜单层级css样式刷新
+	reFreshMenuCss();
 }
 
 /**
@@ -56,7 +58,7 @@ function makeSubMenu(mainMenu,menu){
 				   .attr("pid",menu.pid)
 				   .attr("url",menu.url)
 				   .attr("level",menu.level)
-				   .html("<a>"+menu.name+"</a>"); 
+				   .html("<div class='aTop'><a class='menuName'>"+menu.name+"</a></div>"); 
 			      mainMenu.append(li);   
 	        }else{
 	            //有子元素时，递归调用
@@ -65,16 +67,14 @@ function makeSubMenu(mainMenu,menu){
 				   .attr("id",menu.id)
 				   .attr("pid",menu.pid)
 				   .attr("url",menu.url)
-				   .attr("level",menu.level)
-				   .html("<a>"+menu.name+"</a>");
-				var span = $("<span></span>");
-				if(pid == 0){
-				   span.append("Z");
-				}else{
-				   span.append("+");
-				}
+				   .attr("level",menu.level);
+				   
+				var div = $("<div class='aTop'><a class='menuName'>"+menu.name+"</a></div>");
+				var span = $("<span class='menuNum'></span>");
+				span.append("+");
+				div.append(span);
+				li.append(div);
 				var subMainMenu = $("<ul class='subMainMenu'></ul>");
-				li.append(span);
 				var subMenus = menu.subTreeobjList;
 				for(var menu in subMenus){
 				    var menuIetm = subMenus[menu];
@@ -90,11 +90,26 @@ function makeSubMenu(mainMenu,menu){
 				  .attr("pid",menu.pid)
 				  .attr("url",menu.url)
 				  .attr("level",menu.level)
-				  .html("<a>"+menu.name+"</a>");
+				  .html("<div class='aTop'><a class='menuName'>"+menu.name+"</a></div>");
 			    mainMenu.append(li);
 	   }
 	   return mainMenu;
 }
+
+/**
+功能说明------
+菜单层级css样式刷新
+*/
+function reFreshMenuCss(){
+	var marginToDiv = $(".menuName").parent().width() * 0.3;
+	$(".menuName").each(function(){
+	    var level = $(this).parent().parent().attr("level");
+		var toLeft = level * 8 + marginToDiv + "px";
+		$(this).css("margin-left",toLeft);
+		console.log(level);
+	});
+}
+
 
 /**
 功能说明------
@@ -111,7 +126,8 @@ function setMarkitWidth(){
 点击菜单时,将菜单上的url设置到数据展示去的iframe上
 */
 function  jumptourl(ele){
-    var markName = $(ele).html();
+    var a  = $(ele).find("a");//这里取到的实际是一个a标签，因为设计是菜单的是<div><a>名称</a></div>
+	var markName = $(a).html();//取a标签的值才是菜单的名称
     var url = $(ele).attr("url");
 	var id = $(ele).attr("id");
 	var pid = $(ele).attr("pid");
@@ -377,10 +393,10 @@ function shuffleMarks(id){
 function menuSizeChange(){
 	if(!$('#logo').hasClass("menuZoomout")){		
 		 $(".qpright").css({
-			width: "95%",
-		  }); 
+			width: "100%",
+		  },1000); 
 		 $(".qpleft").css({
-			width: "5%",
+			width: "0%",
 		  }, 300);		 
 		 $('#logo').addClass("menuZoomout");
 		 $('.molo1').hide();
@@ -427,26 +443,24 @@ function initBindSystemEvents(){
   //菜单区宽窄变化
   $(document).on('click','.molo1,.molo2',function(){
 	   menuSizeChange();  
-  });	
+  });
   
   //绑定点击展开的功能
   $(document).on('click','.hasSubMenu',function(event){
-	   var subMainMenu = $(this).find("ul").first();	   
+	   var subMainMenu = $(this).find("ul").first();
 	   if(subMainMenu.hasClass("menuFold")){
 		   subMainMenu.hide();
 		   subMainMenu.removeClass("menuFold");
+		   $(this).children().find(".menuNum").first().html("+");
 	   }else{
 		   subMainMenu.addClass("menuFold");
 		   subMainMenu.show();
-		   //递归移动形成层级渲染
-		   var level = $(this).attr("level");
-		   var offset = $(this).find("a").offset().left;
-		   var toLeft = offset + level * 4 +"px";
-		   console.log(offset);
-		   subMainMenu.children().find("a").css("margin-left",toLeft);
+		   $(this).children().find(".menuNum").first().html("-");
 	   }
 	   //阻止父级再次调用 很重要的
 	  event.stopPropagation();
+	  //刷新点击的展开收起状态
+	  
   });
   
   //url跳转这个事件一定要绑hasSubMenu定在之前
