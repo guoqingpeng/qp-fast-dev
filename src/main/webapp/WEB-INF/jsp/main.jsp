@@ -15,13 +15,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<!--css -->
 	<link href="${CSS_URL}/reset.css" rel="stylesheet" type="text/css" >
-	<link href="${CSS_URL}/homepage.css" rel="stylesheet" type="text/css" >
+	<link href="${CSS_URL}/qp.css" rel="stylesheet" type="text/css" >
 	<link href="${ASSERT_URL}/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 	<link href="${ASSERT_URL}/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 	<!--javascript-->
 	<script src="${JAVASCRIPT_URL}/jquery-3.2.1.js"></script>
 	<script src="${ASSERT_URL}/bootstrap/js/bootstrap.js"></script>
-	<script src="${JAVASCRIPT_URL}/homepage.js"></script>
+	<script src="${JAVASCRIPT_URL}/qp.js"></script>
   </head>
   <body>
   <div id="qpcontainer">

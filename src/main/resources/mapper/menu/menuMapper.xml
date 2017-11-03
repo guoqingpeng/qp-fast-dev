@@ -2,16 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yq.core.dao.MenuDao">
 
-<!-- 获取系统顶级菜单 -->
+    <!-- 获取系统顶级菜单 -->
 	<select id="getTopMenus"  resultType="com.yq.core.entity.Menu">
 		select name,id,pid,url,urlType,level from  menu  where pid = 0 order by id,pid 
 	</select>
 	
+	<!-- 根据父id获取下面的子菜单 -->
 	<select id="getSubMenus"  parameterType="int" resultType="com.yq.core.entity.Menu">
 		select name,id,pid,url,urlType,level from  menu where pid = #{id} order by id,pid 
 	</select>
 	
+	<!-- 获取系统菜单中所有非顶级菜单 -->
 	<select id="getNotTopSubMenus"  resultType="com.yq.core.entity.Menu">
 		select name,id,pid,url ,urlType ,level from  menu  where pid > 0 order by id,pid 
+	</select>	
+	
+	<!-- 获取系统的所有的菜单 -->
+	<select id="getAllMenus"  resultType="com.yq.core.entity.Menu">
+		select name,id,pid,url ,urlType ,level from  menu
 	</select>	
 </mapper>

@@ -21,5 +21,6 @@ public interface MenuDao {
 	public List<TreeObj> getTopMenus();
 	public List<TreeObj> getSubMenus(int id);
 	public List<TreeObj> getNotTopSubMenus();
+	public List<TreeObj> getAllMenus();
 	
 }

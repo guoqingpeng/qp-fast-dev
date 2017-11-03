@@ -17,6 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   g1  homepage
+  本页边正在开发中，敬请期待！！！
   </body>
 </html>

@@ -1,0 +1,69 @@
+/* CSS Document */
+
+.treeArea{
+  width:15%;
+  height:100%;
+  float:left;
+}
+
+#treeData{ 
+	width:100%;
+	height:100%;
+	border:none;
+}
+
+
+.listArea{
+   width:85%;
+   height:100%;
+   float:left;
+}
+
+.qp-search{
+   width:100%;
+   height:auto;
+}
+
+.searchArea{
+  width:100%;
+  height:10%;
+}
+
+.search-left{
+   float:left;
+   width:98%;
+   height:100%;
+}
+
+.search-right{
+   float:left;
+   width:2%;
+   height:100%;
+}
+
+.search-right:hover{
+    cursor:pointer;
+}
+
+.searchForm{
+  width:100%;
+  height:20%;
+  display:none;
+  background:#99CC66;
+}
+
+.qp-down:hover,qp-search-icon:hover{
+    cursor:pointer;
+}
+
+.qp-data{
+   width:100%;
+   height:85%;
+}
+
+.qp-page-state{
+   width:100%;
+   height:5%;
+   background:#BBBBBB;
+   position:fixed;
+}

@@ -1,0 +1,333 @@
+/* CSS Document */  
+#qpcontainer {
+	width:100%;
+	height:100%;
+}
+
+#uppart{
+	width:100%;
+	height:10%;
+	background-color:#FFFFFF;
+}
+
+#uppart #logo {
+	width:15%;
+	height:100%;
+	float:left;
+	cursor:pointer;
+	background:#DDDDDD;
+	font-size:30px;
+}
+
+.molo1{
+	float:left;
+	text-align:right;
+}
+
+.molo2{
+	display:none;
+	float:left;
+	text-align:right;
+}
+
+.home{
+	text-align:right;
+	float:right;
+}
+
+#uppart #markarea {
+	width:75%;
+	height:100%;
+	background:#DDDDDD;
+	position:relative;
+	z-index:3;
+	float:left;
+}
+
+#markarea .leftcontrol {
+    display:none;
+    width:1%;
+	position:relative;
+	float:left;
+	cursor:pointer;
+	z-index:1;
+}
+
+#markarea #marks {
+    width:98%;
+	height:100%;
+	float:left;
+	z-index:2;
+}
+
+#markarea .rightcontrol {
+    display:none;
+    width:1%;
+	cursor:pointer;
+	float:right;
+	z-index:1
+}
+
+#uppart #userinfo {
+	width:10%;
+	height:100%;
+	float:right;
+	background-color:#DDDDDD;;
+} 
+
+.markit{
+	height:50%;
+	margin-left:10px;
+	position:relative;
+    float:left;
+}
+
+.markit:hover{
+	font-style:oblique;
+	background-color:#9999FF;
+}
+
+.markit:hover > .closemark{
+	display:block;
+}
+
+.markChoosen{
+	background-color:#9999FF;
+	float:left;
+}
+
+.markNotChoosen{
+	background-color:#FFCCCC;
+	float:left;
+}
+
+.markname{
+    width:80%;
+	height:100%;
+	display:block;
+    float:left;
+	cursor:pointer;
+	position:relative;
+	top:20%;
+	margin:0;
+}
+
+.closemark{
+    width:20%;
+	height:100%;
+	float:right;
+	position:relative;
+	top:25%;
+	display:none;
+}
+
+#downpart{
+	margin-left:0px;
+	margin-top:0px;
+	margin-bottom:0px;
+	margin-right:0px;
+	width:100%;
+	height:90%;
+}
+
+#qpleft{
+	width:15%;
+	height:100%;
+	float:left;
+	overflow:auto;
+	background:#666666;
+	font-family:"微软雅黑";
+	direction:rtl;/*控制滚动条出现在左侧*/
+}
+
+/*
+::-webkit-scrollbar 滚动条整体部分
+::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）
+::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）
+::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
+::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+*/
+
+/* 滚动条的滑轨背景颜色 */
+#qpleft::-webkit-scrollbar-track{
+	background-color:#F5F5F5;
+	-webkit-box-shadow:inset 0 0 6px rgba(0, 0, 0, 0.22);
+}
+
+/* 滑块颜色 */
+#qpleft::-webkit-scrollbar-thumb{
+	background-color:#8b8b8b;
+	border-radius:10px;
+}
+
+/*定义滚动条宽及背景*/
+#qpleft::-webkit-scrollbar{
+	width:5px;
+	background-color:rgba(0, 0, 0, 0.32);
+}
+/**滚动条结束-----------------------------*/
+
+
+levelOneExpand{
+    
+}
+
+levelOneClosed{
+
+}
+
+levelMoreExpand{
+
+}
+
+levelMoreClosed{
+
+}
+
+.mainMenu{
+    width:100%;
+    height:100%;
+}
+
+.mainMenu .subMenu{
+	width:100%;
+	height:auto;
+	list-style-type:none;
+	clear:both;
+}
+
+.mainMenu .subMenu .aTop{
+	color:#FFFFFF;
+	text-align:center;
+	vertical-align:middle;
+	position:relative;
+	margin-top:10px;
+	display:block;
+	height:24px;
+	padding-top:8px;
+}
+
+.mainMenu .subMenu .aTop .menuName{
+	display:block;
+	float:left;
+	color:#FFFFFF;
+	margin-left:30%;
+}
+
+.mainMenu .subMenu .aTop .menuName:hover{
+    background:#FFFFFF;
+	color:#000000;
+	text-decoration:none;
+	cursor:pointer;
+}
+
+.mainMenu .subMenu  .aTop .menuNum{
+	display:block;
+	color:#FFFFFF;
+	float:right;
+}
+
+.mainMenu .subMenu .aTop .menuNum:hover{
+	cursor:pointer;
+}
+
+.subMainMenu{
+    clear:both;
+	height:auto;
+	position:relative;
+	display:none;
+	background:#000000;
+}
+
+.subMainMenu .subMenu{
+	width:100%;
+	height:auto;
+	list-style-type:none;
+	text-align:center;
+	vertical-align:middle;
+}
+
+.subMainMenu .subMenu .aTop{
+	color:#FFFFFF;
+	text-align:center;
+	vertical-align:middle;
+	position:relative;
+	display:block;
+	height:24px;
+	padding-top:8px;
+}
+
+.subMainMenu .subMenu .aTop .menuName{
+	display:block;
+	color:#FFFFFF;
+}
+
+.subMainMenu .subMenu .aTop .menuName:hover{
+    background:#FFFFFF;;
+	text-decoration:none;
+	cursor:pointer;
+	color:red;
+}
+
+.subMainMenu .subMenu .aTop .menuNum{
+	color:#FFFFFF;
+	display:block;
+	float:right;
+}
+
+.subMainMenu .subMenu .aTop .menuNum:hover{
+    cursor:pointer;
+}
+
+#qpright{
+	margin-top:0;
+	margin-left:0;
+	margin-right:0;
+	width:85%;
+	height:100%;
+	float:left;
+}
+
+#qpright #qp-right-main {
+	margin-top:0;
+	margin-left:0;
+	width:100%;
+	height:100%;
+	float:clear;
+}
+
+#qpright #qp-right-main #dataframe{
+	width:100%;
+	height:100%;
+	border:none;
+	background:#BBBBBB;
+	overflow-y:auto;
+}
+
+#dialog{
+   display:none;
+   width:60%;
+   height:40px;
+   position:absolute;
+   top:50%;
+   left:50%;
+   background:#BBBBBB;
+   z-index:auto;
+}
+
+#msg{
+   display:none;
+   width:20%;
+   height:100px;
+   position:absolute;
+   top:20%;
+   left:30%;
+   background:#BBBBBB;
+   z-index:auto;
+}
+
+#menuData{
+   display:none;
+}
