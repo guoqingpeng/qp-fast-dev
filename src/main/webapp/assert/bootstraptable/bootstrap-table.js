@@ -291,7 +291,7 @@
         data: [],
         totalField: 'total',
         dataField: 'rows',
-        method: 'get',
+        method: 'post',
         url: undefined,
         ajax: undefined,
         cache: true,

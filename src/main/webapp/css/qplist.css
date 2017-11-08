@@ -12,11 +12,21 @@
 	border:none;
 }
 
+.menuFrame{
+  width:85%;
+  height:100%;
+  float:left;
+}
+
+#menuData{
+	width:100%;
+	height:100%;
+	border:none;
+}
 
 .listArea{
-   width:85%;
+   width:100%;
    height:100%;
-   float:left;
 }
 
 .qp-search{

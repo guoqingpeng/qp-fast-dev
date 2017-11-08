@@ -9,7 +9,7 @@
 	
 	<!-- 根据父id获取下面的子菜单 -->
 	<select id="getSubMenus"  parameterType="int" resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url,urlType,level from  menu where pid = #{id} order by id,pid 
+		select name,id,pid,url,urlType,level from  menu where pid = #{id} or id=#{id} order by id,pid 
 	</select>
 	
 	<!-- 获取系统菜单中所有非顶级菜单 -->

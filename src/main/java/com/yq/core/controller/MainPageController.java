@@ -21,7 +21,7 @@ import com.yq.core.common.TreeObj;
 import com.yq.core.dao.MenuDao;
 
 @Controller
-public class MainPageController {
+public class MainPageController extends BaseController{
 	
 	@Autowired
 	private MenuDao menuDao;
@@ -38,7 +38,6 @@ public class MainPageController {
 	@RequestMapping(value="mainPage")
 	public ModelAndView toMainPage(){
 		ModelAndView modelAndView = new ModelAndView();
-		try {
 			//获取顶级菜单，父级菜单为0,递归获取子菜单
 			List<TreeObj> topMenusList = menuDao.getTopMenus();
 			//非顶级菜单
@@ -46,10 +45,6 @@ public class MainPageController {
 			topMenusList = TreeDataUtil.makeTreeData(topMenusList, notTopMenusList);
 			modelAndView.addObject("menu",JSONArray.toJSONString(topMenusList));
 			modelAndView.setViewName("main");
-		} catch (Exception e) {
-			e.printStackTrace();
-			modelAndView.setViewName("404");
-		}
 		return modelAndView;
 	}
 

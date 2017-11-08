@@ -20,7 +20,7 @@ import com.yq.core.common.TreeObj;
 import com.yq.core.dao.MenuDao;
 
 @Controller
-public class TreeController {
+public class TreeController extends BaseController{
 	
 	@Autowired
 	private MenuDao menuDao;
@@ -33,6 +33,7 @@ public class TreeController {
 	 *返回值说明：
 	 *更新日期：3:36:54 PM
 	 *作者: GUO-QP
+	 * @throws JsonProcessingException 
 	 */
 	@RequestMapping(value="treeData")
 	public ModelAndView treeMain(){
@@ -41,7 +42,6 @@ public class TreeController {
 		String  menus = JSONArray.toJSONString(allMenus);
 		modelAndView.addObject("treeData",menus);
 		modelAndView.setViewName("common/tree");
-		System.out.println("加载了Ztree数据了"+menus);
 		return modelAndView;
 	}
 }

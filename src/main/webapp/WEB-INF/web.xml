@@ -41,7 +41,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>yq</servlet-name>
+		<servlet-name>yq</servlet-name>F
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	<!-- 第三步,设定spring拦截请求的后缀 end-->

@@ -24,7 +24,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${ASSERT_URL}/bootstrap/js/bootstrap.js"></script>
 	<script src="${ASSERT_URL}/ztree/js/jquery.ztree.all.js"></script>
 	<script type="text/javascript">
+	
 	    var zTreeObj;
+	    
 	    var setting = {
 				    view: {
 						dblClickExpand: false,
@@ -32,6 +34,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						selectedMulti: false,
 						showIcon: false
 					},
+					
+					edit: {
+						enable: true,
+						showRemoveBtn: false,
+						showRenameBtn: false
+					},	
+					
+					//回调事件在这个地方注册				
+					callback:{
+					    onClick:clickme
+					},
+					
 					data: {
 						simpleData: {
 							enable:true,
@@ -42,11 +56,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 	    };
 	    var zNodes = ${treeData};
-		console.log(zNodes);
+		
 		$(document).ready(function(){
-		  //加载树形结构
+		  //加载树形结构数据
 		  zTreeObj = $.fn.zTree.init($("#qptree"), setting, zNodes);
+		  //节点默认全部展开
+		  zTreeObj.expandAll(true);
 		});
+		
+		function clickme(event, treeId, treeNode, clickFlag) {
+		      var id = treeNode.id;
+		      var dataurl = "menulist.do?pid="+id;
+		      $('#menuData', parent.document).attr("src",dataurl);
+		}
 	</script>
   </head>
   <body>

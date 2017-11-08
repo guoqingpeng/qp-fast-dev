@@ -24,6 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${ASSERT_URL}/bootstrap/js/bootstrap.js"></script>
   </head>
   <body>
-  系统异常！
+  系统异常得不得了了！
   </body>
 </html>
