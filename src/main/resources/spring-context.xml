@@ -19,7 +19,6 @@
 
 	<!-- 第二步,扫描服务层包 -->
 	<context:component-scan base-package="com.yq.core.service"></context:component-scan>
-	<mvc:annotation-driven />
 
 	<!-- 第三步,配置一个数据源,这里使用阿里巴巴的druid 数据库连接池-->
 	<context:property-placeholder location="classpath:db.properties" />

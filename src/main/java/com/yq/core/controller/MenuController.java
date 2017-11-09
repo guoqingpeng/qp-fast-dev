@@ -8,7 +8,6 @@
 */
 package com.yq.core.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,34 +25,19 @@ public class MenuController extends BaseController{
 	@Autowired
 	private MenuDao menuDao;
 	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：跳转到栏目设置页面
+	 *参数说明：@return
+	 *返回值说明：
+	 *更新日期：10:25:32 AM
+	 *作者: GUO-QP
+	 */
 	@RequestMapping(value="menuSet")
 	public ModelAndView  menuSet(){
 		ModelAndView modelAndView = new ModelAndView();
 	    modelAndView.setViewName("menu/menus");
-		return modelAndView;
-	}
-	
-	
-	/**
-	 *版本：
-	 *功能描述：
-	 *获取所有的菜单的列表数据
-	 *参数说明：@return
-	 *返回值说明：
-	 *更新日期：9:17:42 AM
-	 *作者: GUO-QP
-	 */
-	@RequestMapping(value="menulist")
-	public ModelAndView  menulist(int pid){
-		ModelAndView modelAndView = new ModelAndView();
-			//menuFromPid
-			if (pid != 0) {
-				modelAndView.addObject("menuData", "menuFromPid.do?pid="+pid);
-				modelAndView.setViewName("menu/menuframe2");
-			}else {
-				modelAndView.addObject("menuData", "menuData.do");
-				modelAndView.setViewName("menu/menuframe");
-			}
 		return modelAndView;
 	}
 	
@@ -65,8 +49,6 @@ public class MenuController extends BaseController{
 	 *返回值说明：
 	 *更新日期：11:58:03 AM
 	 *作者: GUO-QP
-	 * @throws UnsupportedEncodingException 
-	 * @throws JsonProcessingException 
 	 */
 	@ResponseBody
 	@RequestMapping(value="menuData")
@@ -85,13 +67,13 @@ public class MenuController extends BaseController{
 	 *返回值说明：
 	 *更新日期：5:07:55 PM
 	 *作者: GUO-QP
-	 * @throws JsonProcessingException 
 	 */
 	@ResponseBody
 	@RequestMapping(value="menuFromPid")
 	public  String getMenusByPid(int pid){
 			List<TreeObj> allMenus = menuDao.getSubMenus(pid);
 			String jsonMenus =JSONArray.toJSONString(allMenus);
+			System.out.println(jsonMenus);
 			return jsonMenus;
 	}
 }

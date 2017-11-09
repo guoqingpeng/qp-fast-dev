@@ -13,7 +13,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.yq.core.common.TreeObj;
@@ -35,13 +35,11 @@ public class TreeController extends BaseController{
 	 *作者: GUO-QP
 	 * @throws JsonProcessingException 
 	 */
+	@ResponseBody
 	@RequestMapping(value="treeData")
-	public ModelAndView treeMain(){
-		ModelAndView modelAndView = new ModelAndView();
+	public String treeMain(){
 		List<TreeObj> allMenus = menuDao.getAllMenus();
 		String  menus = JSONArray.toJSONString(allMenus);
-		modelAndView.addObject("treeData",menus);
-		modelAndView.setViewName("common/tree");
-		return modelAndView;
+		return menus;
 	}
 }

@@ -35,7 +35,7 @@
 			名称为[<servlet-name>]-servlet.xml，如spring-servlet.xml
 			<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring-servlet.xml</param-value>&nbsp; 默认
+			<param-value>/WEB-INF/spring-servlet.xml</param-value>默认
 			</init-param>
 		-->
 		<load-on-startup>1</load-on-startup>
@@ -44,9 +44,10 @@
 		<servlet-name>yq</servlet-name>F
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
 	<!-- 第三步,设定spring拦截请求的后缀 end-->
-
-	<!-- filter 1使用spring自带的拦截器设置字符为utf8 
+	<!-- filter 
+	     使用spring自带的拦截器设置字符为utf8 
 		过滤的配置顺序与servlet无关，
 		但是过滤器之间的顺序是有关的-->
 	<filter>

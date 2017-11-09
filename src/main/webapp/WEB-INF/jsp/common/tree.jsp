@@ -19,10 +19,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="${ASSERT_URL}/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 	<link href="${ASSERT_URL}/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 	<link href="${ASSERT_URL}/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css">
+	<link href="${ASSERT_URL}/bootstraptable/bootstrap-table.css"  rel="stylesheet" type="text/css">
 	<!--javascript-->
 	<script src="${JAVASCRIPT_URL}/jquery-3.2.1.js"></script>
 	<script src="${ASSERT_URL}/bootstrap/js/bootstrap.js"></script>
 	<script src="${ASSERT_URL}/ztree/js/jquery.ztree.all.js"></script>
+	<script src="${ASSERT_URL}/bootstraptable/bootstrap-table.js"></script>
+	<script src="${ASSERT_URL}/bootstraptable/bootstrap-table-zh-CN.js"></script>
 	<script type="text/javascript">
 	
 	    var zTreeObj;
@@ -66,8 +69,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		function clickme(event, treeId, treeNode, clickFlag) {
 		      var id = treeNode.id;
-		      var dataurl = "menulist.do?pid="+id;
-		      $('#menuData', parent.document).attr("src",dataurl);
+		      var dataurl = "menuFromPid.do?pid="+id;
+				$.ajax({
+					  type: 'get',
+					  url: dataurl,
+					  dataType: 'json',
+					  success:function(data){
+							$('#smsc').bootstrapTable({
+							    columns: [{
+							        field: 'id',
+							        title: '数据id'
+							    }, {
+							        field: 'name',
+							        title: '名称'
+							    }],
+							    data:data
+							});					  
+					  }
+					});		      
 		}
 	</script>
   </head>
