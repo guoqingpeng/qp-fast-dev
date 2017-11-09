@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.yq.core.common.TreeObj;
 import com.yq.core.dao.MenuDao;
@@ -55,7 +54,6 @@ public class MenuController extends BaseController{
 				modelAndView.addObject("menuData", "menuData.do");
 				modelAndView.setViewName("menu/menuframe");
 			}
-
 		return modelAndView;
 	}
 	
@@ -75,7 +73,6 @@ public class MenuController extends BaseController{
 	public  String menuItems(){
 		List<TreeObj> allMenus = menuDao.getAllMenus();
 		String jsonMenus =JSONArray.toJSONString(allMenus);
-		System.out.println(jsonMenus);
 		return jsonMenus;
 	}
 	
@@ -95,7 +92,6 @@ public class MenuController extends BaseController{
 	public  String getMenusByPid(int pid){
 			List<TreeObj> allMenus = menuDao.getSubMenus(pid);
 			String jsonMenus =JSONArray.toJSONString(allMenus);
-			System.out.println((JSON) JSON.toJSON(allMenus));
 			return jsonMenus;
 	}
 }
