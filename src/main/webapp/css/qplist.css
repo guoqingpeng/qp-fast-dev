@@ -1,32 +1,14 @@
 /* CSS Document */
-
 .treeArea{
   width:15%;
   height:100%;
   float:left;
 }
 
-#treeData{ 
-	width:100%;
-	height:100%;
-	border:none;
-}
-
-.menuFrame{
-  width:85%;
-  height:100%;
-  float:left;
-}
-
-#menuData{
-	width:100%;
-	height:100%;
-	border:none;
-}
-
 .listArea{
-   width:100%;
+   width:85%;
    height:100%;
+   float:left;
 }
 
 .qp-search{
@@ -34,21 +16,18 @@
    height:auto;
 }
 
-.searchArea{
-  width:100%;
-  height:10%;
-}
-
 .search-left{
    float:left;
    width:98%;
-   height:100%;
+   height:50px;
+   background:#CCFFFF;
 }
 
 .search-right{
    float:left;
    width:2%;
-   height:100%;
+   height:50px;
+   background:#CCFFFF;
 }
 
 .search-right:hover{
@@ -56,10 +35,10 @@
 }
 
 .searchForm{
+  clear:both;
   width:100%;
-  height:20%;
   display:none;
-  background:#99CC66;
+  height:auto;
 }
 
 .qp-down:hover,qp-search-icon:hover{
@@ -71,6 +50,12 @@
    height:85%;
 }
 
+#smsc{
+   
+   width:100%;
+   height:100%;
+
+}
 .qp-page-state{
    width:100%;
    height:5%;

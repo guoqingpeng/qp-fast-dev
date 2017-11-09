@@ -305,7 +305,7 @@
         responseHandler: function (res) {
             return res;
         },
-        pagination: true,
+        pagination: false,
         onlyInfoPagination: false,
         paginationLoop: true,
         sidePagination: 'client', // client or server
@@ -318,16 +318,16 @@
         paginationDetailHAlign: 'right', //right, left
         paginationPreText: '&lsaquo;',
         paginationNextText: '&rsaquo;',
-        search: true,
+        search: false,
         searchOnEnterKey: false,
         strictSearch: false,
         searchAlign: 'left',
         selectItemName: 'btSelectItem',
         showHeader: true,
         showFooter: false,
-        showColumns: true,
+        showColumns: false,
         showPaginationSwitch: false,
-        showRefresh: true,
+        showRefresh: false,
         showToggle: false,
         buttonsAlign: 'right',
         smartDisplay: false,

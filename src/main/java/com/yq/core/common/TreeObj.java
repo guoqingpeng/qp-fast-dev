@@ -18,7 +18,6 @@ public class TreeObj {
 	private int urlType = 1;
 	private Boolean hasSubTreeobj = false;
 	private int subMenuNum = 0;
-	private int level = 1;
 	private List<TreeObj> subTreeobjList;
 	public String getName() {
 		return name;
@@ -61,12 +60,6 @@ public class TreeObj {
 	}
 	public void setSubMenuNum(int subMenuNum) {
 		this.subMenuNum = subMenuNum;
-	}
-	public int getLevel() {
-		return level;
-	}
-	public void setLevel(int level) {
-		this.level = level;
 	}
 	public List<TreeObj> getSubTreeobjList() {
 		return subTreeobjList;

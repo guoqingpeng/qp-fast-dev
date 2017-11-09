@@ -47,8 +47,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  
 		  <!--系统的菜单区 开始-->
 		  <div class="qpleft" id="qpleft">
-		  
-		  <!-- 一次性获取所有菜单项-->
 		  </div>
 		  <!--系统的菜单区结束-->
 		  

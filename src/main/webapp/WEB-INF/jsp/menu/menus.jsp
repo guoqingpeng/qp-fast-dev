@@ -33,38 +33,48 @@
 	    <script src="${JAVASCRIPT_URL}/qplist.js"></script>
 	</head>
 	<body>
+	
 		<!-- 菜单栏目左侧树-->
 		<div id="treeArea" class="treeArea">
-			<div>
-				<ul id="qptree" class="ztree"></ul>
-			</div>
+			<ul id="qptree" class="ztree">
+			</ul>
 		</div>
-
-		<div id="menuFrame" class="menuFrame">
-			<div class="listArea">
-				<!--part1 检索区域 -->
-				<div class="qp-search" id="qp-search">
-					<div class="searchArea">
-						<div class="search-left contaniner-horizontal-left">
-							<span class="searchCondition">搜索条件</span>
-							<span class="qp-down glyphicon glyphicon-chevron-up"></span>
-						</div>
-						<div class="search-right contaniner-horizontal">
-							<span class="qp-search-icon glyphicon glyphicon-search"></span>
-						</div>
-					</div>
-					<div class="searchForm"></div>
+		
+		<!-- 右侧列表区域 -->
+		<div class="listArea">
+		
+			<!--part1 检索区域 -->
+			<div class="qp-search" id="qp-search">
+			
+				<div class="search-left contaniner-horizontal-left">
+					<span class="searchCondition">搜索条件</span>
+					<span class="qp-down glyphicon glyphicon-chevron-up"></span>
 				</div>
-				<!--part2 数据区域 -->
-				<div class="qp-data" id="qp-data">
-					<table id="smsc">
-					</table>
+				
+				<div class="search-right contaniner-horizontal">
+					<span class="qp-search-icon glyphicon glyphicon-search"></span>
 				</div>
-				<!--part3 状态区以及分页区 -->
-				<div class="qp-page-state" id="qp-page-state">
+				
+				<div class="searchForm">
+				<form>
+				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+					<label>性别</label><input type="text" />
+					<label>年龄</label><input type="text" />
+					<label>特长</label><input type="text" />
+					<input type="button" value="搜索"/>
+				</form>
 				</div>
+				
 			</div>
-		</div>
+			
+			<!--part2 数据区域 -->
+			<div class="qp-data" id="qp-data">
+				<table id="smsc">
+				</table>
+			</div>
+			
+			<!--part3 状态区以及分页区 -->
+			<div class="qp-page-state" id="qp-page-state"></div>
 		</div>
 	</body>
 </html>

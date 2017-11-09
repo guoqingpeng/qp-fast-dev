@@ -3,14 +3,13 @@
 所有事件的注册
 */
 $(document).ready(function(){
-
   //展开或者隐藏搜索框,动态设置数据区域的高度
   $('.search-left').click(function(){
 	  $('.searchForm').slideToggle(function(){
 		   reSizeDataArea();
 	  });
   });
-  
+  reSizeDataArea();
   //初始化左侧树和列表栏目数据
   initDefaultTree();
   initDefaultMenu();  
@@ -59,6 +58,7 @@ var zNodes = [];
 //--------------ZTree参数配置-----------------------------------------end
 
 /**
+功能说明------
 *初始化左侧树结构数据
 */
 function initDefaultTree(){
@@ -77,6 +77,7 @@ function initDefaultTree(){
 }		
 
 /**
+功能说明------
 *初始化菜单数据
 */
 function initDefaultMenu(){
@@ -85,21 +86,13 @@ function initDefaultMenu(){
 		  url: 'menuData.do',
 		  dataType: 'json',
 		  success:function(data){
-				$('#smsc').bootstrapTable({
-				    columns: [{
-				        field: 'id',
-				        title: '数据id'
-				    }, {
-				        field: 'name',
-				        title: '名称'
-				    }],
-				    data:data
-				});
+		          createTable(data);
 		  }
-		});			
+	});			
 }
 
 /**
+功能说明------
 *给菜单绑定事件
 */		
 function clickme(event, treeId, treeNode, clickFlag) {
@@ -110,18 +103,45 @@ function clickme(event, treeId, treeNode, clickFlag) {
 			  url: dataurl,
 			  dataType: 'json',
 			  success:function(data){
-			        //需要销毁表格首先，否则数据不能加载
-			        $('#smsc').bootstrapTable('destroy'); 
-					$('#smsc').bootstrapTable({
-					    columns: [{
-					        field: 'id',
-					        title: '数据id'
-					    }, {
-					        field: 'name',
-					        title: '名称'
-					    }],
-					    data:data
-					});					  
+				      createTable(data);
 			  }
-			});		      
+		});		      
+}
+
+/**
+功能说明------
+*表格数据渲染
+*/	
+function createTable(data){
+    //需要销毁表格首先，否则数据不能加载
+    $('#smsc').bootstrapTable('destroy'); 
+	$('#smsc').bootstrapTable({
+	    columns: [
+			    {
+			        field: 'id',
+			        title: '数据id'
+			    },
+			    {
+			        field: 'name',
+			        title: '名称'
+			    },
+			    {
+			        field: 'pid',
+			        title: '父id'
+			    },
+			    {
+			        field: 'urlType',
+			        title: '链接类型'
+			    },
+			    {
+			        field: 'url',
+			        title: '链接'
+			    },
+			    {
+			        field: 'level',
+			        title: '层级'
+			    }	    	    	    	    
+	    ],
+	    data:data
+	});	
 }

@@ -13,10 +13,12 @@ var marknum = 10;
 系统首页事件绑定执行
 */
 $(document).ready(function(){
+
   //加载菜单
   initMenu();
   //初始化所有事件
   initBindSystemEvents();
+  
 });
 
 /**
@@ -29,15 +31,17 @@ function initMenu(){
 	var menuContent = $('#menuData').html();
 	var menuJson = $.parseJSON(menuContent);
 	
-	//固定栏目菜单添加
+	//固定栏目菜单添加-----暂时未做
 	
+	var level = 1;
 	//递归生成所有菜单
 	for(var menu in menuJson){
 	    var menuIetm = menuJson[menu];
-	    mainMenu = makeSubMenu(mainMenu,menuIetm);
+	    mainMenu = makeSubMenu(mainMenu,menuIetm,level);
 	}
-	
+	//加载菜单
 	menuArea.append(mainMenu);
+	
 	//菜单加载完毕之后,菜单层级css样式刷新
 	reFreshMenuCss();
 }
@@ -46,30 +50,29 @@ function initMenu(){
 功能说明------
 针对一个菜单，递归生成所有的子菜单
 */
-function makeSubMenu(mainMenu,menu){
+function makeSubMenu(mainMenu,menu,level){
 	   var li = $("<li class='subMenu'></li>");
 	   var menuType = menu.urlType;//1.代表栏目不能跳转,0代表普通菜单可以跳转
 	   var pid = menu.pid;
 	   var subMenuNum = menu.subMenuNum;
-	   //栏目菜单
-	   if(menuType == 1){
-	        if(subMenuNum == 0){      
+	    //栏目菜单
+	    if(subMenuNum == 0){      
 	            //没有子元素时
 				 li.addClass("menuItem")
 				   .attr("id",menu.id)
 				   .attr("pid",menu.pid)
 				   .attr("url",menu.url)
-				   .attr("level",menu.level)
+				   .attr("level",level)
 				   .html("<div class='aTop'><a class='menuName'>"+menu.name+"</a></div>"); 
 			      mainMenu.append(li);   
-	        }else{
+	     }else{
 	            //有子元素时，递归调用
 	            li.addClass("hasSubMenu");
 				li.addClass("menuItem")
 				   .attr("id",menu.id)
 				   .attr("pid",menu.pid)
 				   .attr("url",menu.url)
-				   .attr("level",menu.level);
+				   .attr("level",level);
 				   
 				var div = $("<div class='aTop'><a class='menuName'>"+menu.name+"</a></div>");
 				var span = $("<span class='menuNum'></span>");
@@ -78,23 +81,14 @@ function makeSubMenu(mainMenu,menu){
 				li.append(div);
 				var subMainMenu = $("<ul class='subMainMenu'></ul>");
 				var subMenus = menu.subTreeobjList;
+				level++;
 				for(var menu in subMenus){
 				    var menuIetm = subMenus[menu];
-				    subMainMenu = makeSubMenu(subMainMenu,menuIetm);
+				    subMainMenu = makeSubMenu(subMainMenu,menuIetm,level);
 				}
 				li.append(subMainMenu);
 				mainMenu.append(li);			
-	        }
-	    }else{
-	          //处于顶级栏目但是只是一个普通的跳转 
-			    li.addClass("menuItem")
-				  .attr("id",menu.id)
-				  .attr("pid",menu.pid)
-				  .attr("url",menu.url)
-				  .attr("level",menu.level)
-				  .html("<div class='aTop'><a class='menuName'>"+menu.name+"</a></div>");
-			    mainMenu.append(li);
-	   }
+	     }
 	   return mainMenu;
 }
 
@@ -112,7 +106,6 @@ function reFreshMenuCss(){
 	});
 }
 
-
 /**
 功能说明------
 动态设置页签的宽度
@@ -122,6 +115,7 @@ function setMarkitWidth(){
 	var perwidth =  widthcanuse/marknum - 10 + "px";
 	$(".markit").css("width",perwidth);
 }
+
 
 /*
 功能说明------
