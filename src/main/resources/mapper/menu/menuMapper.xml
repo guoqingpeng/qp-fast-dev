@@ -20,5 +20,12 @@
 	<!-- 获取系统的所有的菜单 -->
 	<select id="getAllMenus"  resultType="com.yq.core.entity.Menu">
 		select name,id,pid,url ,urlType from  menu
-	</select>	
+	</select>
+	
+	<!-- 修改指定菜单的父id -->
+	<update id="updateMenu">
+	  update menu set
+	  pid = #{1}
+	  where id = #{0}
+	</update>
 </mapper>

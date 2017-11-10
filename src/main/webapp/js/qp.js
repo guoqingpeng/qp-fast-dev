@@ -102,7 +102,6 @@ function reFreshMenuCss(){
 	    var level = $(this).parent().parent().attr("level");
 		var toLeft = level * 8 + marginToDiv + "px";
 		$(this).css("margin-left",toLeft);
-		console.log(level);
 	});
 }
 

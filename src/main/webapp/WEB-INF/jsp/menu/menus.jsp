@@ -58,9 +58,10 @@
 				<div class="searchForm">
 				<form>
 				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-					<label>性别</label><input type="text" />
-					<label>年龄</label><input type="text" />
-					<label>特长</label><input type="text" />
+				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+				    				    				    				    
 					<input type="button" value="搜索"/>
 				</form>
 				</div>

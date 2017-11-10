@@ -73,7 +73,6 @@ public class MenuController extends BaseController{
 	public  String getMenusByPid(int pid){
 			List<TreeObj> allMenus = menuDao.getSubMenus(pid);
 			String jsonMenus =JSONArray.toJSONString(allMenus);
-			System.out.println(jsonMenus);
 			return jsonMenus;
 	}
 }

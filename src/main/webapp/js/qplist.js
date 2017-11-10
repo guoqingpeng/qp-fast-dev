@@ -43,7 +43,10 @@ function reSizeDataArea(){
 	},	
 	//回调事件在这个地方注册				
 	callback:{
-	    onClick:clickme
+	    onClick:clickme,
+	    beforeDrag:qpBeforeDrag,
+	    beforeDrop:qpBeforeDrop,
+	    onDrop:qpOnDrop
 	},
 	data: {
 		simpleData: {
@@ -144,4 +147,48 @@ function createTable(data){
 	    ],
 	    data:data
 	});	
+}
+
+/**
+功能说明------
+*拖动前判断元素是否可以拖动
+*/	
+function qpBeforeDrag(treeId, treeNodes){
+   return true;
+}
+
+/**
+功能说明------
+*元素放下前判断元素是否可以放下
+*/	
+function qpBeforeDrop(treeId, treeNodes, targetNode, moveType){
+   
+     //将元素插入到数据库，成功返回true失败返回false，
+     //这个时候元素的位置才可以真正的改变
+      var id = treeNodes[0].id;
+      var pid = targetNode.id;
+      alert(pid);
+      var dataurl = "changTreeParent.do?id="+id+"&pid="+pid;
+	  $.ajax({
+			  type: 'get',
+			  url: dataurl,
+			  dataType: 'json',
+			  success:function(){
+			  initDefaultMenu();
+				      return false;
+			  },
+			  error:function(){
+			  initDefaultMenu();
+			          return false;
+			  }
+	   });  
+}
+
+/**
+功能说明------
+*元素放下后执行的操作
+*/	
+function qpOnDrop(event, treeId, treeNodes, targetNode, moveType, isCopy){
+     //alert(targetNode.id)
+     //暂时没有什么用处好像
 }
