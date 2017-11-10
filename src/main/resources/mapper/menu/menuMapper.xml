@@ -4,28 +4,34 @@
 
     <!-- 获取系统顶级菜单 -->
 	<select id="getTopMenus"  resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url,urlType from  menu  where pid = 0 order by id,pid 
+		select name,id,pid,url,urlType,position from  menu  where pid = 0 order by position asc
 	</select>
 	
 	<!-- 根据父id获取下面的子菜单 -->
 	<select id="getSubMenus"  parameterType="int" resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url,urlType from  menu where pid = #{id} or id=#{id} order by id,pid 
+		select name,id,pid,url,urlType,position from  menu where pid = #{id} or id=#{id} order by position asc 
 	</select>
 	
 	<!-- 获取系统菜单中所有非顶级菜单 -->
 	<select id="getNotTopSubMenus"  resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url ,urlType  from  menu  where pid > 0 order by id,pid 
+		select name,id,pid,url ,urlType,position  from  menu  where pid > 0 order by position asc
 	</select>	
 	
 	<!-- 获取系统的所有的菜单 -->
 	<select id="getAllMenus"  resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url ,urlType from  menu
+		select name,id,pid,url ,urlType,position from  menu order by position asc
 	</select>
 	
 	<!-- 修改指定菜单的父id -->
 	<update id="updateMenu">
-	  update menu set
-	  pid = #{1}
+	  update menu set pid = #{1},position = #{2}
 	  where id = #{0}
 	</update>
+	
+	<!-- 修改指定菜单的父id -->
+	<update id="updateMenuPositions">
+	  update menu set position = position +1
+	  where pid = #{0} and position >=#{1}
+	</update>
+		
 </mapper>

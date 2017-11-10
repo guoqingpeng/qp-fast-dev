@@ -22,6 +22,7 @@ public interface MenuDao {
 	public List<TreeObj> getSubMenus(int id);
 	public List<TreeObj> getNotTopSubMenus();
 	public List<TreeObj> getAllMenus();
-	public int updateMenu(int id ,int pid);
+	public int updateMenu(int id ,int pid,int position);
+	public int updateMenuPositions(int id,int position);
 	
 }

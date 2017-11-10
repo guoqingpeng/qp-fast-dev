@@ -37,6 +37,12 @@ function reSizeDataArea(){
 		showIcon: false
 	},
 	edit: {
+		drag: {
+			autoExpandTrigger: true,
+			prev: true,
+			inner: true,
+			next: true
+		},	
 		enable: true,
 		showRemoveBtn: false,
 		showRenameBtn: false
@@ -54,7 +60,11 @@ function reSizeDataArea(){
 			idKey: "id",
 			pIdKey: "pid",
 			rootPId: ""
-		}
+		},
+        keep: {
+            parent: true,
+            leaf: false
+        }		
 	}
  };
 var zNodes = [];
@@ -118,8 +128,8 @@ function createTable(data){
 			        title: '父id'
 			    },
 			    {
-			        field: 'urlType',
-			        title: '链接类型'
+			        field: 'position',
+			        title: '位置'
 			    },
 			    {
 			        field: 'url',
@@ -155,9 +165,10 @@ function qpClick(event, treeId, treeNode, clickFlag) {
 /**
 功能说明------
 *拖动前判断元素是否可以拖动
+ 需要检测当只有一个根节点时是不允许拖动的
 */	
 function qpBeforeDrag(treeId, treeNodes){
-   return true;
+     return true;
 }
 
 /**
@@ -167,20 +178,78 @@ function qpBeforeDrag(treeId, treeNodes){
 *元素放下前判断元素是否可以放下
 */	
 function qpBeforeDrop(treeId, treeNodes, targetNode, moveType){
-   
+
      //将元素插入到数据库，成功返回true失败返回false，
      //这个时候元素的位置才可以真正的改变
       var id = treeNodes[0].id;
-      var pid ;
-      try{
-         pid= targetNode.id;
-      }catch(err){
-         pid =0;
+      var dataurl;
+      /**判断一下移动到的目的节点的类型
+      //prev移到它上面去
+      //inner移到里面去
+      //next移到后面去
+      */
+      switch(moveType){
+		 case "prev":
+		       dataurl =qpDragPrev(id,targetNode);
+		 break;     
+ 		 case "inner":
+		      dataurl = qpDragInner(id,targetNode);
+		 break;    
+		 case "next":
+		      dataurl = qpDragNext(id,targetNode);  
+		 break;
       }
       
-      var dataurl = "changTreeParent.do?id="+id+"&pid="+pid;
-      
-      //这个地方必须要加一个返回值来接受本次处理的结果,反映到树节点
+      return changePidAndSort(dataurl);
+}
+
+/**
+功能说明------
+*prev类型的
+*设置pid为目标元素的父元素id,
+目标元素以及目标元素之后的【位置+1】
+设置当前元素的位置为目标元素的位置
+*/	
+function qpDragPrev(id,targetNode){
+     var pid = targetNode.pid;
+     var targetPosition = targetNode.position;
+     return "changTreeParent.do?id="+id+"&pid="+pid+"&position="+targetPosition;
+}
+
+/**
+功能说明------
+*inner类型的
+*设置pid为目标元素的id
+位置设置为最后一个元素
+当前元素排序为1
+*/	
+function qpDragInner(id,targetNode){	   
+     var pid = targetNode.id;
+     var lastChild = targetNode.children[children.length-1];
+     var targetPosition = lastChild.position;
+     return "changTreeParent.do?id="+id+"&pid="+pid+"&position="+targetPosition;
+}
+
+/**
+功能说明------
+*prev类型的
+*设置pid为目标元素的父元素id,
+修改目标元素之前的和之后的位置【位置加2】
+设置当前元素的位置为目标元素的【位置+1】
+*/
+function qpDragNext(id,targetNode){
+     var pid = targetNode.pid;
+     var targetPosition = targetNode.position + 1;
+     return "changTreeParent.do?id="+id+"&pid="+pid+"&position="+targetPosition;
+}
+
+/**
+功能说明------
+设置排序
+设置拖拽元素的父级
+*/
+function changePidAndSort(dataurl){
+	  //这个地方必须要加一个返回值来接受本次处理的结果,反映到树节点
 	  var isSuccess = false;
 	  $.ajax({
 			  type: 'get',
@@ -197,7 +266,7 @@ function qpBeforeDrop(treeId, treeNodes, targetNode, moveType){
 			  error:ajaxErrorDelear
 	   });
 	   
-	   return isSuccess;//
+	   return isSuccess;//决定元素是否可以放在新位置
 }
 
 /**
@@ -205,9 +274,6 @@ function qpBeforeDrop(treeId, treeNodes, targetNode, moveType){
 *元素放下后执行的操作
 */	
 function qpOnDrop(event, treeId, treeNodes, targetNode, moveType, isCopy){
-    //alert(targetNode.id)
-    //暂时没有什么用处好像
-    // console.log(targetNode.name+'放下后。。。。');
 }
 
 /**

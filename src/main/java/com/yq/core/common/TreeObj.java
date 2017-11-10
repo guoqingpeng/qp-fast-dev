@@ -14,6 +14,7 @@ public class TreeObj {
 	private String name;
 	private int id;
 	private int pid;
+	private int position;
 	private String url = "";
 	private int urlType = 1;
 	private Boolean hasSubTreeobj = false;
@@ -36,6 +37,12 @@ public class TreeObj {
 	}
 	public void setPid(int pid) {
 		this.pid = pid;
+	}
+	public int getPosition() {
+		return position;
+	}
+	public void setPosition(int position) {
+		this.position = position;
 	}
 	public String getUrl() {
 		return url;
