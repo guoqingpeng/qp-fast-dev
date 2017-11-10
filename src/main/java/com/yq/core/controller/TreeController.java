@@ -57,7 +57,11 @@ public class TreeController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="changTreeParent")
 	public String changTreeParent(int id,int pid){
-		menuDao.updateMenu(id, pid);
+		try {
+			menuDao.updateMenu(id, pid);
+		} catch (Exception e) {
+			return "error";
+		}
 		return "ok";
 	}
 }

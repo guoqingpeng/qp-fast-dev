@@ -43,7 +43,7 @@ function reSizeDataArea(){
 	},	
 	//回调事件在这个地方注册				
 	callback:{
-	    onClick:clickme,
+	    onClick:qpClick,
 	    beforeDrag:qpBeforeDrag,
 	    beforeDrop:qpBeforeDrop,
 	    onDrop:qpOnDrop
@@ -75,7 +75,8 @@ function initDefaultTree(){
 			  zTreeObj = $.fn.zTree.init($("#qptree"), setting, zNodes);
 			  //节点默认全部展开
 			  zTreeObj.expandAll(true);	
-		  }
+		  },
+		  error:ajaxErrorDelear
 		});
 }		
 
@@ -90,25 +91,9 @@ function initDefaultMenu(){
 		  dataType: 'json',
 		  success:function(data){
 		          createTable(data);
-		  }
+		  },
+		  error:ajaxErrorDelear
 	});			
-}
-
-/**
-功能说明------
-*给菜单绑定事件
-*/		
-function clickme(event, treeId, treeNode, clickFlag) {
-      var id = treeNode.id;
-      var dataurl = "menuFromPid.do?pid="+id;
-		$.ajax({
-			  type: 'get',
-			  url: dataurl,
-			  dataType: 'json',
-			  success:function(data){
-				      createTable(data);
-			  }
-		});		      
 }
 
 /**
@@ -151,6 +136,24 @@ function createTable(data){
 
 /**
 功能说明------
+*给菜单绑定事件
+*/		
+function qpClick(event, treeId, treeNode, clickFlag) {
+      var id = treeNode.id;
+      var dataurl = "menuFromPid.do?pid="+id;
+		$.ajax({
+			  type: 'get',
+			  url: dataurl,
+			  dataType: 'json',
+			  success:function(data){
+				      createTable(data);
+			  },
+			  error:ajaxErrorDelear
+		});		      
+}
+
+/**
+功能说明------
 *拖动前判断元素是否可以拖动
 */	
 function qpBeforeDrag(treeId, treeNodes){
@@ -159,6 +162,8 @@ function qpBeforeDrag(treeId, treeNodes){
 
 /**
 功能说明------
+返回true决定元素可以放下，否则不能放下
+并且有且仅在返回true时节点的ondrag事件才会执行
 *元素放下前判断元素是否可以放下
 */	
 function qpBeforeDrop(treeId, treeNodes, targetNode, moveType){
@@ -166,22 +171,33 @@ function qpBeforeDrop(treeId, treeNodes, targetNode, moveType){
      //将元素插入到数据库，成功返回true失败返回false，
      //这个时候元素的位置才可以真正的改变
       var id = treeNodes[0].id;
-      var pid = targetNode.id;
-      alert(pid);
+      var pid ;
+      try{
+         pid= targetNode.id;
+      }catch(err){
+         pid =0;
+      }
+      
       var dataurl = "changTreeParent.do?id="+id+"&pid="+pid;
+      
+      //这个地方必须要加一个返回值来接受本次处理的结果,反映到树节点
+	  var isSuccess = false;
 	  $.ajax({
 			  type: 'get',
 			  url: dataurl,
-			  dataType: 'json',
-			  success:function(){
-			  initDefaultMenu();
-				      return false;
+			  async:false,
+			  success:function(data){
+			         if(data == "ok"){
+			             initDefaultMenu(); 
+			             isSuccess = true;
+			         }else{
+			             alert("系统错误");
+			         }
 			  },
-			  error:function(){
-			  initDefaultMenu();
-			          return false;
-			  }
-	   });  
+			  error:ajaxErrorDelear
+	   });
+	   
+	   return isSuccess;//
 }
 
 /**
@@ -189,6 +205,15 @@ function qpBeforeDrop(treeId, treeNodes, targetNode, moveType){
 *元素放下后执行的操作
 */	
 function qpOnDrop(event, treeId, treeNodes, targetNode, moveType, isCopy){
-     //alert(targetNode.id)
-     //暂时没有什么用处好像
+    //alert(targetNode.id)
+    //暂时没有什么用处好像
+    // console.log(targetNode.name+'放下后。。。。');
+}
+
+/**
+功能说明------
+ajax请求
+*/
+function ajaxErrorDelear(xhr,err,e){
+     alert("网络错误！！！");
 }
