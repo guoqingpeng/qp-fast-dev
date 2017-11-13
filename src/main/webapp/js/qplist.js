@@ -12,7 +12,7 @@ $(document).ready(function(){
   reSizeDataArea();
   //初始化左侧树和列表栏目数据
   initDefaultTree();
-  initDefaultMenu();  
+  initDefaultMenu();
 });
 
 /**
