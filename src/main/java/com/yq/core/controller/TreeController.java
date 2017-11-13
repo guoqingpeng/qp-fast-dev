@@ -58,15 +58,10 @@ public class TreeController extends BaseController{
 	@RequestMapping(value="changTreeParent")
 	public String changTreeParent(int id,int pid,int position){
 		try {
-			
-			System.out.println(id+"-"+pid+"-"+position);
-			
 			//更新目标元素下的位置 >=position +1
 			menuDao.updateMenuPositions(pid, position);
-			
 			//设置本身的父id和位置
 			menuDao.updateMenu(id, pid,position);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";

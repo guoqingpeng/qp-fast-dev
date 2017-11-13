@@ -178,7 +178,6 @@ function qpBeforeDrag(treeId, treeNodes){
 *元素放下前判断元素是否可以放下
 */	
 function qpBeforeDrop(treeId, treeNodes, targetNode, moveType){
-
      //将元素插入到数据库，成功返回true失败返回false，
      //这个时候元素的位置才可以真正的改变
       var id = treeNodes[0].id;
@@ -211,7 +210,7 @@ function qpBeforeDrop(treeId, treeNodes, targetNode, moveType){
 设置当前元素的位置为目标元素的位置
 */	
 function qpDragPrev(id,targetNode){
-     var pid = targetNode.pid;
+     var pid = nullOrEmptyToZero(targetNode.pid);
      var targetPosition = targetNode.position;
      return "changTreeParent.do?id="+id+"&pid="+pid+"&position="+targetPosition;
 }
@@ -225,8 +224,15 @@ function qpDragPrev(id,targetNode){
 */	
 function qpDragInner(id,targetNode){	   
      var pid = targetNode.id;
-     var lastChild = targetNode.children[children.length-1];
-     var targetPosition = lastChild.position;
+     var children = targetNode.children;
+     var targetPosition = 1;
+     var lastChild;
+     //如果目标节点有子元素，则将拖拽节点的位置放在目标节点的最后一个
+     //否则拖拽节点的位置为第一个
+     if(children != undefined){
+         lastChild = children[children.length-1];
+         targetPosition = lastChild.position + 1;
+     }
      return "changTreeParent.do?id="+id+"&pid="+pid+"&position="+targetPosition;
 }
 
@@ -238,7 +244,7 @@ function qpDragInner(id,targetNode){
 设置当前元素的位置为目标元素的【位置+1】
 */
 function qpDragNext(id,targetNode){
-     var pid = targetNode.pid;
+     var pid = nullOrEmptyToZero(targetNode.pid);
      var targetPosition = targetNode.position + 1;
      return "changTreeParent.do?id="+id+"&pid="+pid+"&position="+targetPosition;
 }
@@ -274,6 +280,8 @@ function changePidAndSort(dataurl){
 *元素放下后执行的操作
 */	
 function qpOnDrop(event, treeId, treeNodes, targetNode, moveType, isCopy){
+
+  //暂时没有任何操作
 }
 
 /**
@@ -281,5 +289,17 @@ function qpOnDrop(event, treeId, treeNodes, targetNode, moveType, isCopy){
 ajax请求
 */
 function ajaxErrorDelear(xhr,err,e){
+     //暂时简单的返回错误
      alert("网络错误！！！");
+}
+
+/**
+功能说明------
+简单的为空，未定义的数据转化成0返回
+*/
+function nullOrEmptyToZero(code){
+    if(code == "" || code == "undefined" || code == undefined || code == null){
+        return 0;
+    }
+    return code;
 }

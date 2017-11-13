@@ -470,5 +470,4 @@ function initBindSystemEvents(){
 	   $(".markChoosen").removeClass("markChoosen").addClass("markNotChoosen");
 	   $("#dataframe").attr("src","g1.do");
   });
-  
 }
