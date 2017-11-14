@@ -3,16 +3,31 @@
 所有事件的注册
 */
 $(document).ready(function(){
+
   //展开或者隐藏搜索框,动态设置数据区域的高度
   $('.search-left').click(function(){
 	  $('.searchForm').slideToggle(function(){
 		   reSizeDataArea();
 	  });
   });
+  
   reSizeDataArea();
   //初始化左侧树和列表栏目数据
   initDefaultTree();
   initDefaultMenu();
+  
+  //menuAdd绑定添加按钮事件
+    $('#menuAdd').click(function(e){
+	  //添加页面
+	  var qpDialog = $('#qpDialog');
+	  var title = $("<div>这是标题区域</div>");
+	  var iframe = $("<div>这是内容区域,加载一个页面</div>");
+	  var sPosPage = "(" + e.pageX + "," + e.pageY + ")";
+	  qpDialog.append(title).append(iframe);
+	  qpDialog.show();
+	  
+  });
+     
 });
 
 /**

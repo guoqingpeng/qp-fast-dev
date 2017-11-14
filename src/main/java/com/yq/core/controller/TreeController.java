@@ -29,7 +29,8 @@ public class TreeController extends BaseController{
 	/**
 	 * 
 	 *版本：
-	 *功能描述：加载树结构的页面
+	 *功能描述：加载树结构的数据
+	 *使用Ztree插件的简单模式
 	 *参数说明：@return
 	 *返回值说明：
 	 *更新日期：3:36:54 PM

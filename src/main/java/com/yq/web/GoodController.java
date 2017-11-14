@@ -26,7 +26,7 @@ public class GoodController {
 	@RequestMapping(value="g1")
 	public String g1(){
 		System.out.println("哎呀，g1被点击了");
-		return "g1";
+		return "menu/menuAddPage";
 		
 	}
 	
@@ -40,7 +40,7 @@ public class GoodController {
 	 *作者: GUO-QP
 	 */
 	@RequestMapping(value="g2")
-	public String g2(){
+	public String g2(String name,int pid){
 		System.out.println("哎呀，g2被点击了");
 		return "g2";
 		

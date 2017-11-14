@@ -27,7 +27,7 @@
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" 
 		p:driverClassName="com.mysql.jdbc.Driver"
-		p:url="jdbc:mysql://localhost:3306/qpfastdev" 
+		p:url="jdbc:mysql://localhost:3306/qpfastdev?useUnicode=true&amp;characterEncoding=UTF-8"
 		p:initialSize="1"
 		p:maxWait="1000"
 		p:testOnBorrow="true"

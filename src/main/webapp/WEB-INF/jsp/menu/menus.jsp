@@ -51,17 +51,17 @@
 					<span class="qp-down glyphicon glyphicon-chevron-up"></span>
 				</div>
 				
-				<div class="search-right contaniner-horizontal">
-					<span class="qp-search-icon glyphicon glyphicon-search"></span>
+				<div class="search-right">
+				        <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">
+				             <span id="menuAdd" title="添加" class="qp-button glyphicon glyphicon-plus"></span>
+				        </button>
 				</div>
-				
 				<div class="searchForm">
 				<form>
 				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
 				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
 				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
 				    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-				    				    				    				    
 					<input type="button" value="搜索"/>
 				</form>
 				</div>
@@ -75,7 +75,16 @@
 			</div>
 			
 			<!--part3 状态区以及分页区 -->
-			<div class="qp-page-state" id="qp-page-state"></div>
-		</div>
+			<div class="qp-page-state" id="qp-page-state">
+				<!--页面中的弹窗页面-->
+				<!-- Large modal -->
+				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+				  <div class="modal-dialog modal-lg" role="document">
+				    <div class="modal-content">
+				         <iframe id ="qpPage" src="g1.do"></iframe>
+				    </div>
+				  </div>
+			    </div>
+			</div>    			
 	</body>
 </html>

@@ -8,6 +8,7 @@
 */
 package com.yq.core.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.yq.core.common.TreeObj;
 import com.yq.core.dao.MenuDao;
@@ -71,8 +73,30 @@ public class MenuController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="menuFromPid")
 	public  String getMenusByPid(int pid){
-			List<TreeObj> allMenus = menuDao.getSubMenus(pid);
-			String jsonMenus =JSONArray.toJSONString(allMenus);
-			return jsonMenus;
+		List<TreeObj> allMenus = menuDao.getSubMenus(pid);
+		String jsonMenus =JSONArray.toJSONString(allMenus);
+		return jsonMenus;
+	}
+	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：添加一个栏目
+	 *参数说明：@param name
+	 *参数说明：@param pid
+	 *参数说明：@return
+	 *返回值说明：
+	 *更新日期：5:35:45 PM
+	 *作者: GUO-QP
+	 */
+	@ResponseBody
+	@RequestMapping(value="menuAdd")
+	public String menuAdd(String name,int pid){
+		menuDao.insertMenu(name, pid);
+		HashMap<String , String> aMap= new HashMap<String, String>();
+		aMap.put("msg", "ok");
+		String string = JSON.toJSONString(aMap);
+		System.out.println(string);
+		return  string;
 	}
 }

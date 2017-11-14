@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.yq.core.dao.MenuDao">
 
     <!-- 获取系统顶级菜单 -->
 	<select id="getTopMenus"  resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url,urlType,position from  menu  where pid = 0 order by id asc,pid asc,position asc
+		select name,id,pid,url,urlType,position from  menu  where pid = 0 order by position asc
 	</select>
 	
 	<!-- 根据父id获取下面的子菜单 -->
 	<select id="getSubMenus"  parameterType="int" resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url,urlType,position from  menu where pid = #{id} or id=#{id} order by id asc,pid asc,position asc 
+		select name,id,pid,url,urlType,position from  menu where pid = #{id} or id=#{id} order by position asc 
 	</select>
 	
 	<!-- 获取系统菜单中所有非顶级菜单 -->
 	<select id="getNotTopSubMenus"  resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url ,urlType,position  from  menu  where pid > 0 order by id asc,pid asc,position asc
+		select name,id,pid,url ,urlType,position  from  menu  where pid > 0 order by position asc
 	</select>	
 	
 	<!-- 获取系统的所有的菜单 -->
 	<select id="getAllMenus"  resultType="com.yq.core.entity.Menu">
-		select name,id,pid,url ,urlType,position from  menu order by id asc,pid asc,position asc
+		select name,id,pid,url ,urlType,position from  menu order by position asc
 	</select>
 	
 	<!-- 修改指定菜单的父id -->
@@ -28,10 +29,15 @@
 	  where id = #{0}
 	</update>
 	
-	<!-- 修改指定菜单的父id -->
+	<!-- 修改指定菜单的父id的子元素的位置 -->
 	<update id="updateMenuPositions">
 	  update menu set position = position +1
 	  where pid = #{0} and position >=#{1}
 	</update>
+	
+    <!-- 插入菜单 -->
+	<insert id="insertMenu">
+	 insert into menu(name,pid) values(#{0},#{1})
+	</insert>
 		
 </mapper>
