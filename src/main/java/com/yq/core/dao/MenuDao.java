@@ -90,6 +90,39 @@ public interface MenuDao {
 	 */
 	public int updateMenuPositions(int id,int position);
 	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：添加一个栏目
+	 *参数说明：@param name
+	 *参数说明：@param pid
+	 *返回值说明：
+	 *更新日期：4:05:02 PM
+	 *作者: GUO-QP
+	 */
 	public void insertMenu(String name,int pid);
+	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：删除一个栏目
+	 *参数说明：@param id
+	 *返回值说明：
+	 *更新日期：4:05:47 PM
+	 *作者: GUO-QP
+	 */
+	public void deleteMenu(int id);
+	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：获取父元素下的子元素
+	 *参数说明：@param id
+	 *参数说明：@return
+	 *返回值说明：
+	 *更新日期：4:07:00 PM
+	 *作者: GUO-QP
+	 */
+	public int getChildrenNumByPid(int id);
 	
 }

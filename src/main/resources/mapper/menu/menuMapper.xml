@@ -37,7 +37,17 @@
 	
     <!-- 插入菜单 -->
 	<insert id="insertMenu">
-	 insert into menu(name,pid) values(#{0},#{1})
+	   insert into menu(name,pid) values(#{0},#{1})
 	</insert>
+	
+    <!-- 删除菜单 -->
+	<insert id="deleteMenu">
+	   delete from menu where id = #{0}
+	</insert>
+	
+	<!-- 获取父元素下子菜单的个数 -->
+	<select id="getChildrenNumByPid"  resultType="int">
+		select count(*) from  menu where pid = #{0}
+	</select>	
 		
 </mapper>

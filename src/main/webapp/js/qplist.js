@@ -16,18 +16,6 @@ $(document).ready(function(){
   initDefaultTree();
   initDefaultMenu();
   
-  //menuAdd绑定添加按钮事件
-    $('#menuAdd').click(function(e){
-	  //添加页面
-	  var qpDialog = $('#qpDialog');
-	  var title = $("<div>这是标题区域</div>");
-	  var iframe = $("<div>这是内容区域,加载一个页面</div>");
-	  var sPosPage = "(" + e.pageX + "," + e.pageY + ")";
-	  qpDialog.append(title).append(iframe);
-	  qpDialog.show();
-	  
-  });
-     
 });
 
 /**
@@ -131,6 +119,13 @@ function createTable(data){
 	$('#smsc').bootstrapTable({
 	    columns: [
 			    {
+			        field: 'operation',
+			        title: '操作',
+			        formatter:function(value, row, index){
+			                  return '<a class="mod" >修改</a> ' + '<a class="delete"  onClick="qpDelete('+row.id+')">删除</a>';
+			        }
+			    },
+			    {
 			        field: 'id',
 			        title: '数据id'
 			    },
@@ -157,6 +152,53 @@ function createTable(data){
 	    ],
 	    data:data
 	});	
+}
+
+
+/**
+功能说明------
+*删除数据
+*/
+function qpDelete(id){
+     if(qpDeleteDataFromDB(id)){
+         deleteRowFromPage(id);
+         //当前页面刷新
+         currentPageRefresh();
+     }
+}
+
+/**
+功能说明------
+*根据数据id删除表格中的一行数据
+*/
+function qpDeleteDataFromDB(id){
+	var isDelete = false;
+	var isDelete = $.ajax({
+		  type: 'get',
+		  url: 'menuDelete.do?id='+id,
+		  success:function(data){
+			      if(data=="ok"){
+			         isDelete = true;
+			      }else{
+			         alert(data);
+			      }
+		  },
+		  error:ajaxErrorDelear
+	});
+	return isDelete;
+}
+
+/**
+功能说明------
+*根据数据id删除表格中的一行数据
+*/
+function deleteRowFromPage(id){
+    $('#smsc').bootstrapTable('remove',
+				    {
+				           field:'id',
+				           values:[id]
+				    }
+    );
 }
 
 /**
@@ -203,15 +245,19 @@ function qpBeforeDrop(treeId, treeNodes, targetNode, moveType){
       //next移到后面去
       */
       switch(moveType){
+      
 		 case "prev":
 		       dataurl =qpDragPrev(id,targetNode);
 		 break;     
+		 
  		 case "inner":
 		      dataurl = qpDragInner(id,targetNode);
 		 break;    
+		 
 		 case "next":
 		      dataurl = qpDragNext(id,targetNode);  
 		 break;
+		 
       }
       
       return changePidAndSort(dataurl);
@@ -317,4 +363,20 @@ function nullOrEmptyToZero(code){
         return 0;
     }
     return code;
+}
+
+/**
+功能说明------
+刷新当前页面
+*/
+function currentPageRefresh(){
+       window.location.reload();
+}
+
+/**
+功能说明------
+刷新父页面
+*/
+function parentPageRefresh(){
+       parent.location.reload();
 }

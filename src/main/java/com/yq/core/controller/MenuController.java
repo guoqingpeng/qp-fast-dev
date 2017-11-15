@@ -99,4 +99,28 @@ public class MenuController extends BaseController{
 		System.out.println(string);
 		return  string;
 	}
+	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：
+	 *参数说明：@param id
+	 *参数说明：@return
+	 *返回值说明：
+	 *更新日期：3:57:56 PM
+	 *作者: GUO-QP
+	 */
+	@ResponseBody
+	@RequestMapping(value="menuDelete")
+	public String deleteMenu(int id){
+		String msg = "ok";
+		int childNum = menuDao.getChildrenNumByPid(id);
+		if (childNum > 0) {
+			msg = "该栏目下有子菜单，不能删除，需要先删除子菜单";
+		}else {
+			menuDao.deleteMenu(id);
+		}
+		return msg;
+		
+	}
 }

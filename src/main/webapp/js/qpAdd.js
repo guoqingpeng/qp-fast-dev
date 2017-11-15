@@ -3,8 +3,7 @@ $(document).ready(function(){
    var options={
          success:function(data){
              var ms = $.parseJSON(data);
-             alert(ms.msg);
-             parent.location.reload();
+             parentPageRefresh();
          },
          error:function(data){
              alert("网络发生鼓掌")
@@ -12,3 +11,19 @@ $(document).ready(function(){
    };
    $('#menuAddForm').ajaxForm(options);
 });
+
+/**
+功能说明------
+刷新当前页面
+*/
+function currentPageRefresh(){
+       window.location.reload();
+}
+
+/**
+功能说明------
+刷新父页面
+*/
+function parentPageRefresh(){
+       parent.location.reload();
+}
