@@ -47,15 +47,16 @@ function reSizeDataArea(){
 			next: true
 		},	
 		enable: true,
-		showRemoveBtn: false,
-		showRenameBtn: false
+		showRemoveBtn: true,
+		showRenameBtn: true
 	},	
 	//回调事件在这个地方注册				
 	callback:{
 	    onClick:qpClick,
 	    beforeDrag:qpBeforeDrag,
 	    beforeDrop:qpBeforeDrop,
-	    onDrop:qpOnDrop
+	    onDrop:qpOnDrop,
+	    beforeRemove:qpOnRemove
 	},
 	data: {
 		simpleData: {
@@ -162,8 +163,6 @@ function createTable(data){
 function qpDelete(id){
      if(qpDeleteDataFromDB(id)){
          deleteRowFromPage(id);
-         //当前页面刷新
-         currentPageRefresh();
      }
 }
 
@@ -173,9 +172,10 @@ function qpDelete(id){
 */
 function qpDeleteDataFromDB(id){
 	var isDelete = false;
-	var isDelete = $.ajax({
+	$.ajax({
 		  type: 'get',
 		  url: 'menuDelete.do?id='+id,
+		  async:false,
 		  success:function(data){
 			      if(data=="ok"){
 			         isDelete = true;
@@ -344,6 +344,21 @@ function qpOnDrop(event, treeId, treeNodes, targetNode, moveType, isCopy){
 
   //暂时没有任何操作
 }
+
+/**
+功能说明------
+*元素删除的方法
+*/	
+function qpOnRemove(treeId, treeNode){
+   //暂时没有任何操作
+    var id = treeNode.id;
+    if(qpDelete(id)){
+       return true;
+    }  
+    return true;
+}
+
+
 
 /**
 功能说明------
