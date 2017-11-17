@@ -48,7 +48,7 @@ function reSizeDataArea(){
 		},	
 		enable: true,
 		showRemoveBtn: true,
-		showRenameBtn: true
+		showRenameBtn: false
 	},	
 	//回调事件在这个地方注册				
 	callback:{
@@ -161,9 +161,13 @@ function createTable(data){
 *删除数据
 */
 function qpDelete(id){
+
      if(qpDeleteDataFromDB(id)){
          deleteRowFromPage(id);
+         currentPageRefresh();
+         return true;
      }
+     return false;
 }
 
 /**
@@ -355,7 +359,7 @@ function qpOnRemove(treeId, treeNode){
     if(qpDelete(id)){
        return true;
     }  
-    return true;
+    return false;
 }
 
 
@@ -374,7 +378,10 @@ function ajaxErrorDelear(xhr,err,e){
 简单的为空，未定义的数据转化成0返回
 */
 function nullOrEmptyToZero(code){
-    if(code == "" || code == "undefined" || code == undefined || code == null){
+    if(code == "" || 
+       code == "undefined" || 
+       code == undefined || 
+       code == null){
         return 0;
     }
     return code;

@@ -26,7 +26,7 @@ public class GoodController {
 	@RequestMapping(value="g1")
 	public String g1(){
 		System.out.println("哎呀，g1被点击了");
-		return "menu/menuAddPage";
+		return "table/tableAddPage";
 		
 	}
 	

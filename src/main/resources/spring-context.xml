@@ -16,23 +16,25 @@
 
 	<!-- 第一步,扫描数据访问层包 -->
 	<context:component-scan base-package="com.yq.core.dao"></context:component-scan>
+	<context:component-scan base-package="com.yq.core.mongo"></context:component-scan>
 
 	<!-- 第二步,扫描服务层包 -->
 	<context:component-scan base-package="com.yq.core.service"></context:component-scan>
-
+	
 	<!-- 第三步,配置一个数据源,这里使用阿里巴巴的druid 数据库连接池-->
 	<context:property-placeholder location="classpath:db.properties" />
 
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" 
-		p:driverClassName="com.mysql.jdbc.Driver"
-		p:url="jdbc:mysql://localhost:3306/qpfastdev?useUnicode=true&amp;characterEncoding=UTF-8"
-		p:initialSize="1"
-		p:maxWait="1000"
-		p:testOnBorrow="true"
-		p:username="root"
-		p:password="" />
+		p:driverClassName="${mysql.driverClassName}"
+		p:url="${mysql.url}"
+		p:username="${mysql.user}"
+		p:password="${mysql.pwd}"
+		p:initialSize="${mysql.initialSize}"
+		p:maxWait="${mysql.maxWait}"
+		p:testOnBorrow="${mysql.testOnBorrow}"
+		 />
 
 	<!-- springJDBC 暂时不实用 在需要非常高效的场景下使用-->
 	<bean id="jdbcTemplate"
@@ -58,5 +60,9 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
+	
+	 <!-- 导入mongodb的配置文件 -->
+     <import resource="classpath:mongodb-context.xml"/>
+     
+	
 </beans>

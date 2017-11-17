@@ -21,11 +21,16 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.yq.core.common.TreeObj;
 import com.yq.core.dao.MenuDao;
+import com.yq.core.mongo.TestMongo;
 
 @Controller
 public class MenuController extends BaseController{
+	
 	@Autowired
 	private MenuDao menuDao;
+	
+	@Autowired
+	private TestMongo testMongo;
 	
 	/**
 	 * 
@@ -38,6 +43,7 @@ public class MenuController extends BaseController{
 	 */
 	@RequestMapping(value="menuSet")
 	public ModelAndView  menuSet(){
+		testMongo.mongoinfo();
 		ModelAndView modelAndView = new ModelAndView();
 	    modelAndView.setViewName("menu/menus");
 		return modelAndView;
