@@ -10,6 +10,8 @@ package com.yq.core.mongo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 public abstract class MongoGenDao<T> {
 
@@ -26,6 +28,8 @@ public abstract class MongoGenDao<T> {
 	 *作者: GUO-QP
 	 */
 	public void save(T t) {
+		Query query = new Query();
+		Criteria criteria = Criteria.where("id").is("a");		
 		this.mongoTemplate.save(t);
 	}
 	
