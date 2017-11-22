@@ -22,7 +22,7 @@ public interface TableDao {
 	 *更新日期：3:39:33 PM
 	 *作者: GUO-QP
 	 */
-	public void createTabe(Table table);
+	public void createTabe();
 	
 	/**
 	 * 

@@ -8,12 +8,16 @@
 */
 package com.yq.core.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONArray;
+import com.yq.core.dao.TableDao;
 import com.yq.core.entity.Table;
 import com.yq.core.mongo.TableMongoDao;
 import com.yq.core.util.MongoTableUtil;
@@ -24,6 +28,8 @@ public class TableController {
 	@Autowired
 	TableMongoDao tableMongoDao;
 	
+	@Autowired
+	TableDao tableDao;
 	/**
 	 * 
 	 *版本：
@@ -54,7 +60,8 @@ public class TableController {
 	@ResponseBody
 	@RequestMapping(value="tableData")
 	public String getAllListData(){
-		return null;
+		List<Table> allTable = tableMongoDao.getAllTable();
+		return JSONArray.toJSONString(allTable);
 	}
 	
 	/**
@@ -67,11 +74,33 @@ public class TableController {
 	 *更新日期：3:14:03 PM
 	 *作者: GUO-QP
 	 */
-	@ResponseBody
 	@RequestMapping(value="tableAdd")
 	public String tableAdd(Table table){
 		table.setDataId(MongoTableUtil.getNextTableId("table"));
 		tableMongoDao.save(table);
+		//成功之后创建一个基本表
+		tableDao.createTabe();
+		return "table/tables";
+	}
+	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：删除一个对象
+	 *参数说明：@param id
+	 *参数说明：@return
+	 *返回值说明：
+	 *更新日期：4:20:52 PM
+	 *作者: GUO-QP
+	 */
+	@ResponseBody
+	@RequestMapping(value="tableDelete")
+	public String tableDelete(int id){
+		//在mongo中记录
+		tableMongoDao.delete(id);
+		//删除字段的记录
+		//从数据库中删除表
+		//从数据库中删除字段
 		return "ok";
 	}
 }

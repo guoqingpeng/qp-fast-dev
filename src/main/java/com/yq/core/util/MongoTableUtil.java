@@ -34,6 +34,7 @@ public class MongoTableUtil {
 	 *作者: GUO-QP
 	 */
 	public  static synchronized int getNextTableId(String collectionName){
+		
 		Integer currentId = currentDataIdMap.get(collectionName);
 		/*判断currentTableId是不是null
 		*如果是-1说明系统是初次启动，或者重新启动，

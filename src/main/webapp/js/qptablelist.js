@@ -38,7 +38,7 @@ function reSizeDataArea(){
 function initDefaultMenu(){
 	 $.ajax({
 	  	  type: 'get',
-		  url: 'menuData.do',
+		  url: 'tableData.do',
 		  dataType: 'json',
 		  success:function(data){
 		          createTable(data);
@@ -60,32 +60,28 @@ function createTable(data){
 			        field: 'operation',
 			        title: '操作',
 			        formatter:function(value, row, index){
-			                  return '<a class="mod" >修改</a> ' + '<a class="delete"  onClick="qpDelete('+row.id+')">删除</a>';
+			                  return '<a class="mod" >修改</a> ' + '<a class="delete"  onClick="qpDelete('+row.dataId+')">删除</a>';
 			        }
 			    },
 			    {
-			        field: 'id',
+			        field: 'dataId',
 			        title: '数据id'
 			    },
 			    {
-			        field: 'name',
-			        title: '名称'
+			        field: 'cnName',
+			        title: '对象中文名称'
 			    },
 			    {
-			        field: 'pid',
-			        title: '父id'
+			        field: 'enName',
+			        title: '数据库表名'
 			    },
 			    {
-			        field: 'position',
-			        title: '位置'
+			        field: 'isParent',
+			        title: '是否支持父子级'
 			    },
 			    {
-			        field: 'url',
-			        title: '链接'
-			    },
-			    {
-			        field: 'level',
-			        title: '层级'
+			        field: 'description',
+			        title: '描述'
 			    }	    	    	    	    
 	    ],
 	    data:data
@@ -115,7 +111,7 @@ function qpDeleteDataFromDB(id){
 	var isDelete = false;
 	$.ajax({
 		  type: 'get',
-		  url: 'menuDelete.do?id='+id,
+		  url: 'tableDelete.do?id='+id,
 		  async:false,
 		  success:function(data){
 			      if(data=="ok"){

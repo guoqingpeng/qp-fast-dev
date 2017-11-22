@@ -37,6 +37,7 @@ function reSizeDataArea(){
 		dblClickExpand: false,
 		showLine: false,
 		selectedMulti: false,
+		expandSpeed:"",
 		showIcon: false
 	},
 	edit: {
