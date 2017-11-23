@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.yq.core.entity.Table;
 
 @Repository
-public class TableMongoDao extends MongoGenDao<Table> {
+public class TableMongoDao extends MongoDaoBase<Table> {
 	
 	/**
 	 * 

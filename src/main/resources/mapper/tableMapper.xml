@@ -3,8 +3,25 @@
 
 <mapper namespace="com.yq.core.dao.TableDao">
 
+<!-- 建表语句，默认创建的字段 使用
+创建时间createAt
+更新时间updateAt
+记录创建者creater
+记录更新者updater
+数据版本version 这个字段是为了保持数据排他使用
+ -->
  <update id="createTabe" >
- 	
+	 CREATE TABLE ${enName} (
+	   id INT NOT NULL AUTO_INCREMENT,
+	   name varchar(255),
+	   <if test="isParent !=null and isParent==1">
+	       pid INT,
+	   </if>
+	   PRIMARY KEY ( id )
+	)
  </update>
-		
+ 
+  <update id="destoryTable">
+     DROP TABLE IF EXISTS ${tableName}
+ </update>
 </mapper>

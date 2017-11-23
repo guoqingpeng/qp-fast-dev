@@ -13,9 +13,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-import com.yq.core.entity.Table;
-
-public abstract class MongoGenDao<T> {
+public abstract class MongoDaoBase<T> {
 
 	@Autowired
 	protected MongoTemplate mongoTemplate;
@@ -33,7 +31,15 @@ public abstract class MongoGenDao<T> {
 		this.mongoTemplate.save(t);
 	}
 	
-	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：
+	 *参数说明：@param id
+	 *返回值说明：
+	 *更新日期：8:54:32 AM
+	 *作者: GUO-QP
+	 */
 	public void delete(int id){
 		Query query = new Query(Criteria.where("dataId").is(id));
 		this.mongoTemplate.remove(query, "table");

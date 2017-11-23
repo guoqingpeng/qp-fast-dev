@@ -15,7 +15,6 @@ $(document).ready(function(){
   reSizeDataArea();
   //列表栏目数据
   initDefaultMenu();
-  
 });
 
 /**
@@ -60,7 +59,11 @@ function createTable(data){
 			        field: 'operation',
 			        title: '操作',
 			        formatter:function(value, row, index){
-			                  return '<a class="mod" >修改</a> ' + '<a class="delete"  onClick="qpDelete('+row.dataId+')">删除</a>';
+			                  console.log(row.dataId+"----"+row.enName)
+			                  var id = row.dataId;
+			                  var tableName = row.enName;
+			                  return '<a class="modify" >修改</a> ' + 
+			                         '<a class="delete" id='+id+' tableName='+ tableName+' onClick="qpDelete(this)">删除</a>';
 			        }
 			    },
 			    {
@@ -84,18 +87,24 @@ function createTable(data){
 			        title: '描述'
 			    }	    	    	    	    
 	    ],
+	    detailView: true,
+        detailFormatter: function (index, row) {
+            //这个地方直接返回一个iframe表格里面的数据是该对象下的所有字段
+            var url = "fields.do?tableId="+row.dataId;
+            return '<iframe id ="qpPage" src="'+url+'"></iframe>';
+        },
 	    data:data
 	});	
 }
-
 
 /**
 功能说明------
 *删除数据
 */
-function qpDelete(id){
-
-     if(qpDeleteDataFromDB(id)){
+function qpDelete(ele){
+     var id = $(ele).attr("id")
+     var tableName = $(ele).attr("tableName");
+     if(qpDeleteDataFromDB(id,tableName)){
          deleteRowFromPage(id);
          currentPageRefresh();
          return true;
@@ -106,12 +115,13 @@ function qpDelete(id){
 /**
 功能说明------
 *根据数据id删除表格中的一行数据
+*删掉数据库
 */
-function qpDeleteDataFromDB(id){
+function qpDeleteDataFromDB(id,tableName){
 	var isDelete = false;
 	$.ajax({
 		  type: 'get',
-		  url: 'tableDelete.do?id='+id,
+		  url: 'tableDelete.do?id='+id+'&tableName='+tableName,
 		  async:false,
 		  success:function(data){
 			      if(data=="ok"){
@@ -160,6 +170,12 @@ function nullOrEmptyToZero(code){
     }
     return code;
 }
+
+/**
+功能说明------
+刷新当前页面
+*/
+
 
 /**
 功能说明------

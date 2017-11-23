@@ -8,6 +8,8 @@
 */
 package com.yq.core.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.yq.core.entity.Table;
 
 
@@ -22,7 +24,7 @@ public interface TableDao {
 	 *更新日期：3:39:33 PM
 	 *作者: GUO-QP
 	 */
-	public void createTabe();
+	public void createTabe(Table table);
 	
 	/**
 	 * 
@@ -33,6 +35,6 @@ public interface TableDao {
 	 *更新日期：3:41:23 PM
 	 *作者: GUO-QP
 	 */
-	public void DestoryTable(int id);
+	public void destoryTable(@Param("tableName")String tableName);
 	
 }

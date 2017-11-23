@@ -76,10 +76,14 @@ public class TableController {
 	 */
 	@RequestMapping(value="tableAdd")
 	public String tableAdd(Table table){
-		table.setDataId(MongoTableUtil.getNextTableId("table"));
+		
+		int dataId = MongoTableUtil.getNextTableId("table");
+		table.setDataId(dataId);
+		//注册表
 		tableMongoDao.save(table);
-		//成功之后创建一个基本表
-		tableDao.createTabe();
+		//成功之后创建一个基本表包含一些基本字段
+		tableDao.createTabe(table);
+		//注册默认的字段
 		return "table/tables";
 	}
 	
@@ -95,12 +99,18 @@ public class TableController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="tableDelete")
-	public String tableDelete(int id){
+	public String tableDelete(int id,String tableName){
+		
+		
 		//在mongo中记录
 		tableMongoDao.delete(id);
 		//删除字段的记录
+		
 		//从数据库中删除表
+		tableDao.destoryTable(tableName);
+		
 		//从数据库中删除字段
+		
 		return "ok";
 	}
 }

@@ -41,6 +41,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <label for="exampleInputEmail2">对象类型</label>
 	    <input type="text" name = "type" class="form-control" placeholder="对象类型">
 	  </div>
+
+	  <div class="form-group">
+	    <label for="exampleInputEmail2">是否支持父子级</label>
+	    <input type="text" name = "isParent" class="form-control" placeholder="是否支持父子级">
+	  </div>	  
 	  
 	  <div class="form-group">
 	    <label for="exampleInputEmail2">描述</label>
