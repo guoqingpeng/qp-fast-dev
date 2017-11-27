@@ -23,7 +23,16 @@ public class FieldController {
 	@Autowired
 	FieldMongoDao fieldMongoDao;
 	
-	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：跳转到字段设置列表页面
+	 *参数说明：@param tableId
+	 *参数说明：@return
+	 *返回值说明：
+	 *更新日期：3:00:41 PM
+	 *作者: GUO-QP
+	 */
 	@RequestMapping(value="fields")
 	public ModelAndView toFieldListPage(int tableId){
 		ModelAndView modelAndView = new ModelAndView();

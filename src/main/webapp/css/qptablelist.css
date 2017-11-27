@@ -68,3 +68,20 @@
     border:none;
 	width:100%;
 }
+
+.modal-dialog{
+     width:100%;
+     height:95%;
+}
+
+.modal-content{
+     width:100%;
+     height:95%;
+	 position:relative;
+	 top:-5%;
+}
+
+iframe{
+     width:100%;
+     height:100%;
+}

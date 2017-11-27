@@ -15,6 +15,7 @@ $(document).ready(function(){
   reSizeDataArea();
   //列表栏目数据
   initDefaultMenu();
+  
 });
 
 /**
@@ -62,7 +63,7 @@ function createTable(data){
 			                  console.log(row.dataId+"----"+row.enName)
 			                  var id = row.dataId;
 			                  var tableName = row.enName;
-			                  return '<a class="modify" >修改</a> ' + 
+			                  return '<a class="modify" id='+id+' tableName='+ tableName+' onClick="qpUpdate(this)">修改</a> ' + 
 			                         '<a class="delete" id='+id+' tableName='+ tableName+' onClick="qpDelete(this)">删除</a>';
 			        }
 			    },
@@ -95,6 +96,18 @@ function createTable(data){
         },
 	    data:data
 	});	
+}
+
+/**
+功能说明------
+*更新数据
+*/
+function qpUpdate(ele){
+     var id = $(ele).attr("id");
+     var tableName = $(ele).attr("tableName");
+     var url = "fields.do?tableId="+id;
+     $("#qpDialog").find("iframe").attr("src",url);
+     $("#qpDialog").modal('show');
 }
 
 /**

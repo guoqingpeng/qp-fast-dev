@@ -8,7 +8,6 @@
 */
 package com.yq.core.entity;
 
-
 public class Field {
 	private int dataId;
 	private String cnName;

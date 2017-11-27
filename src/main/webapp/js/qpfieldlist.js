@@ -4,8 +4,12 @@
 一部分代码复制共通list.js
 */
 $(document).ready(function(){
+
   var tableId = $("#smsc").attr("tableId");
+  
+  //页面自适应
   reSizeDataArea();
+  
   //列表栏目数据
   initDefaultMenu(tableId);
 });
@@ -33,6 +37,7 @@ function initDefaultMenu(tableId){
 		  dataType: 'json',
 		  success:function(data){
 		          createTable(data);
+		          setEditAble();
 		  },
 		  error:ajaxErrorDelear
 	});
@@ -46,27 +51,49 @@ function createTable(data){
     //需要销毁表格首先，否则数据不能加载
     $('#smsc').bootstrapTable('destroy'); 
 	$('#smsc').bootstrapTable({
-	    columns: [
+	    columns: [           
 			    {
 			        field: 'dataId',
-			        title: '数据id'
+			        title: '数据id',
+			        visible:false
 			    },
 			    
 			    {
 			        field: 'cnName',
-			        title: '字段中文名'
+			        title: '字段中文名',
+			        'class': 'canEdit'
 			    },
 			    {
 			        field: 'enName',
-			        title: '字段英文名'
+			        title: '字段英文名',
+			        'class': 'canEdit'
 			    },	
-			    {
+			    {  
 			        field: 'type',
-			        title: '字段类型'
-			    }					    		    	    	    	    
+			        title: '字段类型',
+			        'class': 'canEdit'
+			    },
+			    {  
+			        field: 'operation',
+			        title: '[<a>修改</a>][<a>添加</a>]',
+			        formatter:function(value, row, index){
+			                  var id = row.dataId;
+			                  return '<a class="clear" id='+id+'  onClick="qpclear(this)">清空数据</a> ' + 
+			                         '<a class="delete" id='+id+' onClick="qpDelete(this)">删除</a>';
+			        }			        
+			    }			        		    	    	    	    
 	    ],
 	    data:data
 	});	
+}
+
+function setEditAble(){
+	$("td.canEdit").each(function(){
+	    var oldHtml = $(this).html();
+	    var editAbleHtml = $("<input class='form-control' type='text'/>");
+	    editAbleHtml.val(oldHtml);
+	    $(this).html(editAbleHtml);
+	});
 }
 
 /**
@@ -96,7 +123,6 @@ function nullOrEmptyToZero(code){
 功能说明------
 刷新当前页面
 */
-
 
 /**
 功能说明------

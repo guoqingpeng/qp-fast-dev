@@ -70,7 +70,7 @@
 			</div>
 			<!--页面中的弹窗页面-->
 				<!-- Large modal -->
-				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+				<div id = "qpDialog" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 				  <div class="modal-dialog modal-lg" role="document">
 				    <div class="modal-content">
 				         <iframe id ="qpPage" src="g1.do"></iframe>
