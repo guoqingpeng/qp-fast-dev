@@ -11,7 +11,9 @@ package com.yq.core.entity;
 
 public class Field {
 	private int dataId;
-	private String name;
+	private String cnName;
+	private String enName;
+	private int belongTable;
 	private int type;
 	public int getDataId() {
 		return dataId;
@@ -19,11 +21,17 @@ public class Field {
 	public void setDataId(int dataId) {
 		this.dataId = dataId;
 	}
-	public String getName() {
-		return name;
+	public String getCnName() {
+		return cnName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCnName(String cnName) {
+		this.cnName = cnName;
+	}
+	public String getEnName() {
+		return enName;
+	}
+	public void setEnName(String enName) {
+		this.enName = enName;
 	}
 	public int getType() {
 		return type;
@@ -32,4 +40,18 @@ public class Field {
 		this.type = type;
 	}
 	
+	public int getBelongTable() {
+		return belongTable;
+	}
+	public void setBelongTable(int belongTable) {
+		this.belongTable = belongTable;
+	}
+	
+	public Field(int dataId,String cnName,String enName,int type,int belongTable){
+		this.dataId = dataId;
+		this.cnName = cnName;
+		this.enName = enName;
+		this.type = type;
+		this.belongTable = belongTable;
+	}
 }

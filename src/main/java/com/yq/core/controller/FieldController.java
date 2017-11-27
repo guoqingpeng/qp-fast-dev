@@ -8,15 +8,13 @@
 */
 package com.yq.core.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONArray;
-import com.yq.core.entity.Field;
 import com.yq.core.mongo.FieldMongoDao;
 
 @Controller
@@ -24,6 +22,15 @@ public class FieldController {
 	
 	@Autowired
 	FieldMongoDao fieldMongoDao;
+	
+	
+	@RequestMapping(value="fields")
+	public ModelAndView toFieldListPage(int tableId){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("tableId", tableId);
+		modelAndView.setViewName("field/fields");
+		return modelAndView;
+	}
 	
 	/**
 	 * 
@@ -35,14 +42,10 @@ public class FieldController {
 	 *更新日期：4:53:17 PM
 	 *作者: GUO-QP
 	 */
-	@RequestMapping(value="fields")
-	public ModelAndView getAllFieldsByTable(int tableId){
+	@ResponseBody
+	@RequestMapping(value="fieldData")
+	public String  getAllFieldsByTable(int tableId){
 		
-		ModelAndView modelAndView = new ModelAndView();
-		List<Field> fieldsList = fieldMongoDao.findFieldsOfTable(tableId);
-		modelAndView.setViewName("field/fields");
-		modelAndView.addObject("data", JSONArray.toJSONString(fieldsList));
-		return modelAndView;
+		return JSONArray.toJSONString(fieldMongoDao.findFieldsOfTable(tableId));
 	}
-
 }

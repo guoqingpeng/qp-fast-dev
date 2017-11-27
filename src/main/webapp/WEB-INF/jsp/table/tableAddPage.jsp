@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	  <div class="form-group">
 	    <label for="exampleInputEmail2">是否支持父子级</label>
-	    <input type="text" name = "isParent" class="form-control" placeholder="是否支持父子级">
+	    <input type="text" name = "ifSupportParent" class="form-control" placeholder="是否支持父子级">
 	  </div>	  
 	  
 	  <div class="form-group">

@@ -14,10 +14,8 @@ public class Table {
 	private String cnName;
 	private String enName;
 	private int type;
-	private int isParent;
+	private int ifSupportParent;
 	private String description;
-	
-	
 	public int getDataId() {
 		return dataId;
 	}
@@ -42,11 +40,11 @@ public class Table {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public int getIsParent() {
-		return isParent;
+	public int getIfSupportParent() {
+		return ifSupportParent;
 	}
-	public void setIsParent(int isParent) {
-		this.isParent = isParent;
+	public void setIfSupportParent(int ifSupportParent) {
+		this.ifSupportParent = ifSupportParent;
 	}
 	public String getDescription() {
 		return description;
@@ -54,6 +52,5 @@ public class Table {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
 	
 }

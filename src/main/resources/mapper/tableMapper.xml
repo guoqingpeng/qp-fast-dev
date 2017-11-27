@@ -13,8 +13,13 @@
  <update id="createTabe" >
 	 CREATE TABLE ${enName} (
 	   id INT NOT NULL AUTO_INCREMENT,
-	   name varchar(255),
-	   <if test="isParent !=null and isParent==1">
+	   name VARCHAR(255),
+	   createAt DATETIME,
+	   updateAt DATETIME,
+	   creater INT,
+	   updater INT,
+	   version INT,
+	   <if test="ifSupportParent !=null and ifSupportParent==1">
 	       pid INT,
 	   </if>
 	   PRIMARY KEY ( id )

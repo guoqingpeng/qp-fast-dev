@@ -34,11 +34,47 @@ public class FieldMongoDao extends MongoDaoBase<Field>{
 		
 		Query query =new Query(
 				Criteria.
-				where("tableId").
+				where("belongTable").
 				is(tableId));
 		
 		List<Field> fields = mongoTemplate.find(query, Field.class);
 		return fields;
+	}
+	
+	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：批量注册字段
+	 *参数说明：@param fields
+	 *返回值说明：
+	 *更新日期：11:34:59 AM
+	 *作者: GUO-QP
+	 */
+	public void batchInsertFields(List<Field> fields){
+		
+		mongoTemplate.insert(fields, Field.class);
+		
+	}
+	
+	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：删除对象下面所有的字段
+	 *参数说明：
+	 *返回值说明：
+	 *更新日期：11:48:16 AM
+	 *作者: GUO-QP
+	 */
+	public void batchDeleteFields(int tableId){
+		
+		Query query =new Query(
+				Criteria.
+				where("belongTable").
+				is(tableId));
+		
+		mongoTemplate.remove(query, Field.class);
 	}
 
 }

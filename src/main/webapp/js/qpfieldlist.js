@@ -4,9 +4,10 @@
 一部分代码复制共通list.js
 */
 $(document).ready(function(){
-
+  var tableId = $("#smsc").attr("tableId");
+  reSizeDataArea();
   //列表栏目数据
-  initDefaultMenu();
+  initDefaultMenu(tableId);
 });
 
 /**
@@ -25,8 +26,16 @@ function reSizeDataArea(){
 功能说明------
 *初始化菜单数据
 */
-function initDefaultMenu(){
-	createTable(${data});
+function initDefaultMenu(tableId){
+	 $.ajax({
+	  	  type: 'get',
+		  url: 'fieldData.do?tableId='+tableId,
+		  dataType: 'json',
+		  success:function(data){
+		          createTable(data);
+		  },
+		  error:ajaxErrorDelear
+	});
 }
 
 /**
