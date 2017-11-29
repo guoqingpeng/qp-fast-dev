@@ -3,15 +3,23 @@
 所有事件的注册
 一部分代码复制共通list.js
 */
+
+var originFields=[];
 $(document).ready(function(){
 
   var tableId = $("#smsc").attr("tableId");
   
   //页面自适应
   reSizeDataArea();
-  
   //列表栏目数据
   initDefaultMenu(tableId);
+  
+  $('#saveField').click(function(){
+      
+      saveField();
+      
+  });
+  
 });
 
 /**
@@ -37,6 +45,7 @@ function initDefaultMenu(tableId){
 		  dataType: 'json',
 		  success:function(data){
 		          createTable(data);
+		          originFields = data;
 		          setEditAble();
 		  },
 		  error:ajaxErrorDelear
@@ -54,8 +63,7 @@ function createTable(data){
 	    columns: [           
 			    {
 			        field: 'dataId',
-			        title: '数据id',
-			        visible:false
+			        title: '数据id'
 			    },
 			    
 			    {
@@ -75,11 +83,11 @@ function createTable(data){
 			    },
 			    {  
 			        field: 'operation',
-			        title: '[<a>修改</a>][<a>添加</a>]',
+			        title: '[<a id="qpAddField" onClick="qpAddField()">添加</a>]',
 			        formatter:function(value, row, index){
 			                  var id = row.dataId;
-			                  return '<a class="clear" id='+id+'  onClick="qpclear(this)">清空数据</a> ' + 
-			                         '<a class="delete" id='+id+' onClick="qpDelete(this)">删除</a>';
+			                  return '<a class="clear" id='+id+' onClick="qpClearData(this)">清空数据</a> ' + 
+			                         '<a class="delete" id='+id+' onClick="qpDeleteField(this)">删除</a>';
 			        }			        
 			    }			        		    	    	    	    
 	    ],
@@ -87,6 +95,10 @@ function createTable(data){
 	});	
 }
 
+/**
+功能说明------
+将表格中的数据转化成可编辑状态的
+*/
 function setEditAble(){
 	$("td.canEdit").each(function(){
 	    var oldHtml = $(this).html();
@@ -98,7 +110,7 @@ function setEditAble(){
 
 /**
 功能说明------
-ajax请求
+ajax请求错误统一处理
 */
 function ajaxErrorDelear(xhr,err,e){
      //暂时简单的返回错误
@@ -123,11 +135,6 @@ function nullOrEmptyToZero(code){
 功能说明------
 刷新当前页面
 */
-
-/**
-功能说明------
-刷新当前页面
-*/
 function currentPageRefresh(){
        window.location.reload();
 }
@@ -139,3 +146,113 @@ function currentPageRefresh(){
 function parentPageRefresh(){
        parent.location.reload();
 }
+
+
+
+///这个地方来定义表格的添加和删除的数据的记录-------------------start
+var fieldAddList = [];//dataId为-1的就是新加的
+var fieldUpdateList = [];//根据状态判断的
+var fieldDeleteList = [];//根据删除按钮添加的
+
+/**
+功能说明------
+*根据数据id删除表格中的一行数据
+*/
+function deleteRowFromPage(id){
+    $('#smsc').bootstrapTable('remove',
+				    {
+				           field:'dataId',
+				           values:[id]
+				    }
+    );
+    setEditAble();
+}
+
+
+/**
+功能说明------
+*根据数据id删除表格中的一行数据
+*/
+function addRowToPage(row){
+    $('#smsc').bootstrapTable('insertRow',{
+              index:0,
+              row:row
+    });
+    setEditAble();
+}
+
+/**
+功能说明------
+删除一个字段
+*/
+function qpDeleteField(ele){
+    var field=new Object();
+    //看看这个id是否为-1，为空可能是新加的，但是有删除了
+    var dataId = parseInt($(ele).attr("id"));
+    if(dataId != -1){//从已经存在的表删除
+         field.dataId = dataId;
+         fieldDeleteList.push(field);
+    }
+    deleteRowFromPage(dataId);
+    
+}
+
+/**
+功能说明------
+添加一个字段,默认设置dataId为-1
+*/
+function qpAddField(){
+
+   var field=new Object();
+   field.dataId = -1;
+   field.cnName="";
+   field.enName="";
+   field.type=0;
+   fieldAddList.push(field);
+   addRowToPage(field);
+   
+}
+
+/**
+功能说明------
+将表格中的数据分为三类,并且已json字符串的格式保存
+哪些是添加的 fieldAddList
+哪些是修改了的 fieldUpdateList
+哪些是删除了的字段 fieldDeleteList
+*/
+function createCommitFields(){
+   var commitFields=new Object();
+   commitFields.fieldAddList = fieldAddList;
+   commitFields.fieldUpdateList = fieldUpdateList;
+   commitFields.fieldDeleteList = fieldDeleteList;
+   alert(JSON.stringify(commitFields));
+}
+
+/**
+功能说明------
+提交分类了的字段
+*/
+function saveField(){
+
+	 var fields = createCommitFields();
+	 $.ajax({
+	  	  type: 'get',
+		  url: 'updateFields.do',
+		  contentType: "application/json; charset=utf-8",
+		  data:fields,
+		  dataType: 'json',
+		  success:function(data){
+		          createTable(data);
+		          originFields = data;
+		          setEditAble();
+		  },
+		  error:ajaxErrorDelear
+	});	
+
+}
+///这个地方来定义表格的添加和删除的数据的记录-------------------end
+
+
+
+
+

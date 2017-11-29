@@ -155,7 +155,7 @@ function qpDeleteDataFromDB(id,tableName){
 function deleteRowFromPage(id){
     $('#smsc').bootstrapTable('remove',
 				    {
-				           field:'id',
+				           field:'dataId',
 				           values:[id]
 				    }
     );
