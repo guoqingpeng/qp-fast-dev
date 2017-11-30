@@ -8,11 +8,13 @@
 */
 package com.yq.core.entity;
 
+
 public class Field {
 	private int dataId;
 	private String cnName;
 	private String enName;
 	private int belongTable;
+	private String tableName;
 	private int type;
 	public int getDataId() {
 		return dataId;
@@ -46,11 +48,34 @@ public class Field {
 		this.belongTable = belongTable;
 	}
 	
+	
+	public String getTableName() {
+		return tableName;
+	}
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+	
+	
+	//这里必须写默认的构造函数，否则fastjson是无法解析的，mongodbtemplate也是无法解析的
+	public Field(){
+		
+	}
+	
 	public Field(int dataId,String cnName,String enName,int type,int belongTable){
 		this.dataId = dataId;
 		this.cnName = cnName;
 		this.enName = enName;
 		this.type = type;
 		this.belongTable = belongTable;
+	}
+	
+	public Field(int dataId,String cnName,String enName,int type,int belongTable,String tableName){
+		this.dataId = dataId;
+		this.cnName = cnName;
+		this.enName = enName;
+		this.type = type;
+		this.belongTable = belongTable;
+		this.tableName= tableName;
 	}
 }

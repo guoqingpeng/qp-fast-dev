@@ -32,11 +32,12 @@ public class FieldMongoDao extends MongoDaoBase<Field>{
 	 */
 	public List<Field> findFieldsOfTable(int tableId){
 		
-		Query query =new Query(
+		Query query = new Query(
 				Criteria.
 				where("belongTable").
-				is(tableId));
+				is(tableId).andOperator(Criteria.where("enName").ne("dataId")));
 		
+		//query.sort().on("dataId", Order.DESCENDING);
 		List<Field> fields = mongoTemplate.find(query, Field.class);
 		return fields;
 	}
@@ -75,6 +76,39 @@ public class FieldMongoDao extends MongoDaoBase<Field>{
 				is(tableId));
 		
 		mongoTemplate.remove(query, Field.class);
+	}
+	
+	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：批量删除指定的字段
+	 *参数说明：@param fields
+	 *返回值说明：
+	 *更新日期：1:51:18 PM
+	 *作者: GUO-QP
+	 */
+	public void batchDeleteSomeFields(List<Field> fields){
+		
+		mongoTemplate.remove(fields);
+		
+	}
+	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：删除指定的字段
+	 *参数说明：@param field
+	 *返回值说明：
+	 *更新日期：1:56:32 PM
+	 *作者: GUO-QP
+	 */
+	public void deleteField(Field field){
+		mongoTemplate.remove(
+				new Query(
+				    Criteria.where("dataId").is(field.getDataId())		
+				),Field.class);
+		
 	}
 
 }

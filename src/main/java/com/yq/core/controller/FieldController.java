@@ -8,6 +8,8 @@
 */
 package com.yq.core.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +18,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.yq.core.dao.FieldDao;
+import com.yq.core.entity.Field;
 import com.yq.core.mongo.FieldMongoDao;
+import com.yq.core.mongo.TableMongoDao;
+import com.yq.core.util.MongoTableUtil;
 
 @Controller
 public class FieldController {
 	
 	@Autowired
 	FieldMongoDao fieldMongoDao;
+	
+	@Autowired
+	TableMongoDao tableMongoDao;
+	
+	@Autowired
+	FieldDao fieldDao;
 	
 	/**
 	 * 
@@ -70,10 +83,33 @@ public class FieldController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="updateFields")
-	public String updateFields(JSON data){
+	public String updateFields(String fields){
+		JSONObject jsonObject = JSON.parseObject(fields);
+		List<Field> addfieldList = JSON.parseArray(jsonObject.getString("fieldAddList"), Field.class);
+		//List<Field> fieldUpdateList = JSON.parseArray(jsonObject.getString("fieldUpdateList"), Field.class);
+		List<Field> fieldDeleteList = JSON.parseArray(jsonObject.getString("fieldDeleteList"), Field.class);
+		int tableId = jsonObject.getIntValue("tableId");
+		String tableName = tableMongoDao.getTableNameById(tableId);
 		
-		System.out.println(data);
+		for (Field field : addfieldList) {
+			field.setDataId(MongoTableUtil.getNextTableId("field"));
+			field.setBelongTable(tableId);
+			field.setTableName(tableName);
+			fieldDao.addField(field);
+		}
 		
+		fieldMongoDao.batchInsertFields(addfieldList);
+		
+		System.out.println("字段批量添加成功");
+		
+		for (Field field : fieldDeleteList) {
+			field.setTableName(tableName);
+			System.out.println(field.getEnName());
+			fieldDao.dropField(field);
+			fieldMongoDao.deleteField(field);
+		}
+		
+		System.out.println("字段批量删除成功");
 		return "ok";
 	}
 }

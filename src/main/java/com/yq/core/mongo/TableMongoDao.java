@@ -10,6 +10,8 @@ package com.yq.core.mongo;
 
 import java.util.List;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.yq.core.entity.Table;
@@ -31,6 +33,16 @@ public class TableMongoDao extends MongoDaoBase<Table> {
 		List<Table> allTables = mongoTemplate.findAll(Table.class);
 		
 		return allTables;
+	}
+	
+	public String getTableNameById(int tableId){
+		
+		Table table = mongoTemplate.findOne(
+				new Query(
+						Criteria.where("dataId").is(tableId)
+				), Table.class);
+		
+		return table.getEnName();
 	}
 
 }

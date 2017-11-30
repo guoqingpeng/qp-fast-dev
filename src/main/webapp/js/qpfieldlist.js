@@ -5,21 +5,42 @@
 */
 
 var originFields=[];
+var tableId;
 $(document).ready(function(){
 
-  var tableId = $("#smsc").attr("tableId");
+  tableId = $("#smsc").attr("tableId");
   
   //页面自适应
   reSizeDataArea();
+  
   //列表栏目数据
   initDefaultMenu(tableId);
   
   $('#saveField').click(function(){
-      
       saveField();
-      
   });
   
+  $(document).on('change','input',function(event){
+  
+     var index = $(this).parent().parent().attr("data-index");
+     var row = new Object();
+     var fields = $(this).parent().parent().children();
+     row.dataId = $(fields[0]).html();
+     
+     var td1 = $(fields[1]);
+     var input1 = td1.children()[0];
+     row.cnName = $(input1).val();
+     
+     var td2 = $(fields[2]);
+     var input2 = td2.children()[0];
+     row.enName = $(input2).val();
+     
+     var td3 = $(fields[3]);
+     var input3 = td3.children()[0];                   
+     row.type = $(input3).val();
+     $("#smsc").bootstrapTable('getOptions').data.splice(index, 1, row);
+     
+  });  
 });
 
 /**
@@ -82,12 +103,17 @@ function createTable(data){
 			        'class': 'canEdit'
 			    },
 			    {  
+			        field: 'tableName',
+			        title: '表名',
+			    },			    
+			    {  
 			        field: 'operation',
 			        title: '[<a id="qpAddField" onClick="qpAddField()">添加</a>]',
 			        formatter:function(value, row, index){
 			                  var id = row.dataId;
+			                  var enName = row.enName;
 			                  return '<a class="clear" id='+id+' onClick="qpClearData(this)">清空数据</a> ' + 
-			                         '<a class="delete" id='+id+' onClick="qpDeleteField(this)">删除</a>';
+			                         '<a class="delete" id='+id+' enName="'+enName+'"  onClick="qpDeleteField(this)">删除</a>';
 			        }			        
 			    }			        		    	    	    	    
 	    ],
@@ -150,7 +176,6 @@ function parentPageRefresh(){
 
 
 ///这个地方来定义表格的添加和删除的数据的记录-------------------start
-var fieldAddList = [];//dataId为-1的就是新加的
 var fieldUpdateList = [];//根据状态判断的
 var fieldDeleteList = [];//根据删除按钮添加的
 
@@ -165,7 +190,6 @@ function deleteRowFromPage(id){
 				           values:[id]
 				    }
     );
-    setEditAble();
 }
 
 
@@ -187,14 +211,16 @@ function addRowToPage(row){
 */
 function qpDeleteField(ele){
     var field=new Object();
-    //看看这个id是否为-1，为空可能是新加的，但是有删除了
-    var dataId = parseInt($(ele).attr("id"));
+    //看看这个id是否为-1
+    var dataId =parseInt($(ele).attr("id"));
+    var enName = $(ele).attr("enName");
     if(dataId != -1){//从已经存在的表删除
          field.dataId = dataId;
+         field.enName = enName;
          fieldDeleteList.push(field);
     }
     deleteRowFromPage(dataId);
-    
+    setEditAble();
 }
 
 /**
@@ -202,13 +228,11 @@ function qpDeleteField(ele){
 添加一个字段,默认设置dataId为-1
 */
 function qpAddField(){
-
    var field=new Object();
    field.dataId = -1;
    field.cnName="";
    field.enName="";
    field.type=0;
-   fieldAddList.push(field);
    addRowToPage(field);
    
 }
@@ -222,10 +246,34 @@ function qpAddField(){
 */
 function createCommitFields(){
    var commitFields=new Object();
-   commitFields.fieldAddList = fieldAddList;
+   commitFields.tableId = tableId;
+   commitFields.fieldAddList = getNewAddFields();
    commitFields.fieldUpdateList = fieldUpdateList;
    commitFields.fieldDeleteList = fieldDeleteList;
-   alert(JSON.stringify(commitFields));
+   return JSON.stringify(commitFields);
+}
+
+
+/**
+功能说明------
+获取列表中新加的字段dataId=-1
+*/
+function getNewAddFields(){
+  var fieldAddList = [];//dataId为-1的就是新加的
+  var rows = $('#smsc').bootstrapTable('getData');
+  for(row in rows){
+     var rowObj = rows[row];
+     if(rowObj.dataId == -1){
+	   var field = new Object();
+	   field.dataId = -1;
+	   field.cnName = rowObj.cnName;
+	   field.enName = rowObj.enName;
+	   field.type = rowObj.type;
+	   fieldAddList.push(field);
+     }
+     console.log(rowObj.dataId);
+  }
+  return fieldAddList;
 }
 
 /**
@@ -233,26 +281,16 @@ function createCommitFields(){
 提交分类了的字段
 */
 function saveField(){
-
 	 var fields = createCommitFields();
 	 $.ajax({
-	  	  type: 'get',
-		  url: 'updateFields.do',
-		  contentType: "application/json; charset=utf-8",
+	  	  type: 'POST',
+		  url: 'updateFields.do?fields='+fields,
+		  contentType:'application/json',
 		  data:fields,
-		  dataType: 'json',
 		  success:function(data){
-		          createTable(data);
-		          originFields = data;
-		          setEditAble();
+		       alert("成功");
 		  },
 		  error:ajaxErrorDelear
 	});	
-
 }
 ///这个地方来定义表格的添加和删除的数据的记录-------------------end
-
-
-
-
-

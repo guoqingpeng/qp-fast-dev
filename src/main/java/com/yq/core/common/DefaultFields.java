@@ -39,36 +39,73 @@ public class DefaultFields {
 		List<Field> defaultFields = new ArrayList<Field>();
 		
 		//id字段
-		Field idField = new Field(MongoTableUtil.getNextTableId("field"),"数据id","dataId",FieldTypeConstant.NUMBER,table.getDataId());
+		Field idField = new Field(MongoTableUtil.getNextTableId("field"),
+								"数据id",
+								"dataId",
+								FieldTypeConstant.NUMBER,
+								table.getDataId(),table.getEnName());
 		defaultFields.add(idField);
 		
 		//name字段
-		Field nameField = new Field(MongoTableUtil.getNextTableId("field"),"名称","name",FieldTypeConstant.TEXT,table.getDataId());
+		Field nameField = new Field(MongoTableUtil.getNextTableId("field"),
+								"名称","name",
+								FieldTypeConstant.TEXT,
+								table.getDataId(),
+								table.getEnName());
 		defaultFields.add(nameField);
 		
 		//创建时间
-		Field createAtField = new Field(MongoTableUtil.getNextTableId("field"),"创建时间","createAt",FieldTypeConstant.DATE_TIME,table.getDataId());
+		Field createAtField = new Field(MongoTableUtil.getNextTableId("field"),
+								"创建时间",
+								"createAt",
+								FieldTypeConstant.DATE_TIME,
+								table.getDataId(),
+								table.getEnName());
 		defaultFields.add(createAtField);
 		
 		//更新时间
-		Field updateAtField = new Field(MongoTableUtil.getNextTableId("field"),"更新时间","updateAt",FieldTypeConstant.DATE_TIME,table.getDataId());
+		Field updateAtField = new Field(MongoTableUtil.getNextTableId("field"),
+								"更新时间","updateAt",
+								FieldTypeConstant.DATE_TIME,
+								table.getDataId(),
+								table.getEnName());
 		defaultFields.add(updateAtField);
 		
 		//创建者
-		Field createrField = new Field(MongoTableUtil.getNextTableId("field"),"数据创建者","creater",FieldTypeConstant.INNER_OBJCET,table.getDataId());
+		Field createrField = new Field(MongoTableUtil.getNextTableId("field"),
+								"数据创建者",
+								"creater",
+								FieldTypeConstant.INNER_OBJCET,
+								table.getDataId(),
+								table.getEnName());
 		defaultFields.add(createrField);
 		
 		//更新者
-		Field updaterField = new Field(MongoTableUtil.getNextTableId("field"),"数据更新者","updater",FieldTypeConstant.INNER_OBJCET,table.getDataId());
+		Field updaterField = new Field(MongoTableUtil.getNextTableId("field"),
+								"数据更新者",
+								"updater",
+								FieldTypeConstant.INNER_OBJCET,
+								table.getDataId(),
+								table.getEnName());
 		defaultFields.add(updaterField);
 		
 		//版本
-		Field versionField = new Field(MongoTableUtil.getNextTableId("field"),"版本","version",FieldTypeConstant.NUMBER,table.getDataId());
+		Field versionField = new Field(MongoTableUtil.getNextTableId("field"),
+								"版本",
+								"version",
+								FieldTypeConstant.NUMBER,
+								table.getDataId(),
+								table.getEnName());
 		defaultFields.add(versionField);
 		
 		//pid
 		if(table.getIfSupportParent()==1){
-			Field pidField = new Field(MongoTableUtil.getNextTableId("field"),"父级","pid",FieldTypeConstant.NUMBER,table.getDataId());
+			Field pidField = new Field(MongoTableUtil.getNextTableId("field"),
+								"父级",
+								"pid",
+								FieldTypeConstant.NUMBER,
+								table.getDataId(),
+								table.getEnName());
 			defaultFields.add(pidField);
 		}
 		
