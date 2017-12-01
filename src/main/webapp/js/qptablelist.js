@@ -92,7 +92,7 @@ function createTable(data){
         detailFormatter: function (index, row) {
             //这个地方直接返回一个iframe表格里面的数据是该对象下的所有字段
             var url = "fields.do?tableId="+row.dataId;
-            return '<iframe id ="qpPage" src="'+url+'"></iframe>';
+            return '<iframe class="qpFieldArea" src="'+url+'"></iframe>';
         },
 	    data:data
 	});	
@@ -115,11 +115,10 @@ function qpUpdate(ele){
 *删除数据
 */
 function qpDelete(ele){
-     var id = $(ele).attr("id")
+     var id = parseInt($(ele).attr("id"));
      var tableName = $(ele).attr("tableName");
      if(qpDeleteDataFromDB(id,tableName)){
          deleteRowFromPage(id);
-         currentPageRefresh();
          return true;
      }
      return false;

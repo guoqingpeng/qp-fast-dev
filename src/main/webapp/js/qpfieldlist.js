@@ -66,7 +66,7 @@ function createTable(data){
 	    columns: [           
 			    {
 			        field: 'dataId',
-			        title: '数据id'
+			        title: '数据id',
 			    },
 			    
 			    {
@@ -246,7 +246,7 @@ function getNewAddFields(){
   var rows = $('#smsc').bootstrapTable('getData');
   for(row in rows){
      var rowObj = rows[row];
-     if(rowObj.dataId == -1){
+     if(rowObj.dataId < 0){
 	   var field = new Object();
 	   field.dataId = -1;
 	   field.cnName = rowObj.cnName;

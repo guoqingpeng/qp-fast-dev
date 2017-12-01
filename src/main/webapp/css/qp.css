@@ -140,36 +140,6 @@
 	direction:rtl;/*控制滚动条出现在左侧*/
 }
 
-/*
-::-webkit-scrollbar 滚动条整体部分
-::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
-::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）
-::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
-::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）
-::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
-::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
-*/
-
-/* 滚动条的滑轨背景颜色 */
-#qpleft::-webkit-scrollbar-track{
-	background-color:#F5F5F5;
-	-webkit-box-shadow:inset 0 0 6px rgba(0, 0, 0, 0.22);
-}
-
-/* 滑块颜色 */
-#qpleft::-webkit-scrollbar-thumb{
-	background-color:#8b8b8b;
-	border-radius:10px;
-}
-
-/*定义滚动条宽及背景*/
-#qpleft::-webkit-scrollbar{
-	width:5px;
-	background-color:rgba(0, 0, 0, 0.32);
-}
-/**滚动条结束-----------------------------*/
-
-
 levelOneExpand{
     
 }

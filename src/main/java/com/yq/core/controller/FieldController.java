@@ -100,16 +100,13 @@ public class FieldController {
 		
 		fieldMongoDao.batchInsertFields(addfieldList);
 		
-		System.out.println("字段批量添加成功");
 		
 		for (Field field : fieldDeleteList) {
 			field.setTableName(tableName);
-			System.out.println(field.getEnName());
 			fieldDao.dropField(field);
 			fieldMongoDao.deleteField(field);
 		}
 		
-		System.out.println("字段批量删除成功");
 		return "ok";
 	}
 }
