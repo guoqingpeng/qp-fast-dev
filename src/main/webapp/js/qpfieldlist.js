@@ -6,6 +6,7 @@
 
 var originFields=[];
 var tableId;
+var addindex = -1;
 $(document).ready(function(){
 
   tableId = $("#smsc").attr("tableId");
@@ -17,30 +18,11 @@ $(document).ready(function(){
   initDefaultMenu(tableId);
   
   $('#saveField').click(function(){
-      saveField();
+      saveField(); 
   });
   
-  $(document).on('change','input',function(event){
+  monitorForValueChange();
   
-     var index = $(this).parent().parent().attr("data-index");
-     var row = new Object();
-     var fields = $(this).parent().parent().children();
-     row.dataId = $(fields[0]).html();
-     
-     var td1 = $(fields[1]);
-     var input1 = td1.children()[0];
-     row.cnName = $(input1).val();
-     
-     var td2 = $(fields[2]);
-     var input2 = td2.children()[0];
-     row.enName = $(input2).val();
-     
-     var td3 = $(fields[3]);
-     var input3 = td3.children()[0];                   
-     row.type = $(input3).val();
-     $("#smsc").bootstrapTable('getOptions').data.splice(index, 1, row);
-     
-  });  
 });
 
 /**
@@ -190,6 +172,7 @@ function deleteRowFromPage(id){
 				           values:[id]
 				    }
     );
+    setEditAble();
 }
 
 
@@ -214,13 +197,12 @@ function qpDeleteField(ele){
     //看看这个id是否为-1
     var dataId =parseInt($(ele).attr("id"));
     var enName = $(ele).attr("enName");
-    if(dataId != -1){//从已经存在的表删除
+    if(dataId > 0){//从已经存在的表删除
          field.dataId = dataId;
          field.enName = enName;
          fieldDeleteList.push(field);
     }
     deleteRowFromPage(dataId);
-    setEditAble();
 }
 
 /**
@@ -228,8 +210,9 @@ function qpDeleteField(ele){
 添加一个字段,默认设置dataId为-1
 */
 function qpAddField(){
+
    var field=new Object();
-   field.dataId = -1;
+   field.dataId = (addindex--);
    field.cnName="";
    field.enName="";
    field.type=0;
@@ -294,3 +277,34 @@ function saveField(){
 	});	
 }
 ///这个地方来定义表格的添加和删除的数据的记录-------------------end
+
+/**
+功能说明------
+当表格中的数据改变时，更新表格整体数据
+*/
+function monitorForValueChange(){
+
+	  $(document).on('change','input',function(event){
+	  
+	     var index = $(this).parent().parent().attr("data-index");
+	     
+	     var row = new Object();
+	     var fields = $(this).parent().parent().children();
+	     row.dataId = parseInt($(fields[0]).html());//特别注意这个地方的数据的类型
+	     
+	     var td1 = $(fields[1]);
+	     var input1 = td1.children()[0];
+	     row.cnName = $(input1).val();
+	     
+	     var td2 = $(fields[2]);
+	     var input2 = td2.children()[0];
+	     row.enName = $(input2).val();
+	     
+	     var td3 = $(fields[3]);
+	     var input3 = td3.children()[0];                   
+	     row.type = $(input3).val();
+	     
+	     $("#smsc").bootstrapTable('getOptions').data.splice(index, 1, row);
+  });
+  
+}
