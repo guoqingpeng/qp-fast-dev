@@ -5,6 +5,7 @@ var openedurls = "";
 var jioncode = "guoqingpeng";
 var homepageurl = "g1.do";
 var marknum = 10;
+var currentOpenUrl = -1;
 
 /**
 功能说明------
@@ -163,6 +164,26 @@ function checkAvriableMarkWidth(){
 
 /**
 功能说明------
+iframe切换
+*/
+function createDataArea(url){
+    //根据属性src来找是否有这个url
+    //如果有则打开,其它的隐藏，否则创建一个新的iframe，隐藏其它的iframe
+    var currentIframe = $("[src='"+url+"']");
+    $('.dataArea').hide();
+    if(currentIframe.length >0){
+        currentIframe.parent().show();
+    }else{
+	    var div = $('<div class="dataArea" ></div>')
+	    var newIframe = $('<iframe class="dataframe" ></iframe>');
+	    newIframe.attr("src",url);
+	    div.append(newIframe);
+	    $('#qp-right-main').append(div);    
+    }
+}
+
+/**
+功能说明------
 创建一个标签
 */
 function creatMark(id,url,markName){
@@ -174,9 +195,10 @@ function creatMark(id,url,markName){
 			   "</div>");
 	$("#marks").append(mark);
 	addUrltoOpenedurls(id);
-	$("#dataframe").attr("src",url);
+	createDataArea(url);
 	setMarkitWidth();
 	setMarkLoctionCenter(mark);
+	currentOpenUrl = id;
 	var alertsg = $("<div class='alert alert-warning' role='alert'>打开页签成功"+markName+"</div>");
 	$("#msg").append(alertsg);
 	$(alertsg).show(500);
@@ -256,11 +278,13 @@ function moveRight(){
 跳转到选中的页签上
 */
 function clickMenuAndMark(id){
-	$(".markit").removeClass("markChoosen").addClass("markNotChoosen");
-	$(".markit[openid='"+id+"']").addClass("markChoosen").removeClass("markNotChoosen");
-	//找到选中的url
-	var url = $(".markit[openid='"+id+"']").attr("url");
-	$("#dataframe").attr("src",url);
+    if(currentOpenUrl != id){
+		$(".markit").removeClass("markChoosen").addClass("markNotChoosen");
+		$(".markit[openid='"+id+"']").addClass("markChoosen").removeClass("markNotChoosen");
+		//找到选中的url
+		var url = $(".markit[openid='"+id+"']").attr("url");
+		currentOpenUrl = id;
+	}
 }
 
 /*
@@ -304,12 +328,15 @@ function removeUrlfromOpenedurls(id){
 切换到选中的标签页上面
 */
 function markChoosen(ele){
-	//所有元素未选中
-	$(".markit").removeClass("markChoosen").addClass("markNotChoosen");
-	//当前元素选中
-	$(ele).parent().addClass("markChoosen").removeClass("markNotChoosen");
-	//设置当前框架的页面
-	$("#dataframe").attr("src",$(ele).parent().attr("url"));
+    var openid = parseInt($(ele).parent().attr("openid"));
+    if(currentOpenUrl != openid){
+		$(".markit").removeClass("markChoosen").addClass("markNotChoosen");
+		//当前元素选中
+		$(ele).parent().addClass("markChoosen").removeClass("markNotChoosen");
+		//设置当前框架的页面
+		createDataArea($(ele).parent().attr("url"))
+		currentOpenUrl = openid;
+    }
 }
 
 /**
@@ -321,6 +348,7 @@ function destoryMark(ele){
    openurlWhenCloseMark(ele);
    var id = $(ele).parent().attr("openid");
    $(ele).parent().remove();
+   //删除iframe，暂时部删除这样可以提高效率
    removeUrlfromOpenedurls(id);
    var leftflafg = $(".ishow").first().prev();
    var rightflafg = $(".ishow").last().next(); 
@@ -348,7 +376,7 @@ function openurlWhenCloseMark(ele){
 		}else if(nextitem.length == 1){
 			markChoosen(nextitem);
 		}else{
-			$("#dataframe").attr("src",homepageurl);
+			createDataArea(homepageurl);
 		}
 	}
 }
@@ -468,6 +496,6 @@ function initBindSystemEvents(){
   //点击home图标
   $(document).on('click','.home',function(){
 	   $(".markChoosen").removeClass("markChoosen").addClass("markNotChoosen");
-	   //$("#dataframe").attr("src","g1.do");
+	   createDataArea(homepageurl);
   });
 }

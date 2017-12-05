@@ -54,7 +54,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <div class="qpright" id="qpright">
 			<!--数据列表展示区-->
 			<div class="qp-right-main" id="qp-right-main">
-			 <iframe id="dataframe" src=""></iframe>
 			</div>
 		  </div>
 		   <!--系统的数据展示区 结束-->
