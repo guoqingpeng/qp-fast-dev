@@ -140,7 +140,7 @@ function  jumptourl(ele){
 		showMark();
 	}else{
 		shuffleMarks(id);
-		clickMenuAndMark(id);
+		clickMenuAndMark(id,url);
 	}
 }
 
@@ -170,7 +170,8 @@ function createDataArea(url){
     //根据属性src来找是否有这个url
     //如果有则打开,其它的隐藏，否则创建一个新的iframe，隐藏其它的iframe
     var currentIframe = $("[src='"+url+"']");
-    $('.dataArea').hide();
+    //$('.dataArea').hide();//这个地方遍历太多了,
+    $('.dataArea:visible').hide();//代码优化
     if(currentIframe.length >0){
         currentIframe.parent().show();
     }else{
@@ -277,7 +278,7 @@ function moveRight(){
 点击菜单时切换选中的标签
 跳转到选中的页签上
 */
-function clickMenuAndMark(id){
+function clickMenuAndMark(id,url){
     if(currentOpenUrl != id){
 		$(".markit").removeClass("markChoosen").addClass("markNotChoosen");
 		$(".markit[openid='"+id+"']").addClass("markChoosen").removeClass("markNotChoosen");
@@ -285,6 +286,7 @@ function clickMenuAndMark(id){
 		var url = $(".markit[openid='"+id+"']").attr("url");
 		currentOpenUrl = id;
 	}
+	createDataArea(url);
 }
 
 /*
