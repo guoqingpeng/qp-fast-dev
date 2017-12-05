@@ -87,6 +87,20 @@ public class MenuController extends BaseController{
 	/**
 	 * 
 	 *版本：
+	 *功能描述：跳转到菜单添加页面
+	 *参数说明：@return
+	 *返回值说明：
+	 *更新日期：1:54:36 PM
+	 *作者: GUO-QP
+	 */
+	@RequestMapping(value="toMenuAddPage")
+	public String toMenuAddPage(){
+		return "menu/menuAddPage";
+	}
+	
+	/**
+	 * 
+	 *版本：
 	 *功能描述：添加一个栏目
 	 *参数说明：@param name
 	 *参数说明：@param pid
@@ -98,11 +112,11 @@ public class MenuController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="menuAdd")
 	public String menuAdd(String name,int pid){
+		System.out.println(name);
 		menuDao.insertMenu(name, pid);
 		HashMap<String , String> aMap= new HashMap<String, String>();
 		aMap.put("msg", "ok");
 		String string = JSON.toJSONString(aMap);
-		System.out.println(string);
 		return  string;
 	}
 	

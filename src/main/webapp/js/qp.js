@@ -468,6 +468,6 @@ function initBindSystemEvents(){
   //点击home图标
   $(document).on('click','.home',function(){
 	   $(".markChoosen").removeClass("markChoosen").addClass("markNotChoosen");
-	   $("#dataframe").attr("src","g1.do");
+	   //$("#dataframe").attr("src","g1.do");
   });
 }

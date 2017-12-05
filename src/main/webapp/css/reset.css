@@ -121,7 +121,7 @@ sup,sub {
 }
 
 /*
-全局定义滚动条的格式
+-------------------------------------------------webkit浏览器全局定义滚动条的格式
 ::-webkit-scrollbar 滚动条整体部分
 ::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
 ::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）
@@ -149,3 +149,31 @@ sup,sub {
 	background-color:rgba(0, 0, 0, 0.32);
 }
 /**滚动条结束-----------------------------*/
+
+-------------------------------------------------火狐浏览器全局定义滚动条的格式
+@-moz-document url-prefix(http://),url-prefix(https://) {   
+    /* 滚动条颜色 */  
+    scrollbar {   
+       -moz-appearance: none !important;   
+       background: rgb(0,255,0) !important;   
+    }   
+    /* 滚动条按钮颜色 */  
+    thumb,scrollbarbutton {   
+       -moz-appearance: none !important;   
+       background-color: rgb(0,0,255) !important;   
+    }   
+    /* 鼠标悬停时按钮颜色 */  
+      
+    thumb:hover,scrollbarbutton:hover {   
+       -moz-appearance: none !important;   
+       background-color: rgb(255,0,0) !important;   
+    }   
+    /* 隐藏上下箭头 */  
+    scrollbarbutton {   
+       display: none !important;   
+    }   
+    /* 纵向滚动条宽度 */  
+    scrollbar[orient="vertical"] {   
+      min-width: 15px !important;   
+    }   
+}

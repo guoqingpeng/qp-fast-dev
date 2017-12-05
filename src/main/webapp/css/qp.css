@@ -79,6 +79,7 @@
 	height:50%;
 	margin-left:10px;
 	position:relative;
+	border-radius:12px;
     float:left;
 }
 
@@ -191,6 +192,7 @@ levelMoreClosed{
 	color:#000000;
 	text-decoration:none;
 	cursor:pointer;
+	border-radius:5px;
 }
 
 .mainMenu .subMenu  .aTop .menuNum{
@@ -238,6 +240,7 @@ levelMoreClosed{
     background:#FFFFFF;;
 	text-decoration:none;
 	cursor:pointer;
+	border-radius:5px;
 	color:red;
 }
 

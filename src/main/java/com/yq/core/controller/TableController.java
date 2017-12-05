@@ -73,6 +73,20 @@ public class TableController {
 	/**
 	 * 
 	 *版本：
+	 *功能描述：跳转到对象添加页面
+	 *参数说明：@return
+	 *返回值说明：
+	 *更新日期：1:53:07 PM
+	 *作者: GUO-QP
+	 */
+	@RequestMapping(value="toTabelAddPage")
+	public String toTableAdddPage(){
+		return "table/tableAddPage";
+	}
+	
+	/**
+	 * 
+	 *版本：
 	 *功能描述：添加一个对象
 	 *参数说明：@param table
 	 *参数说明：@return
