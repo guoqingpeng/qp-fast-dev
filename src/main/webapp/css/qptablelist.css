@@ -1,19 +1,13 @@
 /* CSS Document */
-.treeArea{
-  width:15%;
-  height:100%;
-  float:left;
-}
-
 .listArea{
    width:100%;
    height:100%;
-   float:left;
 }
 
 .qp-search{
    width:100%;
    height:auto;
+   overflow:hidden;/*子元素有浮动时，加这个父元素就有高度了*/
 }
 
 .search-left{
@@ -21,6 +15,7 @@
    width:10%;
    height:50px;
 }
+
 .search-left:hover{
    cursor:pointer;
 }
@@ -48,8 +43,9 @@
 
 .qp-data{
    width:100%;
-   height:85%;
+   height:80%;
    overflow:auto;
+   clear:both;
 }
 
 #smsc{
@@ -60,8 +56,9 @@
 
 .qp-page-state{
    width:100%;
-   height:5%;
+   height:30px;
    background:#BBBBBB;
+   clear:both;
 }
 
 #qpPage{

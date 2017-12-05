@@ -74,17 +74,18 @@
 				</table>
 			</div>
 			
-			<!--part3 状态区以及分页区 -->
+			<!--part3 状态区以及分页区
 			<div class="qp-page-state" id="qp-page-state">
-				<!--页面中的弹窗页面-->
-				<!-- Large modal -->
-				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-				  <div class="modal-dialog modal-lg" role="document">
-				    <div class="modal-content">
-				         <iframe id ="qpPage" src="toMenuAddPage.do"></iframe>
-				    </div>
-				  </div>
+			</div>
+			 -->
+			<!--页面中的弹窗页面-->
+			<!-- Large modal -->
+			<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+			  <div class="modal-dialog modal-lg" role="document">
+			    <div class="modal-content">
+			         <iframe id ="qpPage" src="toMenuAddPage.do"></iframe>
 			    </div>
-			</div>    			
+			  </div>
+		    </div>						
 	</body>
 </html>

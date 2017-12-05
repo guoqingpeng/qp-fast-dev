@@ -169,7 +169,7 @@ iframe切换
 function createDataArea(url){
     //根据属性src来找是否有这个url
     //如果有则打开,其它的隐藏，否则创建一个新的iframe，隐藏其它的iframe
-    var currentIframe = $("[src='"+url+"']");
+    var currentIframe = $("iframe[src='"+url+"']");
     //$('.dataArea').hide();//这个地方遍历太多了,
     $('.dataArea:visible').hide();//代码优化
     if(currentIframe.length >0){

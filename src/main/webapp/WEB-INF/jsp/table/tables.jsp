@@ -66,7 +66,6 @@
 			
 			<!--part3 状态区以及分页区 -->
 			<div class="qp-page-state" id="qp-page-state">
-				
 			</div>
 			<!--页面中的弹窗页面-->
 			<!-- Large modal -->
