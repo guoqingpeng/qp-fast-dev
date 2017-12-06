@@ -70,7 +70,7 @@
 			
 			<!--part2 数据区域 -->
 			<div class="qp-data" id="qp-data">
-				<table id="smsc">
+				<table id="smsc" data-height="600">
 				</table>
 			</div>
 			

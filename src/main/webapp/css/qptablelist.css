@@ -44,7 +44,7 @@
 .qp-data{
    width:100%;
    height:80%;
-   overflow:auto;
+   overflow:none;
    clear:both;
 }
 
