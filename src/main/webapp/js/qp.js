@@ -17,8 +17,12 @@ $(document).ready(function(){
 
   //加载菜单
   initMenu();
+  
   //初始化所有事件
   initBindSystemEvents();
+  
+  //加载主页内容
+  createDataArea(homepageurl);
   
 });
 
@@ -349,8 +353,10 @@ function destoryMark(ele){
    //关闭标签前获取前面的一个元素
    openurlWhenCloseMark(ele);
    var id = $(ele).parent().attr("openid");
+   var url = $(ele).parent().attr("url");
    $(ele).parent().remove();
-   //删除iframe，暂时部删除这样可以提高效率
+   //删除iframe
+   $("iframe[src='"+url+"']").parent().remove();
    removeUrlfromOpenedurls(id);
    var leftflafg = $(".ishow").first().prev();
    var rightflafg = $(".ishow").last().next(); 

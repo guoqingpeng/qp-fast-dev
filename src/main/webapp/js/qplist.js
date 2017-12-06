@@ -152,7 +152,8 @@ function createTable(data){
 			        title: '层级'
 			    }	    	    	    	    
 	    ],
-	    data:data
+	    data:data,
+	    height:500
 	});	
 }
 
