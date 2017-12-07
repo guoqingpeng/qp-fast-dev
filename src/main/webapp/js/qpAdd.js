@@ -2,7 +2,6 @@
 $(document).ready(function(){
    var options={
          success:function(data){
-             var ms = $.parseJSON(data);
              parentPageRefresh();
          },
          error:function(data){

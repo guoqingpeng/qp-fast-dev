@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${JAVASCRIPT_URL}/qpAdd.js"></script>
   </head>
   <body>
-	<form id="tableAddForm" class="form-inline" action="tableAdd.do" method="post">
+	<form id="menuAddForm" class="form-inline" action="tableAdd.do" method="post">
 	       	  	
 	  <div class="form-group">
 	    <label for="exampleInputName2">对象中文名</label>
