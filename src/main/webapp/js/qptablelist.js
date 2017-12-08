@@ -94,7 +94,8 @@ function createTable(data){
             var url = "fields.do?tableId="+row.dataId;
             return '<iframe class="qpFieldArea" src="'+url+'"></iframe>';
         },
-	    data:data
+	    data:data,
+	    height:400
 	});	
 }
 
