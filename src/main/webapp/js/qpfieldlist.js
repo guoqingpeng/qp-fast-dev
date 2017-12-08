@@ -82,7 +82,7 @@ function createTable(data){
 			    {  
 			        field: 'type',
 			        title: '字段类型',
-			        'class': 'canEdit'
+			        'class': 'canSelect'
 			    },
 			    {  
 			        field: 'tableName',
@@ -99,7 +99,8 @@ function createTable(data){
 			        }			        
 			    }			        		    	    	    	    
 	    ],
-	    data:data
+	    data:data,
+	    height:500
 	});	
 }
 
@@ -108,12 +109,47 @@ function createTable(data){
 将表格中的数据转化成可编辑状态的
 */
 function setEditAble(){
+
 	$("td.canEdit").each(function(){
 	    var oldHtml = $(this).html();
 	    var editAbleHtml = $("<input class='form-control' type='text'/>");
 	    editAbleHtml.val(oldHtml);
 	    $(this).html(editAbleHtml);
 	});
+	
+   var selectBox = $("<select  style ='float:left;width:50%' class='form-control'/></select>");
+	   selectBox.append("<option value=1>字符</option>")
+				.append("<option value=2>富文本</option>")
+				.append("<option value=3>EMAIL</option>")
+				.append("<option value=4>URL</option>")
+				.append("<option value=5>手机</option>")
+				.append("<option value=6>座机</option>")
+				.append("<option value=7>规则</option>")
+				.append("<option value=8>地址</option>")
+				.append("<option value=9>拼音</option>")
+				.append("<option value=10>数据</option>")
+				.append("<option value=11>金额</option>")
+				.append("<option value=12>日期</option>")
+				.append("<option value=13>时间</option>")
+				.append("<option value=14>单选</option>")
+				.append("<option value=15>单文档</option>")
+				.append("<option value=16>内部对象</option>")
+				.append("<option value=17>星期</option>")
+				.append("<option value=18>用户名</option>")
+				.append("<option value=19>密码</option>")
+				.append("<option value=20>排序</option>")
+				.append("<option value=21>微信号</option>")
+				.append("<option value=22>微信昵称</option>")
+				.append("<option value=23>微信公众标识号</option>")
+				.append("<option value=24>经度</option>")
+				.append("<option value=25>维度</option>")
+				.append("<option value=26>颜色</option>")
+				.append("<option value=27>坐席帐号</option>")
+				.append("<option value=28>坐席密码</option>");
+	$("td.canSelect").html(selectBox).append("<div style='float:left;width:50%' >"+
+	                                              "<input type='text' name = 'rule' class='form-control' placeholder='*长度'>"+
+	                                         "</div>");
+	
 }
 
 /**
@@ -254,7 +290,6 @@ function getNewAddFields(){
 	   field.type = rowObj.type;
 	   fieldAddList.push(field);
      }
-     console.log(rowObj.dataId);
   }
   return fieldAddList;
 }
@@ -271,7 +306,7 @@ function saveField(){
 		  contentType:'application/json',
 		  data:fields,
 		  success:function(data){
-		       alert("成功");
+		       currentPageRefresh();
 		  },
 		  error:ajaxErrorDelear
 	});	
@@ -284,7 +319,7 @@ function saveField(){
 */
 function monitorForValueChange(){
 
-	  $(document).on('change','input',function(event){
+	  $(document).on('change','input,select',function(event){
 	  
 	     var index = $(this).parent().parent().attr("data-index");
 	     
@@ -301,10 +336,46 @@ function monitorForValueChange(){
 	     row.enName = $(input2).val();
 	     
 	     var td3 = $(fields[3]);
-	     var input3 = td3.children()[0];                   
-	     row.type = $(input3).val();
+	     var input3 = td3.children()[0];
+	     var type = $(input3).val()        
+	     row.type = type;
+	     
+	     //如果变化的元素是select时，修改页面结构
+	     var eventItem = $(this)[0].tagName;
+	     if(eventItem == "SELECT"){
+	          var div = $(this).next();
+	          if(type ==7){
+	              var input = "<input type='text' name = 'rule' class='form-control' placeholder='规则'>"
+	              $(div).html(input);
+	          }else if(type ==14){
+				   var selectBox = $("<select  class='form-control'/></select>");
+					   selectBox.append("<option value=1>考试类型</option>")
+								.append("<option value=2>年级</option>")
+								.append("<option value=3>成绩分类</option>")
+								.append("<option value=4>实践类型</option>")
+								.append("<option value=5>任务状态</option>")
+								.append("<option value=6>是否</option>")
+					 $(div).html(selectBox);			
+	          }else if(type ==16){
+	               $(div).html("选择对象");              
+	          }else if(type ==12){
+	               $(div).html("选择日期格式");       
+	          }else if(type ==13){
+	               $(div).html("选择时间格式");
+	          }else{
+	               $(div).html("<input type='text' name = 'rule' class='form-control' placeholder='长度'>");
+	          }
+	     }
 	     
 	     $("#smsc").bootstrapTable('getOptions').data.splice(index, 1, row);
   });
   
+}
+
+/**
+功能说明------
+刷新当前页面
+*/
+function currentPageRefresh(){
+       window.location.reload();
 }

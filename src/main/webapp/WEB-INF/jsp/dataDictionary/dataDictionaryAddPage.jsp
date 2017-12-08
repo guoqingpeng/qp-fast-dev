@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>qp-dev-center</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
-	<meta charset="utf-8"/>
+	<meta charset="UTF-8"/>
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
@@ -25,35 +25,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${JAVASCRIPT_URL}/qpAdd.js"></script>
   </head>
   <body>
-	<form id="menuAddForm" class="form-inline" action="tableAdd.do" method="post">
-	       	  	
-	  <div class="form-group">
-	    <label for="exampleInputName2">对象中文名</label>
-	    <input type="text" name = "cnName" class="form-control" placeholder="对象中文名">
-	  </div>
-	  
-	  <div class="form-group">
-	    <label for="exampleInputEmail2">对象英文名</label>
-	    <input type="text" name = "enName" class="form-control" placeholder="对象英文名">
-	  </div>
-	  
-	  <div class="form-group">
-	    <label for="exampleInputEmail2">对象类型</label>
-	    <input type="text" name = "type" class="form-control" placeholder="对象类型">
-	  </div>
+	<form id="menuAddForm" class="form-inline" action="dataDictionaryAdd.do" method="post">
 
 	  <div class="form-group">
-	    <label for="exampleInputEmail2">是否支持父子级</label>
-	    <input type="text" name = "ifSupportParent" class="form-control" placeholder="是否支持父子级">
-	  </div>	  
-	  
+	    <label for="exampleInputEmail2">父级id</label>
+	    <input type="text" name = "pid" class="form-control" placeholder="pid">
+	  </div>
 	  <div class="form-group">
-	    <label for="exampleInputEmail2">描述</label>
-	    <input type="text" name = "description" class="form-control" placeholder="描述">
-	  </div>	  
-	  
+	    <label for="exampleInputName2">名称</label>
+	    <input type="text" name = "name" class="form-control" placeholder="name">
+	  </div>
 	  <button type="submit" class="btn btn-default">保存</button>
 	</form>
-	
   </body>
 </html>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.yq.core.common.TreeObj;
+import com.yq.core.dao.DataDictionaryDao;
 import com.yq.core.dao.MenuDao;
 
 
@@ -25,6 +26,9 @@ public class TreeController extends BaseController{
 	
 	@Autowired
 	private MenuDao menuDao;
+	
+	@Autowired
+	private DataDictionaryDao dataDictionaryDao;
 	
 	/**
 	 * 
@@ -61,12 +65,43 @@ public class TreeController extends BaseController{
 		try {
 			//更新目标元素下的位置 >=position +1
 			menuDao.updateMenuPositions(pid, position);
+			
 			//设置本身的父id和位置
 			menuDao.updateMenu(id, pid,position);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error";
 		}
 		return "ok";
 	}
+	
+	/**
+	 * 
+	 *版本：
+	 *功能描述：拖动栏目时修改pid
+	 *参数说明：@param id
+	 *参数说明：@param pid
+	 *返回值说明：
+	 *更新日期：4:30:40 PM
+	 *作者: GUO-QP
+	 */
+	@ResponseBody
+	@RequestMapping(value="changDataDictionaryParent")
+	public String changDataDictionaryParent(int id,int pid,int position){
+		try {
+			//更新目标元素下的位置 >=position +1
+			dataDictionaryDao.updateDataDictionaryPositions(id, position);
+			
+			//设置本身的父id和位置
+			dataDictionaryDao.updateDataDictionary(id, pid, position);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+		return "ok";
+	}	
+	
+	
 }
