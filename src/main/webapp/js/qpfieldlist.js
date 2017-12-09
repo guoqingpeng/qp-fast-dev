@@ -8,7 +8,7 @@ var originFields=[];
 var tableId;
 var addindex = -1;
 $(document).ready(function(){
-
+  
   tableId = $("#smsc").attr("tableId");
   
   //页面自适应
@@ -339,7 +339,6 @@ function monitorForValueChange(){
 	     var input3 = td3.children()[0];
 	     var type = $(input3).val()        
 	     row.type = type;
-	     
 	     //如果变化的元素是select时，修改页面结构
 	     var eventItem = $(this)[0].tagName;
 	     if(eventItem == "SELECT"){
@@ -349,19 +348,29 @@ function monitorForValueChange(){
 	              $(div).html(input);
 	          }else if(type ==14){
 				   var selectBox = $("<select  class='form-control'/></select>");
-					   selectBox.append("<option value=1>考试类型</option>")
-								.append("<option value=2>年级</option>")
-								.append("<option value=3>成绩分类</option>")
-								.append("<option value=4>实践类型</option>")
-								.append("<option value=5>任务状态</option>")
-								.append("<option value=6>是否</option>")
-					 $(div).html(selectBox);			
+				   var optionsHtml = $("#cachedDictionary").html();
+				   var options  = $.parseJSON(optionsHtml);
+				   for(var opt in options){
+				       var option = $("<option></option");
+				       option.val(options[opt].id);
+				       option.text(options[opt].name);
+				       selectBox.append(option);
+				   }
+				   $(div).html(selectBox);
 	          }else if(type ==16){
 	               $(div).html("选择对象");              
 	          }else if(type ==12){
-	               $(div).html("选择日期格式");       
+	               $(div).html("选择日期格式");   
+	               var selectBox = $("<select  class='form-control'/></select>");
+	               selectBox.append("<option value=1>YYYY-MM-DD HH:MM:SS</option>")
+	                        .append("<option value=2>YYYY-MM-DD</option>")
+	               $(div).append(selectBox);  	                   
 	          }else if(type ==13){
 	               $(div).html("选择时间格式");
+	               var selectBox = $("<select  class='form-control'/></select>");
+	               selectBox.append("<option value=1>HH:MM:SS</option>")
+	                        .append("<option value=3>HH:MM</option>");
+	               $(div).append(selectBox);        
 	          }else{
 	               $(div).html("<input type='text' name = 'rule' class='form-control' placeholder='长度'>");
 	          }

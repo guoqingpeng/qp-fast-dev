@@ -10,7 +10,6 @@ package com.yq.core.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.yq.core.common.TreeObj;

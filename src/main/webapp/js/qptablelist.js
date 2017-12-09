@@ -60,7 +60,6 @@ function createTable(data){
 			        field: 'operation',
 			        title: '操作',
 			        formatter:function(value, row, index){
-			                  console.log(row.dataId+"----"+row.enName)
 			                  var id = row.dataId;
 			                  var tableName = row.enName;
 			                  return '<a class="modify" id='+id+' tableName='+ tableName+' onClick="qpUpdate(this)">修改</a> ' + 

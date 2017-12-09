@@ -39,8 +39,11 @@
 			<table id="smsc" tableId="${tableId}">
 			</table>
 		</div>
+		
 		<div>
+		    
 			<input id="saveField" class="btn btn-default" type="submit" value="保存">
 		</div>
+		<div id="cachedDictionary">${cachedDictionary}</div>
 	</body>
 </html>

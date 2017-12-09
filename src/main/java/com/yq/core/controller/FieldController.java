@@ -19,11 +19,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.yq.core.common.TreeObj;
+import com.yq.core.dao.DataDictionaryDao;
 import com.yq.core.dao.FieldDao;
 import com.yq.core.entity.Field;
 import com.yq.core.mongo.FieldMongoDao;
 import com.yq.core.mongo.TableMongoDao;
 import com.yq.core.util.MongoTableUtil;
+
+
 
 @Controller
 public class FieldController {
@@ -37,6 +41,8 @@ public class FieldController {
 	@Autowired
 	FieldDao fieldDao;
 	
+	@Autowired
+	private DataDictionaryDao dataDictionaryDao;
 	/**
 	 * 
 	 *版本：
@@ -50,6 +56,8 @@ public class FieldController {
 	@RequestMapping(value="fields")
 	public ModelAndView toFieldListPage(int tableId){
 		ModelAndView modelAndView = new ModelAndView();
+		List<TreeObj> dics = dataDictionaryDao.getTopDataDictionarys();
+		modelAndView.addObject("cachedDictionary", JSONArray.toJSONString(dics));
 		modelAndView.addObject("tableId", tableId);
 		modelAndView.setViewName("field/fields");
 		return modelAndView;
