@@ -10,6 +10,7 @@ package com.yq.core.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.yq.core.common.TreeObj;
@@ -75,7 +76,10 @@ public interface MenuDao {
 	 *更新日期：3:14:00 PM
 	 *作者: GUO-QP
 	 */
-	public int updateMenu(int id ,int pid,int position);
+	public int updateMenu(
+			@Param("id")int id ,
+			@Param("pid")int pid,
+			@Param("position")int position);
 	
 	/**
 	 * 
@@ -88,7 +92,9 @@ public interface MenuDao {
 	 *更新日期：3:14:41 PM
 	 *作者: GUO-QP
 	 */
-	public int updateMenuPositions(int id,int position);
+	public int updateMenuPositions(
+			@Param("id")int id,
+			@Param("position")int position);
 	
 	/**
 	 * 
@@ -100,7 +106,9 @@ public interface MenuDao {
 	 *更新日期：4:05:02 PM
 	 *作者: GUO-QP
 	 */
-	public void insertMenu(String name,int pid);
+	public void insertMenu(
+			@Param("name")String name,
+			@Param("pid")int pid);
 	
 	/**
 	 * 
@@ -123,6 +131,6 @@ public interface MenuDao {
 	 *更新日期：4:07:00 PM
 	 *作者: GUO-QP
 	 */
-	public int getChildrenNumByPid(int id);
+	public int getChildrenNumByPid(int pid);
 	
 }

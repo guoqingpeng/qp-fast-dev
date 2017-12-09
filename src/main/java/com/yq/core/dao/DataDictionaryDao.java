@@ -10,6 +10,7 @@ package com.yq.core.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.yq.core.common.TreeObj;
@@ -75,7 +76,10 @@ public interface DataDictionaryDao {
 	 *更新日期：3:14:00 PM
 	 *作者: GUO-QP
 	 */
-	public int updateDataDictionary(int id ,int pid,int position);
+	public int updateDataDictionary(
+			@Param("id")int id ,
+			@Param("pid")int pid,
+			@Param("position")int position);
 	
 	/**
 	 * 
@@ -88,7 +92,9 @@ public interface DataDictionaryDao {
 	 *更新日期：3:14:41 PM
 	 *作者: GUO-QP
 	 */
-	public int updateDataDictionaryPositions(int id,int position);
+	public int updateDataDictionaryPositions(
+			@Param("id")int id,
+			@Param("position")int position);
 	
 	/**
 	 * 
@@ -100,7 +106,10 @@ public interface DataDictionaryDao {
 	 *更新日期：4:05:02 PM
 	 *作者: GUO-QP
 	 */
-	public int insertDataDictionary(String name,int pid);
+	public int insertDataDictionary(
+			@Param("name")String name,
+			@Param("pid")int pid,
+			@Param("id") int id);
 	
 	/**
 	 * 

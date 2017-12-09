@@ -25,8 +25,8 @@
 	
 	<!-- 修改指定元素的父id -->
 	<update id="updateDataDictionary">
-	  update dataDictionary set pid = #{1},position = #{2}
-	  where id = #{0}
+	  update dataDictionary set pid = #{pid},position = #{position}
+	  where id = #{id}
 	</update>
 	
 	<!-- 修改指定元素的父id的子元素的位置 -->
@@ -36,18 +36,18 @@
 	</update>
 	
     <!-- 插入元素 -->
-	<insert id="insertDataDictionary">
-	   insert into dataDictionary(name,pid) values(#{0},#{1})
+	<insert id="insertDataDictionary" useGeneratedKeys="true" keyProperty="id">
+	   insert into dataDictionary(name,pid) values(#{name},#{pid})
 	</insert>
 	
     <!-- 删除元素 -->
 	<insert id="deleteDataDictionary">
-	   delete from dataDictionary where id = #{0}
+	   delete from dataDictionary where id = #{id}
 	</insert>
 	
 	<!-- 获取父元素下子元素的个数 -->
 	<select id="getChildrenNumByPid"  resultType="int">
-		select count(*) from  dataDictionary where pid = #{0}
+		select count(*) from  dataDictionary where pid = #{id}
 	</select>	
 		
 </mapper>

@@ -108,8 +108,10 @@ public class DataDictionaryController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="dataDictionaryAdd")
 	public String dataDictionaryAdd(String name,int pid){
-		int i = dataDictionaryDao.insertDataDictionary(name, pid);
-		System.out.println("-----------------"+i);
+		int id = 0;
+		int i = dataDictionaryDao.insertDataDictionary(name, pid,id);
+		System.out.println("new-----------------"+id);
+		System.out.println("newi-----------------"+i);
 		HashMap<String , String> aMap= new HashMap<String, String>();
 		aMap.put("msg", "ok");
 		String string = JSON.toJSONString(aMap);

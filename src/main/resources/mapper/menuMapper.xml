@@ -25,29 +25,29 @@
 	
 	<!-- 修改指定菜单的父id -->
 	<update id="updateMenu">
-	  update menu set pid = #{1},position = #{2}
-	  where id = #{0}
+	  update menu set pid = #{pid},position = #{position}
+	  where id = #{id}
 	</update>
 	
 	<!-- 修改指定菜单的父id的子元素的位置 -->
 	<update id="updateMenuPositions">
 	  update menu set position = position +1
-	  where pid = #{0} and position >=#{1}
+	  where pid = #{id} and position >=#{position}
 	</update>
 	
     <!-- 插入菜单 -->
 	<insert id="insertMenu">
-	   insert into menu(name,pid) values(#{0},#{1})
+	   insert into menu(name,pid) values(#{name},#{pid})
 	</insert>
 	
     <!-- 删除菜单 -->
 	<insert id="deleteMenu">
-	   delete from menu where id = #{0}
+	   delete from menu where id = #{id}
 	</insert>
 	
 	<!-- 获取父元素下子菜单的个数 -->
 	<select id="getChildrenNumByPid"  resultType="int">
-		select count(*) from  menu where pid = #{0}
+		select count(*) from  menu where pid = #{pid}
 	</select>	
 		
 </mapper>
