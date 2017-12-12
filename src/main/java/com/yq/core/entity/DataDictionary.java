@@ -24,5 +24,13 @@ public class DataDictionary extends TreeObj{
 	public void setKey(int key) {
 		this.key = key;
 	}	
-
+	
+	public DataDictionary(){
+		
+	}
+	
+	public DataDictionary(int pid ,String name){
+		super.setPid(pid);
+		super.setName(name);
+	}
 }

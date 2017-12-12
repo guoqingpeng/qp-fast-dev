@@ -14,6 +14,7 @@ import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.yq.core.common.TreeObj;
+import com.yq.core.entity.DataDictionary;
 
 
 @MapperScan
@@ -106,10 +107,7 @@ public interface DataDictionaryDao {
 	 *更新日期：4:05:02 PM
 	 *作者: GUO-QP
 	 */
-	public int insertDataDictionary(
-			@Param("name")String name,
-			@Param("pid")int pid,
-			@Param("id") int id);
+	public int insertDataDictionary(DataDictionary dataDictionary);
 	
 	/**
 	 * 

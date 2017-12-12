@@ -16,6 +16,8 @@ public class Field {
 	private int belongTable;
 	private String tableName;
 	private int type;
+	private String rule;
+	
 	public int getDataId() {
 		return dataId;
 	}
@@ -57,6 +59,13 @@ public class Field {
 	}
 	
 	
+	
+	public String getRule() {
+		return rule;
+	}
+	public void setRule(String rule) {
+		this.rule = rule;
+	}
 	//这里必须写默认的构造函数，否则fastjson是无法解析的，mongodbtemplate也是无法解析的
 	public Field(){
 		

@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.yq.core.common.TreeObj;
 import com.yq.core.dao.DataDictionaryDao;
+import com.yq.core.entity.DataDictionary;
 
 @Controller
 public class DataDictionaryController extends BaseController{
@@ -108,10 +109,8 @@ public class DataDictionaryController extends BaseController{
 	@ResponseBody
 	@RequestMapping(value="dataDictionaryAdd")
 	public String dataDictionaryAdd(String name,int pid){
-		int id = 0;
-		int i = dataDictionaryDao.insertDataDictionary(name, pid,id);
-		System.out.println("new-----------------"+id);
-		System.out.println("newi-----------------"+i);
+		DataDictionary dataDictionary = new DataDictionary(pid,name);
+		dataDictionaryDao.insertDataDictionary(dataDictionary);
 		HashMap<String , String> aMap= new HashMap<String, String>();
 		aMap.put("msg", "ok");
 		String string = JSON.toJSONString(aMap);

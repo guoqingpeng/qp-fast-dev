@@ -22,7 +22,7 @@ $(document).ready(function(){
   });
   
   monitorForValueChange();
-  
+   
 });
 
 /**
@@ -82,21 +82,33 @@ function createTable(data){
 			    {  
 			        field: 'type',
 			        title: '字段类型',
-			        'class': 'canSelect'
+			        'class': 'canSelect',
+			        formatter:function(value, row, index){
+			                  var selectBox = systemFieldType();
+			                  selectBox.find("option[value="+value+"]").attr("selected","selected");
+			                  //根据值选中
+			                  return $(selectBox)[0].outerHTML + initRule(value,row.rule);
+			        }
 			    },
 			    {  
 			        field: 'tableName',
 			        title: '表名',
-			    },			    
+			    },
+			   {  
+			        field: 'rule',
+			        title: '字段类型对应的规则的',
+			        visible:true
+			    },
+			    
 			    {  
 			        field: 'operation',
 			        title: '[<a id="qpAddField" onClick="qpAddField()">添加</a>]',
 			        formatter:function(value, row, index){
 			                  var id = row.dataId;
 			                  var enName = row.enName;
-			                  return '<a class="clear" id='+id+' onClick="qpClearData(this)">清空数据</a> ' + 
+			                  return '<a class="clear" id='+id+' onClick="qpClearData(this)">清空</a> ' + 
 			                         '<a class="delete" id='+id+' enName="'+enName+'"  onClick="qpDeleteField(this)">删除</a>';
-			        }			        
+			        }      
 			    }			        		    	    	    	    
 	    ],
 	    data:data,
@@ -112,13 +124,22 @@ function setEditAble(){
 
 	$("td.canEdit").each(function(){
 	    var oldHtml = $(this).html();
-	    var editAbleHtml = $("<input class='form-control' type='text'/>");
+	    var editAbleHtml = $("<input class='form-control qpAttr' type='text'/>");
 	    editAbleHtml.val(oldHtml);
 	    $(this).html(editAbleHtml);
 	});
 	
-   var selectBox = $("<select  style ='float:left;width:50%' class='form-control'/></select>");
-	   selectBox.append("<option value=1>字符</option>")
+}
+
+
+/**
+功能说明------
+返回系统所有的字段类型
+*/
+function systemFieldType(){
+   var selectBox = $("<select  style ='float:left;width:60%' class='form-control qpAttr'></select>");
+	   selectBox.append("<option value=-1>请选择</option>")
+	            .append("<option value=1>字符</option>")
 				.append("<option value=2>富文本</option>")
 				.append("<option value=3>EMAIL</option>")
 				.append("<option value=4>URL</option>")
@@ -146,11 +167,9 @@ function setEditAble(){
 				.append("<option value=26>颜色</option>")
 				.append("<option value=27>坐席帐号</option>")
 				.append("<option value=28>坐席密码</option>");
-	$("td.canSelect").html(selectBox).append("<div style='float:left;width:50%' >"+
-	                                              "<input type='text' name = 'rule' class='form-control' placeholder='*长度'>"+
-	                                         "</div>");
-	
+     return selectBox;
 }
+
 
 /**
 功能说明------
@@ -217,10 +236,12 @@ function deleteRowFromPage(id){
 *根据数据id删除表格中的一行数据
 */
 function addRowToPage(row){
+
     $('#smsc').bootstrapTable('insertRow',{
               index:0,
               row:row
     });
+    
     setEditAble();
 }
 
@@ -251,7 +272,8 @@ function qpAddField(){
    field.dataId = (addindex--);
    field.cnName="";
    field.enName="";
-   field.type=0;
+   field.type=-1;
+   field.rule="";
    addRowToPage(field);
    
 }
@@ -288,6 +310,7 @@ function getNewAddFields(){
 	   field.cnName = rowObj.cnName;
 	   field.enName = rowObj.enName;
 	   field.type = rowObj.type;
+	   field.rule = rowObj.rule;
 	   fieldAddList.push(field);
      }
   }
@@ -319,12 +342,19 @@ function saveField(){
 */
 function monitorForValueChange(){
 
-	  $(document).on('change','input,select',function(event){
-	  
-	     var index = $(this).parent().parent().attr("data-index");
+	  $(document).on('change','.qpAttr,.qpRule',function(event){
 	     
-	     var row = new Object();
-	     var fields = $(this).parent().parent().children();
+         var index;
+		 var row = new Object();;
+		 var fields;
+	     if($(this).hasClass("qpAttr")){
+		     index = $(this).parent().parent().attr("data-index");
+		     fields = $(this).parent().parent().children();
+	     }else{
+	         index = $(this).parent().parent().parent().attr("data-index");
+		     fields = $(this).parent().parent().parent().children();
+	     }
+	     
 	     row.dataId = parseInt($(fields[0]).html());//特别注意这个地方的数据的类型
 	     
 	     var td1 = $(fields[1]);
@@ -337,48 +367,70 @@ function monitorForValueChange(){
 	     
 	     var td3 = $(fields[3]);
 	     var input3 = td3.children()[0];
-	     var type = $(input3).val()        
+	     var type = $(input3).val();
 	     row.type = type;
-	     //如果变化的元素是select时，修改页面结构
-	     var eventItem = $(this)[0].tagName;
-	     if(eventItem == "SELECT"){
-	          var div = $(this).next();
-	          if(type ==7){
-	              var input = "<input type='text' name = 'rule' class='form-control' placeholder='规则'>"
-	              $(div).html(input);
-	          }else if(type ==14){
-				   var selectBox = $("<select  class='form-control'/></select>");
-				   var optionsHtml = $("#cachedDictionary").html();
-				   var options  = $.parseJSON(optionsHtml);
-				   for(var opt in options){
-				       var option = $("<option></option");
-				       option.val(options[opt].id);
-				       option.text(options[opt].name);
-				       selectBox.append(option);
-				   }
-				   $(div).html(selectBox);
-	          }else if(type ==16){
-	               $(div).html("选择对象");              
-	          }else if(type ==12){
-	               $(div).html("选择日期格式");   
-	               var selectBox = $("<select  class='form-control'/></select>");
-	               selectBox.append("<option value=1>YYYY-MM-DD HH:MM:SS</option>")
-	                        .append("<option value=2>YYYY-MM-DD</option>")
-	               $(div).append(selectBox);  	                   
-	          }else if(type ==13){
-	               $(div).html("选择时间格式");
-	               var selectBox = $("<select  class='form-control'/></select>");
-	               selectBox.append("<option value=1>HH:MM:SS</option>")
-	                        .append("<option value=3>HH:MM</option>");
-	               $(div).append(selectBox);        
-	          }else{
-	               $(div).html("<input type='text' name = 'rule' class='form-control' placeholder='长度'>");
-	          }
-	     }
 	     
+	     var input4 = td3.find(".qpRule");
+	     var rule = $(input4).val();
+	     row.rule = rule;
+	     
+	     var eventItemName = $(this)[0].tagName;
+	     if(eventItemName == "SELECT" && $(this).hasClass("qpAttr")){
+	        $(this).next().remove();
+	        $(this).after(initRule(type,rule));
+	     }
+	     //将数据更新到tabledata中
 	     $("#smsc").bootstrapTable('getOptions').data.splice(index, 1, row);
   });
-  
+}
+
+/**
+功能说明------
+初始化类型的结构页面
+*/
+function initRule(type,rule){
+       rule = rule==""?1:rule;
+       var div = $("<div></div>");
+       if(type == 7){
+           $(div).html("<a>设置规则</a>")
+           var input = $("<input type='text' name = 'rule' class='form-control qpRule' placeholder='规则'/>");
+           $(input).attr("value",rule);
+           $(div).append(input);
+       }else if(type == 14){
+		   var selectBox = $("<select  class='form-control qpRule'/></select>");
+		   var optionsHtml = $("#cachedDictionary").html();
+		   var options  = $.parseJSON(optionsHtml);
+		   for(var opt in options){
+		       var option = $("<option></option");
+		       option.val(options[opt].id);
+		       option.text(options[opt].name);
+		       selectBox.append(option);
+		   }
+		   selectBox.find("option[value="+rule+"]").attr("selected","selected");
+		   $(div).html(selectBox);
+        }else if(type == 16){
+             $(div).html("选择对象");
+        }else if(type ==12){
+             $(div).html("选择日期格式");   
+             var selectBox = $("<select  class='form-control qpRule'/></select>");
+             selectBox.append("<option value=1>YYYY-MM-DD HH:MM:SS</option>")
+                      .append("<option value=2>YYYY-MM-DD</option>");
+             selectBox.find("option[value="+rule+"]").attr("selected","selected");         
+             $(div).append(selectBox);  	                   
+        }else if(type == 13){
+             $(div).html("选择时间格式");
+             var selectBox = $("<select  class='form-control qpRule'/></select>");
+             selectBox.append("<option value=1>HH:MM:SS</option>")
+                      .append("<option value=2>HH:MM</option>");
+             
+             selectBox.find("option[value="+rule+"]").attr("selected","selected");         
+             $(div).append(selectBox);        
+        }else{
+             var input = $("<input type='text' name = 'rule' class='form-control qpRule' placeholder='长度'/>");
+             $(input).attr("value",rule);
+             $(div).append(input);
+        }
+        return div[0].outerHTML;
 }
 
 /**

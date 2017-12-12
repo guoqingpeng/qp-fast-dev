@@ -74,5 +74,9 @@ public class TreeObj {
 	public void setSubTreeobjList(List<TreeObj> subTreeobjList) {
 		this.subTreeobjList = subTreeobjList;
 	}
+	
+	public TreeObj(){
+		
+	}
 
 }

@@ -62,7 +62,7 @@ function createTable(data){
 			        formatter:function(value, row, index){
 			                  var id = row.dataId;
 			                  var tableName = row.enName;
-			                  return '<a class="modify" id='+id+' tableName='+ tableName+' onClick="qpUpdate(this)">修改</a> ' + 
+			                  return '<a class="modify" id='+id+' tableName='+ tableName+' onClick="qpUpdate(this)">字段维护</a> ' + 
 			                         '<a class="delete" id='+id+' tableName='+ tableName+' onClick="qpDelete(this)">删除</a>';
 			        }
 			    },

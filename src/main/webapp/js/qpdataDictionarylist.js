@@ -88,8 +88,8 @@ function initDefaultTree(){
 		      zNodes = data;
 			  //加载树形结构数据
 			  zTreeObj = $.fn.zTree.init($("#qptree"), setting, zNodes);
-			  //节点默认全部展开
-			  zTreeObj.expandAll(true);	
+			  //节点默认全部收缩
+			  zTreeObj.expandAll(false);	
 		  },
 		  error:ajaxErrorDelear
 		});
