@@ -58,14 +58,14 @@ public class Field {
 		this.tableName = tableName;
 	}
 	
-	
-	
 	public String getRule() {
 		return rule;
 	}
+	
 	public void setRule(String rule) {
 		this.rule = rule;
 	}
+	
 	//这里必须写默认的构造函数，否则fastjson是无法解析的，mongodbtemplate也是无法解析的
 	public Field(){
 		

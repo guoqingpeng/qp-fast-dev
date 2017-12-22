@@ -45,8 +45,8 @@
 				</div>
 				
 				<div class="search-right">
-				        <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">
-				             <span id="menuAdd" title="添加" class="qp-button glyphicon glyphicon-plus"></span>
+				        <button type="button" class="btn btn-default" data-toggle="modal">
+				             <span id="menuAdd" onClick="openObjectAdd()" title="添加" class="qp-button glyphicon glyphicon-plus"></span>
 				        </button>
 				</div>
 				<div class="searchForm">

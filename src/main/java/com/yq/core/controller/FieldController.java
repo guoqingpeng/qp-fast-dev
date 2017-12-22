@@ -76,7 +76,6 @@ public class FieldController {
 	@ResponseBody
 	@RequestMapping(value="fieldData")
 	public String  getAllFieldsByTable(int tableId){
-		
 		return JSONArray.toJSONString(fieldMongoDao.findFieldsOfTable(tableId));
 	}
 	

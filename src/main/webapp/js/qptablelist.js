@@ -62,8 +62,9 @@ function createTable(data){
 			        formatter:function(value, row, index){
 			                  var id = row.dataId;
 			                  var tableName = row.enName;
-			                  return '<a class="modify" id='+id+' tableName='+ tableName+' onClick="qpUpdate(this)">字段维护</a> ' + 
-			                         '<a class="delete" id='+id+' tableName='+ tableName+' onClick="qpDelete(this)">删除</a>';
+			                  return '<a class="modify"  id='+id+' tableName='+ tableName+' onClick="qpUpdate(this)">字段维护</a> '+ 
+			                         '<a class="pageSet" id='+id+' tableName='+ tableName+' onClick="pageSet(this)">生成页面</a> '+
+			                         '<a class="delete"  id='+id+' tableName='+ tableName+' onClick="qpDelete(this)">删除</a>';
 			        }
 			    },
 			    {
@@ -100,6 +101,15 @@ function createTable(data){
 
 /**
 功能说明------
+*打开对象添加页面
+*/
+function openObjectAdd(){
+     $("#qpDialog").find("iframe").attr("src","toTabelAddPage.do");
+     $("#qpDialog").modal('show');
+}
+
+/**
+功能说明------
 *更新数据
 */
 function qpUpdate(ele){
@@ -109,6 +119,20 @@ function qpUpdate(ele){
      $("#qpDialog").find("iframe").attr("src",url);
      $("#qpDialog").modal('show');
 }
+
+/**
+功能说明------
+*弹出设置页面
+*/
+function pageSet(ele){
+     var id = $(ele).attr("id");
+     var tableName = $(ele).attr("tableName");
+     var url = "pageSet.do?tableId="+id;
+     $("#qpDialog").find("iframe").attr("src",url);
+     $("#qpDialog").modal('show');
+}
+
+
 
 /**
 功能说明------

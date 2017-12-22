@@ -66,7 +66,7 @@ function createTable(data){
 	    columns: [           
 			    {
 			        field: 'dataId',
-			        title: '数据id',
+			        title: '数据id'
 			    },
 			    
 			    {
@@ -85,7 +85,7 @@ function createTable(data){
 			        'class': 'canSelect',
 			        formatter:function(value, row, index){
 			                  var selectBox = systemFieldType();
-			                  selectBox.find("option[value="+value+"]").attr("selected","selected");
+			                  selectBox.find("option[value='"+value+"']").attr("selected","selected");
 			                  //根据值选中
 			                  return $(selectBox)[0].outerHTML + initRule(value,row.rule);
 			        }
@@ -93,11 +93,12 @@ function createTable(data){
 			    {  
 			        field: 'tableName',
 			        title: '表名',
+			        visible:false
 			    },
 			   {  
 			        field: 'rule',
 			        title: '字段类型对应的规则的',
-			        visible:true
+			        visible:false
 			    },
 			    
 			    {  
@@ -389,7 +390,6 @@ function monitorForValueChange(){
 初始化类型的结构页面
 */
 function initRule(type,rule){
-       rule = rule==""?1:rule;
        var div = $("<div></div>");
        if(type == 7){
            $(div).html("<a>设置规则</a>")
@@ -406,24 +406,25 @@ function initRule(type,rule){
 		       option.text(options[opt].name);
 		       selectBox.append(option);
 		   }
-		   selectBox.find("option[value="+rule+"]").attr("selected","selected");
+		   selectBox.find("option[value='"+rule+"']").attr("selected","selected");
 		   $(div).html(selectBox);
         }else if(type == 16){
              $(div).html("选择对象");
         }else if(type ==12){
              $(div).html("选择日期格式");   
              var selectBox = $("<select  class='form-control qpRule'/></select>");
-             selectBox.append("<option value=1>YYYY-MM-DD HH:MM:SS</option>")
+             selectBox.append("<option value=-1>请选择</option>")
+                      .append("<option value=1>YYYY-MM-DD HH:MM:SS</option>")
                       .append("<option value=2>YYYY-MM-DD</option>");
-             selectBox.find("option[value="+rule+"]").attr("selected","selected");         
+             selectBox.find("option[value='"+rule+"']").attr("selected","selected");         
              $(div).append(selectBox);  	                   
         }else if(type == 13){
              $(div).html("选择时间格式");
              var selectBox = $("<select  class='form-control qpRule'/></select>");
-             selectBox.append("<option value=1>HH:MM:SS</option>")
+             selectBox.append("<option value=-1>请选择</option>")
+                      .append("<option value=1>HH:MM:SS</option>")
                       .append("<option value=2>HH:MM</option>");
-             
-             selectBox.find("option[value="+rule+"]").attr("selected","selected");         
+             selectBox.find("option[value='"+rule+"']").attr("selected","selected");         
              $(div).append(selectBox);        
         }else{
              var input = $("<input type='text' name = 'rule' class='form-control qpRule' placeholder='长度'/>");
