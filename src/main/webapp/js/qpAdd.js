@@ -2,10 +2,12 @@
 $(document).ready(function(){
    var options={
          success:function(data){
-             parentPageRefresh();
+            
+             alert(data);
+              parentPageRefresh();
          },
          error:function(data){
-             alert("网络发生鼓掌")
+             alert("网络发生故障")
          }
    };
    $('#menuAddForm').ajaxForm(options);

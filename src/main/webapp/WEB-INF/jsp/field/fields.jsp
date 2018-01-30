@@ -19,7 +19,7 @@
 		
 		<!--css -->
 		<link href="${CSS_URL}/reset.css" rel="stylesheet" type="text/css">
-		<link href="${CSS_URL}/qptablelist.css" rel="stylesheet" type="text/css">
+		<link href="${CSS_URL}/qpfieldlist.css" rel="stylesheet" type="text/css">
 		<link href="${ASSERT_URL}/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="${ASSERT_URL}/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 		<link href="${ASSERT_URL}/ztree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css">
@@ -38,11 +38,12 @@
 		<div class="qp-data" id="qp-data">
 			<table id="smsc" tableId="${tableId}">
 			</table>
-		</div>
+		</div>	
 		
-		<div>
+		<div id="qp-submit">
 	         <input id="saveField" class="btn btn-default" type="submit" value="保存">
 		</div>
+		
 		<div id="cachedDictionary">${cachedDictionary}</div>
 	</body>
 </html>

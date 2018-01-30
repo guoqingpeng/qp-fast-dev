@@ -12,10 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DataDictionaryCache {
-	
 	//数据字典
 	Map<Integer, String> datadicHashMap = new HashMap<Integer, String>();
-	
-	
-
 }

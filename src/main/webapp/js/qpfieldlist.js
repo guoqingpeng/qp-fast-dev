@@ -113,7 +113,7 @@ function createTable(data){
 			    }			        		    	    	    	    
 	    ],
 	    data:data,
-	    height:500
+	    height:400
 	});	
 }
 

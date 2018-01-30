@@ -1,0 +1,20 @@
+/* CSS Document */
+.qp-data{
+   width:100%;
+   height:80%;
+   overflow:none;
+   clear:both;
+}
+
+#qp-submit{
+   width:100%;
+   height:20%;
+   margin-top:5%;
+}
+
+#saveField{
+	maigrin-top:50px;
+}
+#cachedDictionary{
+     display:none;
+}
