@@ -45,6 +45,7 @@ public class MenuController extends BaseController{
 	public ModelAndView  menuSet(){
 		testMongo.mongoinfo();
 		ModelAndView modelAndView = new ModelAndView();
+		//test
 	    modelAndView.setViewName("menu/menus");
 		return modelAndView;
 	}
@@ -74,7 +75,7 @@ public class MenuController extends BaseController{
 	 *参数说明：@return
 	 *返回值说明：
 	 *更新日期：5:07:55 PM
-	 *作者: GUO-QP
+	 *作者: GUO-QPjjjjjjjj
 	 */
 	@ResponseBody
 	@RequestMapping(value="menuFromPid")
