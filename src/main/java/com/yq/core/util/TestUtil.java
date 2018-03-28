@@ -31,6 +31,7 @@ public class TestUtil {
 		MongoDatabase database =  mongoClient.getDatabase("gqptest");
 		MongoCollection<Document> dCollection = database.getCollection("table");
 		dCollection.insertOne(new Document("name","guoqigpeng"));
+		mongoClient.close();
 	}
 
 }

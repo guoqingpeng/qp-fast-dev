@@ -63,8 +63,10 @@ public class MongoTableUtil {
 	public static Integer findMaxIdInTable(String collectionName) {
 		int maxId = 0;
 		try {
-			Mongo client = new Mongo("192.168.6.190:27017");
+			@SuppressWarnings("deprecation")
+			Mongo client = new Mongo("localhost:27017");
 			
+			@SuppressWarnings("deprecation")
 			DB database = client.getDB("gqptest");
 			DBCollection collection = database.getCollection(collectionName);
 
