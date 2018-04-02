@@ -48,7 +48,6 @@ public class PageController extends BaseController{
 	public String pageAdd(){
 		
 		System.out.println("sfdsfds");
-		System.out.println(77298);
 		return "数据保存成功";
 	}
 
