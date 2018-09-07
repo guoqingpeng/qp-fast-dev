@@ -8,11 +8,6 @@
 */
 package com.yq.core.util;
 
-import org.bson.Document;
-
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 
 public class TestUtil {
 
@@ -23,14 +18,16 @@ public class TestUtil {
 	 *返回值说明：
 	 *更新日期：1:08:47 PM
 	 *作者: GUO-QP
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args){
 		
-		MongoClient mongoClient =new MongoClient("192.168.6.190",27017);
-		MongoDatabase database =  mongoClient.getDatabase("gqptest");
-		MongoCollection<Document> dCollection = database.getCollection("table");
-		dCollection.insertOne(new Document("name","guoqigpeng"));
+		try {
+			System.out.println(Primenumber.getPrePrimenumber(1));
+		} catch (PrimeNotFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
-
 }
