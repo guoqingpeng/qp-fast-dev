@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<script>
 	     //页面自动跳转到主项目页
-	     window.location.href = "http://192.168.6.155:8088/mainPage.do";
+	     window.location.href = "http://localhost:8088/mainPage.do";
 	</script>
   </head>
   <body>

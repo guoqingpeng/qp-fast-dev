@@ -50,11 +50,11 @@ public class AssertUrlListener implements ServletContextListener{
 		}
 	}
 	
-	@Override
+	//@Override
 	public void contextDestroyed(ServletContextEvent contextEvent) {
 	}
 	
-	@Override
+	//@Override
 	public void contextInitialized(ServletContextEvent contextEvent) {
 		ServletContext appContext = contextEvent.getServletContext();
 		appContext.setAttribute("ASSERT_URL", ASSERT_URL);

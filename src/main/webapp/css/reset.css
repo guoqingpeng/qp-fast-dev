@@ -145,7 +145,7 @@ sup,sub {
 
 /*定义滚动条宽及背景*/
 ::-webkit-scrollbar{
-	width:5px;
+	width:0.1px;
 	background-color:rgba(0, 0, 0, 0.32);
 }
 /**滚动条结束-----------------------------*/
@@ -178,7 +178,7 @@ sup,sub {
     
     /* 纵向滚动条宽度 */  
     scrollbar[orient="vertical"] {   
-      min-width: 5px !important;   
+      min-width: 1px !important;   
     }  
      
 }

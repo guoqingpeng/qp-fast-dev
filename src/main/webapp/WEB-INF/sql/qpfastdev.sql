@@ -1,65 +1,104 @@
-/*
-Navicat MySQL Data Transfer
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-Source Server         : local
-Source Server Version : 50617
-Source Host           : localhost:3306
-Source Database       : qpfastdev
+DROP TABLE IF EXISTS `datadictionary`;
+CREATE TABLE `datadictionary` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(11) DEFAULT NULL,
+  `url` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  `urlType` int(11) DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  `name` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-Target Server Type    : MYSQL
-Target Server Version : 50617
-File Encoding         : 65001
-
-Date: 2017-10-31 08:51:56
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for `menu`
--- ----------------------------
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `pid` int(10) DEFAULT NULL,
-  `name` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `urlType` int(1) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(11) DEFAULT NULL,
   `url` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  `position` int(10) DEFAULT NULL,
+  `urlType` int(11) DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  `name` varchar(200) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- ----------------------------
--- Records of menu
--- ----------------------------
-INSERT INTO `menu` VALUES ('1', '0', '采购管理', '1', '', '1');
-INSERT INTO `menu` VALUES ('2', '0', '考勤管理', '0', 'g2.do', '2');
-INSERT INTO `menu` VALUES ('3', '0', '人事管理', '1', '', '3');
-INSERT INTO `menu` VALUES ('4', '0', '留学管理', '1', '', '4');
-INSERT INTO `menu` VALUES ('5', '0', '考试管理', '1', '', '5');
-INSERT INTO `menu` VALUES ('6', '0', '商机管理', '1', '', '6');
-INSERT INTO `menu` VALUES ('7', '1', '采购管理', '1', '', '2');
-INSERT INTO `menu` VALUES ('8', '1', '采购管理', '1', '', '1');
-INSERT INTO `menu` VALUES ('9', '1', '采购管理', '1', '', '3');
-INSERT INTO `menu` VALUES ('10', '1', '采购管理1', '0', 'g1.do', '4');
-INSERT INTO `menu` VALUES ('11', '6', '采购管理', '0', 'g2.do', '1');
-INSERT INTO `menu` VALUES ('12', '6', '采购管理', '0', 'g1.do', '2');
-INSERT INTO `menu` VALUES ('13', '6', '采购管理', '0', 'g2.do', '4');
-INSERT INTO `menu` VALUES ('14', '6', '采购管理', '0', 'g1.do', '3');
-INSERT INTO `menu` VALUES ('15', '6', '采购管理', '0', 'g1.do', '5');
-INSERT INTO `menu` VALUES ('16', '3', '采购管理', '0', 'g2.do', '1');
-INSERT INTO `menu` VALUES ('17', '4', '采购管理', '0', 'g1.do', '3');
-INSERT INTO `menu` VALUES ('18', '4', '采购管理', '0', 'g2.do', '2');
-INSERT INTO `menu` VALUES ('19', '4', '采购管理', '0', 'g1.do', '1');
-INSERT INTO `menu` VALUES ('20', '5', '采购管理', '0', 'g1.do', '1');
-INSERT INTO `menu` VALUES ('21', '5', '采购管理', '0', 'g2.do', '2');
-INSERT INTO `menu` VALUES ('22', '6', '采购管理', '0', 'g1.do', '2');
-INSERT INTO `menu` VALUES ('23', '6', '采购管理', '0', 'g1.do', '1');
-INSERT INTO `menu` VALUES ('24', '7', '采购管理', '0', 'g2.do', '4');
-INSERT INTO `menu` VALUES ('25', '7', '采购管理', '0', 'g1.do', '5');
-INSERT INTO `menu` VALUES ('26', '8', '采购管理', '0', 'g1.do', '3');
-INSERT INTO `menu` VALUES ('27', '8', '采购管理', '0', 'g2.do', '2');
-INSERT INTO `menu` VALUES ('28', '8', '采购管理', '0', 'g2.do', '4');
-INSERT INTO `menu` VALUES ('29', '8', '采购管理', '0', 'g2.do', '1');
-INSERT INTO `menu` VALUES ('30', '9', '采购管理', '0', 'g1.do', '1');
-INSERT INTO `menu` VALUES ('31', '10', 'gfhf', '0', null, null);
+DROP TABLE IF EXISTS `myorder`;
+CREATE TABLE `myorder` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `createAt` datetime DEFAULT NULL,
+  `updateAt` datetime DEFAULT NULL,
+  `creater` int(11) DEFAULT NULL,
+  `updater` int(11) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `createAt` datetime DEFAULT NULL,
+  `updateAt` datetime DEFAULT NULL,
+  `creater` int(11) DEFAULT NULL,
+  `updater` int(11) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `datadictionary` (`urlType`,`id`,`name`,`url`,`pid`,`position`) VALUES 
+ (NULL, '2', UNHEX('e8aea2e58d95'), NULL, '0', NULL),
+(NULL, '3', UNHEX('e59586e59381'), NULL, '0', NULL),
+(NULL, '4', UNHEX('e5be85e5aea1e6a0b8'), NULL, '2', NULL),
+(NULL, '5', UNHEX('e5aea1e6a0b8e4b8ad'), NULL, '2', NULL),
+(NULL, '6', UNHEX('e5aea1e6a0b8e9809ae8bf87'), NULL, '2', NULL),
+(NULL, '7', UNHEX('e5aea1e6a0b8e5a4b1e8b4a5'), NULL, '2', NULL),
+(NULL, '8', UNHEX('e9a39fe59381'), NULL, '3', NULL),
+(NULL, '9', UNHEX('e69c8de8a385'), NULL, '3', NULL),
+(NULL, '10', UNHEX('e7a4bce789a9'), NULL, '3', NULL),
+(NULL, '11', UNHEX('e78ea9e585b7'), NULL, '3', NULL),
+(NULL, '12', UNHEX('e7b3bbe7bb9fe8aebee7bdae'), NULL, '0', NULL),
+(NULL, '13', UNHEX('e8a1a8e7aea1e79086'), UNHEX('7461626c655365742e646f'), '12', NULL),
+(NULL, '16', UNHEX('e6a08fe79baee7aea1e79086'), UNHEX('6d656e755365742e646f'), '12', NULL),
+(NULL, '17', UNHEX('e5ad97e585b8e7aea1e79086'), UNHEX('6461746144696374696f6e6172795365742e646f'), '12', NULL);
+
+INSERT INTO `menu` (`urlType`,`id`,`name`,`url`,`pid`,`position`) VALUES 
+ (NULL, '2', UNHEX('e8aea2e58d95'), NULL, '0', '1'),
+(NULL, '3', UNHEX('e59586e59381'), NULL, '0', '0'),
+(NULL, '4', UNHEX('e5be85e5aea1e6a0b8'), NULL, '2', NULL),
+(NULL, '5', UNHEX('e5aea1e6a0b8e4b8ad'), NULL, '2', NULL),
+(NULL, '6', UNHEX('e5aea1e6a0b8e9809ae8bf87'), NULL, '2', NULL),
+(NULL, '7', UNHEX('e5aea1e6a0b8e5a4b1e8b4a5'), NULL, '2', NULL),
+(NULL, '8', UNHEX('e9a39fe59381'), NULL, '3', NULL),
+(NULL, '9', UNHEX('e69c8de8a385'), NULL, '3', NULL),
+(NULL, '10', UNHEX('e7a4bce789a9'), NULL, '3', NULL),
+(NULL, '11', UNHEX('e78ea9e585b7'), NULL, '3', NULL),
+(NULL, '12', UNHEX('e7b3bbe7bb9fe8aebee7bdae'), NULL, '0', NULL),
+(NULL, '13', UNHEX('e8a1a8e7aea1e79086'), UNHEX('7461626c655365742e646f'), '12', NULL),
+(NULL, '16', UNHEX('e6a08fe79baee7aea1e79086'), UNHEX('6d656e755365742e646f'), '12', NULL),
+(NULL, '17', UNHEX('e5ad97e585b8e7aea1e79086'), UNHEX('6461746144696374696f6e6172795365742e646f'), '12', '3'),
+(NULL, '18', UNHEX('e8a792e889b2e7aea1e79086'), NULL, '12', '4'),
+(NULL, '19', UNHEX('e69d83e99990e8aebee7bdae'), NULL, '12', '1'),
+(NULL, '20', UNHEX('e7bb84e7bb87e7bb93e69e84'), NULL, '12', '0'),
+(NULL, '21', UNHEX('e9a1bee5aea2e7aea1e79086'), NULL, '22', '0'),
+(NULL, '22', UNHEX('e59586e5aeb6e7aea1e79086'), NULL, '0', NULL),
+(NULL, '23', UNHEX('e5ba97e993bae7aea1e79086'), NULL, '22', NULL),
+(NULL, '24', UNHEX('e5aea2e69c8de7aea1e79086'), NULL, '22', NULL),
+(NULL, '25', UNHEX('e59381e7898ce7aea1e79086'), NULL, '22', NULL),
+(NULL, '26', UNHEX('e4bc98e683a0e7aea1e79086'), NULL, '22', NULL),
+(NULL, '27', UNHEX('e6b4bbe58aa8e7aea1e79086'), NULL, '22', NULL),
+(NULL, '28', UNHEX('e68aa5e8a1a8e7aea1e79086'), NULL, '22', '3'),
+(NULL, '29', UNHEX('e789a9e6b581e7aea1e79086'), NULL, '22', NULL);
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
